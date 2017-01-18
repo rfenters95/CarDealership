@@ -13,6 +13,7 @@ public class Main extends Application {
 
         // testing uploads
         int x = 1;
+        int y = 0;
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
