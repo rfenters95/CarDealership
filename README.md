@@ -1,3 +1,3 @@
 # CarDealership
-CS 340 Project
+CS340 Project
 
