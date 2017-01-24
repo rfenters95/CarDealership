@@ -27,7 +27,7 @@ public class LoginController {
 
     @FXML public void login(ActionEvent event) throws IOException {
 
-        Parent loginPage = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent loginPage = FXMLLoader.load(getClass().getResource("welcome.fxml"));
         Scene loginScene = new Scene(loginPage);
         Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
