@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CustomerSearchController">
+   <children>
+      <TextField promptText="#DL" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </TextField>
+      <HBox maxWidth="1.7976931348623157E308" spacing="5.0">
+         <children>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Clear" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Search" HBox.hgrow="ALWAYS" />
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </HBox>
+      <ListView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </ListView>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Accept" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>
