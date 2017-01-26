@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,7 +16,6 @@ public class LoginController {
     private int FAILED_ATTEMPTS = 0;
     private final int MAX_ATTEMPTS = 3;
 
-    @FXML Label errorStatus;
     @FXML TextField userName;
     @FXML TextField passWord;
 
