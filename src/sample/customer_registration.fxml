@@ -1,10 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.StackPane?>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Button mnemonicParsing="false" text="Winning" />
+      <VBox spacing="5.0">
+         <children>
+            <Label text="Employee: N/A">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Customer: N/A">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox spacing="10.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+         <children>
+            <TextField fx:id="firstNameTextField" prefWidth="300.0" promptText="First Name" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="lastNameTextField" prefWidth="300.0" promptText="Last Name" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox spacing="10.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextField fx:id="phoneTextField" prefWidth="200.0" promptText="Phone" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="emailTextField" prefWidth="200.0" promptText="Email" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+            <DatePicker fx:id="dateOfBirthDatePicker" prefWidth="200.0" promptText="DOB" HBox.hgrow="ALWAYS" />
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </HBox>
+      <TextField fx:id="addressTextField" promptText="Address" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </TextField>
+      <ListView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
+      </ListView>
+      <StackPane>
+         <children>
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#doSomething" text="Search" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </VBox.margin>
+      </StackPane>
    </children>
-</StackPane>
+</VBox>
