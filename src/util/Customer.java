@@ -8,6 +8,11 @@ public class Customer {
     private String address;
     private String dateOfBirth;
 
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -58,6 +63,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return firstName + lastName + dateOfBirth;
+        return lastName + ", " + firstName;
     }
 }
