@@ -36,14 +36,26 @@
             <Insets left="10.0" right="10.0" />
          </VBox.margin>
       </ListView>
-      <HBox spacing="5.0">
-         <VBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </VBox.margin>
+      <VBox spacing="5.0">
          <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Modify" HBox.hgrow="ALWAYS" />
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Remove" HBox.hgrow="ALWAYS" />
+            <HBox spacing="5.0">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modify" text="Modify" HBox.hgrow="ALWAYS" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#remove" text="Remove" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#exit" text="Done">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </Button>
          </children>
-      </HBox>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </VBox>
    </children>
 </VBox>
