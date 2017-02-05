@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.VehicleAddController">
    <children>
       <BorderPane maxWidth="250.0">
          <left>
@@ -79,10 +79,18 @@
             </BorderPane>
          </children>
       </GridPane>
-      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Save" VBox.vgrow="ALWAYS">
+      <HBox spacing="5.0">
+         <children>
+            <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" prefWidth="300.0" text="Cancel" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="300.0" text="Save" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" />
          </VBox.margin>
-      </Button>
+      </HBox>
    </children>
 </VBox>
