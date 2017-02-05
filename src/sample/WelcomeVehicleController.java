@@ -13,7 +13,7 @@ import java.io.IOException;
 public class WelcomeVehicleController {
 
     @FXML public void option1(ActionEvent event) throws IOException {
-        Parent register_page = FXMLLoader.load(getClass().getResource("vehicle_registration.fxml"));
+        Parent register_page = FXMLLoader.load(getClass().getResource("vehicle_add.fxml"));
         Scene register_scene = new Scene(register_page);
         Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         register_stage.hide();
