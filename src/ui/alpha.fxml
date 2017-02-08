@@ -3,8 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<VBox xmlns="http://javafx.com/javafx/8">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="CarDealershipLogo" />
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
@@ -93,7 +92,7 @@
                                           </BorderPane>
                                        </children>
                                     </GridPane>
-                                    <Button mnemonicParsing="false" text="Register">
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Register" VBox.vgrow="ALWAYS">
                                        <padding>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </padding>
@@ -143,6 +142,11 @@
                                        </children>
                                     </GridPane>
                                     <ListView prefHeight="200.0" prefWidth="200.0" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Search" VBox.vgrow="ALWAYS">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Button>
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -237,15 +241,11 @@
                                           </BorderPane>
                                        </children>
                                     </GridPane>
-                                    <StackPane>
-                                       <children>
-                                          <BorderPane maxWidth="450.0">
-                                             <center>
-                                                <Button mnemonicParsing="false" prefWidth="200.0" text="Save" BorderPane.alignment="CENTER" />
-                                             </center>
-                                          </BorderPane>
-                                       </children>
-                                    </StackPane>
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add" VBox.vgrow="ALWAYS">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Button>
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
