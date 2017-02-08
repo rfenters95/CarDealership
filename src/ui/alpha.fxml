@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label text="CarDealershipLogo" />
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Customer">
+               <content>
+                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Register">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                 <children>
+                                    <Label text="New Customer Information">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator />
+                                    <GridPane hgap="5.0" vgap="5.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <BorderPane maxWidth="400.0">
+                                             <left>
+                                                <Label text="First Name" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                          <BorderPane maxWidth="400.0" GridPane.columnIndex="1">
+                                             <left>
+                                                <Label text="Last Name" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                          <BorderPane maxWidth="400.0" GridPane.rowIndex="1">
+                                             <left>
+                                                <Label text="Email" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                          <BorderPane maxWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <left>
+                                                <Label text="Phone" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                          <BorderPane maxWidth="400.0" GridPane.rowIndex="2">
+                                             <left>
+                                                <Label text="Address" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                          <BorderPane maxWidth="400.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <left>
+                                                <Label text="City" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                          <BorderPane maxWidth="400.0" GridPane.rowIndex="3">
+                                             <left>
+                                                <Label text="State" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <ComboBox prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                       </children>
+                                    </GridPane>
+                                    <Button mnemonicParsing="false" text="Register">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                      <Tab text="Search">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Search Existing Customers">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <GridPane hgap="5.0" vgap="5.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <BorderPane maxWidth="400.0">
+                                             <left>
+                                                <Label text="First Name" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                          <BorderPane maxWidth="400.0" GridPane.columnIndex="1">
+                                             <left>
+                                                <Label text="Last Name" BorderPane.alignment="CENTER" />
+                                             </left>
+                                             <right>
+                                                <TextField prefWidth="250.0" BorderPane.alignment="CENTER" />
+                                             </right>
+                                          </BorderPane>
+                                       </children>
+                                    </GridPane>
+                                    <ListView prefHeight="200.0" prefWidth="200.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </content>
+            </Tab>
+          <Tab text="Vehicle">
+               <content>
+                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Add">
+                           <content>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Label text="Add Vehicle">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Separator prefWidth="200.0" />
+                                    <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="350.0">
+                                       <left>
+                                          <Label text="Condition" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <right>
+                                          <ComboBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" BorderPane.alignment="CENTER" />
+                                       </right>
+                                    </BorderPane>
+                                    <GridPane hgap="5.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                             <right>
+                                                <TextField promptText="Make" BorderPane.alignment="CENTER" />
+                                             </right>
+                                             <left>
+                                                <Label text="Make" BorderPane.alignment="CENTER" />
+                                             </left>
+                                          </BorderPane>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                             <right>
+                                                <TextField promptText="Year" BorderPane.alignment="CENTER" />
+                                             </right>
+                                             <left>
+                                                <Label text="Year" BorderPane.alignment="CENTER" />
+                                             </left>
+                                          </BorderPane>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                             <right>
+                                                <TextField promptText="Type" BorderPane.alignment="CENTER" />
+                                             </right>
+                                             <left>
+                                                <Label text="Type" BorderPane.alignment="CENTER" />
+                                             </left>
+                                          </BorderPane>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                             <right>
+                                                <TextField promptText="Model" BorderPane.alignment="CENTER" />
+                                             </right>
+                                             <left>
+                                                <Label text="Model" BorderPane.alignment="CENTER" />
+                                             </left>
+                                          </BorderPane>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <right>
+                                                <TextField promptText="Color" BorderPane.alignment="CENTER" />
+                                             </right>
+                                             <left>
+                                                <Label text="Color" BorderPane.alignment="CENTER" />
+                                             </left>
+                                          </BorderPane>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <right>
+                                                <TextField promptText="Price($)" BorderPane.alignment="CENTER" />
+                                             </right>
+                                             <left>
+                                                <Label text="Price($)" BorderPane.alignment="CENTER" />
+                                             </left>
+                                          </BorderPane>
+                                       </children>
+                                    </GridPane>
+                                    <StackPane>
+                                       <children>
+                                          <BorderPane maxWidth="450.0">
+                                             <center>
+                                                <Button mnemonicParsing="false" prefWidth="200.0" text="Save" BorderPane.alignment="CENTER" />
+                                             </center>
+                                          </BorderPane>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </Tab>
+                        <Tab text="Search">
+                           <content>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                                 <content>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Search Existing Vehicle" />
+                                          <Separator prefWidth="200.0" />
+                                          <GridPane hgap="5.0" vgap="5.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                   <right>
+                                                      <ComboBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                   <left>
+                                                      <Label text="Make" BorderPane.alignment="CENTER" />
+                                                   </left>
+                                                </BorderPane>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                   <left>
+                                                      <Label text="Model" BorderPane.alignment="CENTER" />
+                                                   </left>
+                                                   <right>
+                                                      <ComboBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                </BorderPane>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                                   <left>
+                                                      <Label text="Year" BorderPane.alignment="CENTER" />
+                                                   </left>
+                                                   <right>
+                                                      <ComboBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                </BorderPane>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <left>
+                                                      <Label text="Color" BorderPane.alignment="CENTER" />
+                                                   </left>
+                                                   <right>
+                                                      <ComboBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                </BorderPane>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                   <left>
+                                                      <Label text="Type" BorderPane.alignment="CENTER" />
+                                                   </left>
+                                                   <right>
+                                                      <ComboBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                </BorderPane>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <left>
+                                                      <Label text="Price Range" BorderPane.alignment="CENTER" />
+                                                   </left>
+                                                   <right>
+                                                      <ComboBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                                                   </right>
+                                                </BorderPane>
+                                             </children>
+                                          </GridPane>
+                                          <ListView prefHeight="200.0" prefWidth="200.0" />
+                                          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Select">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </Button>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

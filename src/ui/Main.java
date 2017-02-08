@@ -1,29 +1,29 @@
-package sample;
+package ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static String prevPage;
+    private static String alertMessage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Car Dealership");
-        //primaryStage.getIcons().add(new Image("sample/icon.png"));
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        primaryStage.setResizable(false);
-        ///primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setTitle("CarDealership");
         primaryStage.setScene(new Scene(root));
-
-        // delete
-        primaryStage.setResizable(false);
-
         primaryStage.show();
+    }
+
+    public static String getAlertMessage() {
+        return alertMessage;
+    }
+
+    public static void setAlertMessage(String alertMessage) {
+        Main.alertMessage = alertMessage;
     }
 
     public static void main(String[] args) {
