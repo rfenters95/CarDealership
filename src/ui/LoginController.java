@@ -31,13 +31,7 @@ public class LoginController implements Initializable {
             register_stage.setScene(register_scene);
             register_stage.show();
         } else {
-            Main.setAlertMessage("Invalid Login Combo!");
-            Parent register_page = FXMLLoader.load(getClass().getResource("alert_box.fxml"));
-            Scene register_scene = new Scene(register_page);
-            Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            register_stage.hide();
-            register_stage.setScene(register_scene);
-            register_stage.show();
+            Main.alertUser(event, this, "Invalid Login Combo!");
         }
     }
 
