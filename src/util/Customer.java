@@ -8,9 +8,13 @@ public class Customer {
     private String address;
     private String dateOfBirth;
 
-    public Customer(String firstName, String lastName) {
+    public Customer(String firstName, String lastName, String phone, String email, String address, String dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getFirstName() {

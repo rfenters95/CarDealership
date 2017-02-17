@@ -20,10 +20,8 @@ public class LoginController implements Initializable {
 
     @FXML private TextField username;
     @FXML private TextField password;
-    @FXML
-    private Button login;
-    @FXML
-    private VBox root;
+    @FXML private Button login;
+    @FXML private VBox root;
 
     @FXML
     public void login(ActionEvent event) throws IOException {
