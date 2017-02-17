@@ -3,9 +3,8 @@ package ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 import util.Customer;
 
 import java.net.URL;
@@ -21,6 +20,9 @@ public class AlphaController implements Initializable {
     @FXML private TextField customerAddress;
     @FXML private DatePicker customerDOB; //getValue() format=yyyy-mm-dd
     @FXML private ComboBox<String> stateComboBox;
+
+    @FXML private ListView<Customer> customerSearchListView;
+    @FXML private ListView<Customer> vehicleSearchListView;
 
     @FXML private ComboBox<String> vehicleCondition;
 
@@ -41,5 +43,53 @@ public class AlphaController implements Initializable {
 
         String[] vehicleConditions = {"New", "Used"};
         vehicleCondition.getItems().addAll(vehicleConditions);
+
+        //populate customer search list view with all customers
+        //connect to db & get all customers
+        customerSearchListView.setCellFactory(new Callback<ListView<Customer>, ListCell<Customer>>() {
+            @Override
+            public ListCell<Customer> call(ListView<Customer> param) {
+                ListCell<Customer> cell = new ListCell<Customer>() {
+                    //private ImageView imageView = new ImageView(new File("res/jmGhosts.jpg").toURI().toString());
+                    @Override
+                    protected void updateItem(Customer item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(!empty && item != null) {
+                            setText(item.getFirstName() + " " + item.getLastName());
+                            //setGraphic(imageView);
+                        } else {
+                            setText("");
+                            setGraphic(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+
+        //populate vehicle search list view with all vehicle
+        //connect to db & get all vehicles
+        /*
+        vehicleSearchListView.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
+            @Override
+            public ListCell<Vehicle> call(ListView<Vehicle> param) {
+                ListCell<Customer> cell = new ListCell<Vehicle>() {
+                    //private ImageView imageView = new ImageView(new File("res/jmGhosts.jpg").toURI().toString());
+                    @Override
+                    protected void updateItem(Vehicle item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(!empty && item != null) {
+                            setText(item.getFirstName() + " " + item.getLastName());
+                            //setGraphic(imageView);
+                        } else {
+                            setText("");
+                            setGraphic(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        */
     }
 }
