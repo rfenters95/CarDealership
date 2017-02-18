@@ -33,7 +33,7 @@ public class LoginController implements Initializable {
             register_stage.setScene(register_scene);
             register_stage.show();
         } else {
-            Main.alertUser(event, this, "Invalid Login Combo!");
+            Main.alertUser(event, this, "Invalid Login Combo!", "login.fxml");
         }
     }
 

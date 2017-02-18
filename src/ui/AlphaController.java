@@ -6,12 +6,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 import util.Customer;
+import util.Vehicle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AlphaController implements Initializable {
+
+    public static Customer selectedCustomer;
+    public static Vehicle selectedVehicle;
 
     @FXML private TextField customerFirstName;
     @FXML private TextField customerLastName;
@@ -21,16 +26,50 @@ public class AlphaController implements Initializable {
     @FXML private DatePicker customerDOB; //getValue() format=yyyy-mm-dd
     @FXML private ComboBox<String> stateComboBox;
 
-    @FXML private ListView<Customer> customerSearchListView;
-    @FXML private ListView<Customer> vehicleSearchListView;
-
+    @FXML private TextField vehicleMake;
+    @FXML private TextField vehicleModel;
+    @FXML private TextField vehicleYear;
+    @FXML private TextField vehicleColor;
+    @FXML private TextField vehicleType;
+    @FXML private TextField vehiclePrice;
     @FXML private ComboBox<String> vehicleCondition;
+
+    @FXML private ListView<Customer> customerSearchListView;
+    @FXML private ListView<Vehicle> vehicleSearchListView;
 
     @FXML
     public void save(ActionEvent event) {
         Customer customer = new Customer(customerFirstName.getText(), customerLastName.getText(), customerPhone.getText(), customerEmail.getText(), customerAddress.getText(), null);
         System.out.println("Saved: " + customer.getLastName() + ", " + customer.getFirstName());
-        System.out.println(customerDOB.getValue());
+        customerSearchListView.getItems().add(customer);
+        //System.out.println(customerDOB.getValue());
+    }
+
+    @FXML
+    public void customerSelected(ActionEvent event) {
+        selectedCustomer = customerSearchListView.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    public void searchCustomer(ActionEvent event) {
+    }
+
+    @FXML
+    public void addVehicle(ActionEvent event) {
+        Vehicle vehicle = new Vehicle(vehicleMake, vehicleModel, vehicleYear, vehicleColor, vehicleType, vehiclePrice, vehicleCondition);
+        System.out.println("Added: " + vehicle.getMake() + " " + vehicle.getModel());
+        vehicleSearchListView.getItems().add(vehicle);
+    }
+
+    @FXML
+    public void vehicleSelected(ActionEvent event) throws IOException {
+        selectedVehicle = vehicleSearchListView.getSelectionModel().getSelectedItem();
+        String message = selectedCustomer.getFirstName() + " " + selectedVehicle.getModel();
+        Main.alertUser(event, this, message, "alpha.fxml");
+    }
+
+    @FXML
+    public void searchVehicle(ActionEvent event) throws IOException {
     }
 
 
@@ -49,7 +88,7 @@ public class AlphaController implements Initializable {
         customerSearchListView.setCellFactory(new Callback<ListView<Customer>, ListCell<Customer>>() {
             @Override
             public ListCell<Customer> call(ListView<Customer> param) {
-                ListCell<Customer> cell = new ListCell<Customer>() {
+                return new ListCell<Customer>() {
                     //private ImageView imageView = new ImageView(new File("res/jmGhosts.jpg").toURI().toString());
                     @Override
                     protected void updateItem(Customer item, boolean empty) {
@@ -63,23 +102,21 @@ public class AlphaController implements Initializable {
                         }
                     }
                 };
-                return cell;
             }
         });
 
         //populate vehicle search list view with all vehicle
         //connect to db & get all vehicles
-        /*
         vehicleSearchListView.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
             @Override
             public ListCell<Vehicle> call(ListView<Vehicle> param) {
-                ListCell<Customer> cell = new ListCell<Vehicle>() {
+                return new ListCell<Vehicle>() {
                     //private ImageView imageView = new ImageView(new File("res/jmGhosts.jpg").toURI().toString());
                     @Override
                     protected void updateItem(Vehicle item, boolean empty) {
                         super.updateItem(item, empty);
                         if(!empty && item != null) {
-                            setText(item.getFirstName() + " " + item.getLastName());
+                            setText(item.getMake() + " " + item.getModel());
                             //setGraphic(imageView);
                         } else {
                             setText("");
@@ -87,9 +124,7 @@ public class AlphaController implements Initializable {
                         }
                     }
                 };
-                return cell;
             }
         });
-        */
     }
 }

@@ -15,6 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private static String alertMessage;
+    private static String returnAddress;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -22,15 +23,20 @@ public class Main extends Application {
         primaryStage.setTitle("CarDealership");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image(new File("res/icon.png").toURI().toString()));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
     public static String getAlertMessage() {
         return alertMessage;
     }
+    public static String getReturnAddress() {
+        return returnAddress;
+    }
 
-    public static void alertUser(ActionEvent event, Object controller, String alertMessage) throws IOException {
+    public static void alertUser(ActionEvent event, Object controller, String alertMessage, String returnAddress) throws IOException {
         Main.alertMessage = alertMessage;
+        Main.returnAddress = returnAddress;
         Parent register_page = FXMLLoader.load(controller.getClass().getResource("alert_box.fxml"));
         Scene register_scene = new Scene(register_page);
         Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

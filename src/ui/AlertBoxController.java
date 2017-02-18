@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,11 +16,13 @@ import java.util.ResourceBundle;
 
 public class AlertBoxController implements Initializable {
 
+    private String returnAddress;
+
     @FXML Label messageLabel;
 
     @FXML
     public void accept(ActionEvent event) throws IOException {
-        Parent register_page = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent register_page = FXMLLoader.load(getClass().getResource(returnAddress));
         Scene register_scene = new Scene(register_page);
         Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         register_stage.hide();
@@ -33,5 +34,6 @@ public class AlertBoxController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         messageLabel.setText(Main.getAlertMessage());
+        returnAddress = Main.getReturnAddress();
     }
 }
