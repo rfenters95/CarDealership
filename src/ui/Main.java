@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import util.Employee;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +16,7 @@ public class Main extends Application {
 
     private static String alertMessage;
     private static String returnAddress;
-    public static Employee sessionEmployee;
+    public static String sessionEmployee;
 
     @Override
     public void start(Stage primaryStage) throws Exception{

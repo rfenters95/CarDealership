@@ -28,10 +28,12 @@ public class LoginController implements Initializable {
 
         //legit user & isAdmit=true
         if (username.getText().toLowerCase().equals("reed")) {
+            Main.sessionEmployee = "Reed";
             loadResource(event, "alpha.fxml");
 
             //legit user & isAdmit=false
         } else if (username.getText().toLowerCase().equals("krunal")) {
+            Main.sessionEmployee = "Krunal";
             loadResource(event, "beta.fxml");
 
         } else {
