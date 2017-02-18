@@ -1,5 +1,8 @@
 package util;
 
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+
 public class Customer {
     private String firstName;
     private String lastName;
@@ -8,13 +11,26 @@ public class Customer {
     private String address;
     private String dateOfBirth;
 
-    public Customer(String firstName, String lastName, String phone, String email, String address, String dateOfBirth) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
+    public Customer(TextField firstName, TextField lastName, TextField phone, TextField email, TextField address, DatePicker dateOfBirth) throws IllegalArgumentException {
+        this(firstName.getText(), lastName.getText(), phone.getText(), email.getText(), address.getText(), dateOfBirth.getValue().toString());
+    }
+
+    public Customer(String firstName, String lastName, String phone, String email, String address, String dateOfBirth) throws IllegalArgumentException {
+        boolean allValid = isValidArgument(firstName) && isValidArgument(lastName) && isValidArgument(phone) && isValidArgument(email) && isValidArgument(address) && isValidArgument(dateOfBirth);
+        if (allValid) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.phone = phone;
+            this.email = email;
+            this.address = address;
+            this.dateOfBirth = dateOfBirth;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean isValidArgument(String argument) {
+        return argument != null && !argument.isEmpty();
     }
 
     public String getFirstName() {

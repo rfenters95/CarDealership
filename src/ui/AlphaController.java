@@ -13,6 +13,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import util.Customer;
+import util.IllegalEventMonitor;
 import util.Vehicle;
 
 import java.io.IOException;
@@ -49,15 +50,19 @@ public class AlphaController implements Initializable {
 
     @FXML
     public void save(ActionEvent event) {
-        Customer customer = new Customer(customerFirstName.getText(), customerLastName.getText(), customerPhone.getText(), customerEmail.getText(), customerAddress.getText(), null);
-        System.out.println("Saved: " + customer.getLastName() + ", " + customer.getFirstName());
-        customerSearchListView.getItems().add(customer);
-        //System.out.println(customerDOB.getValue());
+        try {
+            Customer customer = new Customer(customerFirstName, customerLastName, customerPhone, customerEmail, customerAddress, customerDOB);
+            System.out.println("Saved: " + customer.getLastName() + ", " + customer.getFirstName());
+            customerSearchListView.getItems().add(customer);
+        } catch (IllegalArgumentException e) {
+            System.out.println("IllegalArgumentException!");
+        }
     }
 
     @FXML
     public void customerSelected(ActionEvent event) {
         selectedCustomer = customerSearchListView.getSelectionModel().getSelectedItem();
+        System.out.println(selectedCustomer.getFirstName() + " selected!");
     }
 
     @FXML
@@ -66,9 +71,13 @@ public class AlphaController implements Initializable {
 
     @FXML
     public void addVehicle(ActionEvent event) {
-        Vehicle vehicle = new Vehicle(vehicleMake, vehicleModel, vehicleYear, vehicleColor, vehicleType, vehiclePrice, vehicleCondition);
-        System.out.println("Added: " + vehicle.getMake() + " " + vehicle.getModel());
-        vehicleSearchListView.getItems().add(vehicle);
+        try {
+            Vehicle vehicle = new Vehicle(vehicleMake, vehicleModel, vehicleYear, vehicleColor, vehicleType, vehiclePrice, vehicleCondition);
+            System.out.println("Added: " + vehicle.getMake() + " " + vehicle.getModel());
+            vehicleSearchListView.getItems().add(vehicle);
+        } catch (Exception e) {
+            System.out.println("Incomplete Form Exception!");
+        }
     }
 
     @FXML
@@ -102,9 +111,12 @@ public class AlphaController implements Initializable {
         register_stage.show();
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //create custom text fields to auto implement this
+        customerFirstName.textProperty().addListener(new IllegalEventMonitor(customerFirstName));
+        customerLastName.textProperty().addListener(new IllegalEventMonitor(customerLastName));
 
         sessionEmployeeLabel.setText("Hello, " + Main.sessionEmployee);
         logoutLabel.setTextFill(Paint.valueOf("Blue"));
