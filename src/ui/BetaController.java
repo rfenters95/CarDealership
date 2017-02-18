@@ -20,7 +20,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class AlphaController implements Initializable {
+public class BetaController implements Initializable {
 
     public static Customer selectedCustomer;
     public static Vehicle selectedVehicle;

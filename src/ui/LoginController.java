@@ -25,16 +25,27 @@ public class LoginController implements Initializable {
 
     @FXML
     public void login(ActionEvent event) throws IOException {
+
+        //legit user & isAdmit=true
         if (username.getText().toLowerCase().equals("reed")) {
-            Parent register_page = FXMLLoader.load(getClass().getResource("alpha.fxml"));
-            Scene register_scene = new Scene(register_page);
-            Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            register_stage.hide();
-            register_stage.setScene(register_scene);
-            register_stage.show();
+            loadResource(event, "alpha.fxml");
+
+            //legit user & isAdmit=false
+        } else if (username.getText().toLowerCase().equals("krunal")) {
+            loadResource(event, "beta.fxml");
+
         } else {
             Main.alertUser(event, this, "Invalid Login Combo!", "login.fxml");
         }
+    }
+
+    private void loadResource(ActionEvent event, String resourcePath) throws IOException {
+        Parent register_page = FXMLLoader.load(getClass().getResource(resourcePath));
+        Scene register_scene = new Scene(register_page);
+        Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        register_stage.hide();
+        register_stage.setScene(register_scene);
+        register_stage.show();
     }
 
     @Override
