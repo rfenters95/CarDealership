@@ -45,6 +45,11 @@ public class AlphaController implements Initializable {
     @FXML private TextField vehiclePrice;
     @FXML private ComboBox<String> vehicleCondition;
 
+    @FXML private TabPane tabPane;
+    @FXML private Tab customerTab;
+    @FXML private Tab vehicleTab;
+    @FXML private Tab invoiceTab;
+
     @FXML private ListView<Customer> customerSearchListView;
     @FXML private ListView<Vehicle> vehicleSearchListView;
 
@@ -84,7 +89,8 @@ public class AlphaController implements Initializable {
     public void vehicleSelected(ActionEvent event) throws IOException {
         selectedVehicle = vehicleSearchListView.getSelectionModel().getSelectedItem();
         String message = selectedCustomer.getFirstName() + " " + selectedVehicle.getModel();
-        Main.alertUser(event, this, message, "alpha.fxml");
+        //Main.alertUser(event, this, message, "alpha.fxml");
+        tabPane.getSelectionModel().select(invoiceTab);
     }
 
     @FXML

@@ -22,9 +22,9 @@
             <Insets />
          </VBox.margin>
       </StackPane>
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Customer">
+          <Tab fx:id="customerTab" text="Customer">
                <content>
                   <TabPane tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -203,7 +203,7 @@
                   </TabPane>
                </content>
             </Tab>
-          <Tab text="Vehicle">
+          <Tab fx:id="vehicleTab" text="Vehicle">
                <content>
                   <TabPane tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -317,7 +317,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font></Label>
                                     <Separator prefWidth="200.0" />
-                                    <GridPane hgap="5.0" vgap="5.0">
+                                    <GridPane hgap="100.0" vgap="5.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -330,7 +330,7 @@
                                        <children>
                                           <BorderPane prefHeight="200.0" prefWidth="200.0">
                                              <right>
-                                                <ComboBox prefWidth="150.0" promptText="Make" BorderPane.alignment="CENTER" />
+                                                <ComboBox prefWidth="200.0" promptText="Make" BorderPane.alignment="CENTER" />
                                              </right>
                                              <left>
                                                 <Label text="Make" BorderPane.alignment="CENTER" />
@@ -341,7 +341,7 @@
                                                 <Label text="Model" BorderPane.alignment="CENTER" />
                                              </left>
                                              <right>
-                                                <ComboBox prefWidth="150.0" promptText="Model" BorderPane.alignment="CENTER" />
+                                                <ComboBox prefWidth="200.0" promptText="Model" BorderPane.alignment="CENTER" />
                                              </right>
                                           </BorderPane>
                                           <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -349,7 +349,7 @@
                                                 <Label text="Year" BorderPane.alignment="CENTER" />
                                              </left>
                                              <right>
-                                                <ComboBox prefWidth="150.0" promptText="Year" BorderPane.alignment="CENTER" />
+                                                <ComboBox prefWidth="200.0" promptText="Year" BorderPane.alignment="CENTER" />
                                              </right>
                                           </BorderPane>
                                           <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -357,7 +357,7 @@
                                                 <Label text="Color" BorderPane.alignment="CENTER" />
                                              </left>
                                              <right>
-                                                <ComboBox prefWidth="150.0" promptText="Color" BorderPane.alignment="CENTER" />
+                                                <ComboBox prefWidth="200.0" promptText="Color" BorderPane.alignment="CENTER" />
                                              </right>
                                           </BorderPane>
                                           <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -365,7 +365,7 @@
                                                 <Label text="Type" BorderPane.alignment="CENTER" />
                                              </left>
                                              <right>
-                                                <ComboBox prefWidth="150.0" promptText="Type" BorderPane.alignment="CENTER" />
+                                                <ComboBox prefWidth="200.0" promptText="Type" BorderPane.alignment="CENTER" />
                                              </right>
                                           </BorderPane>
                                           <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -373,7 +373,7 @@
                                                 <Label text="Price Range" BorderPane.alignment="CENTER" />
                                              </left>
                                              <right>
-                                                <ComboBox prefWidth="150.0" promptText="Price Range" BorderPane.alignment="CENTER" />
+                                                <ComboBox prefWidth="200.0" promptText="Price Range" BorderPane.alignment="CENTER" />
                                              </right>
                                           </BorderPane>
                                        </children>
@@ -404,7 +404,7 @@
                   </TabPane>
                </content>
             </Tab>
-            <Tab text="Invoice">
+            <Tab fx:id="invoiceTab" text="Invoice">
                <content>
                   <fx:include source="invoice.fxml" />
                </content>
