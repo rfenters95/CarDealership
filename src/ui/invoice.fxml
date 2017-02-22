@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <ScrollPane pannable="true" prefHeight="460.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -12,6 +13,22 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
+            <HBox>
+               <children>
+                  <ImageView fitHeight="50.0" fitWidth="50.0">
+                     <image>
+                        <Image url="@../../res/icon.png" />
+                     </image>
+                  </ImageView>
+                  <VBox>
+                     <children>
+                        <Label text="CarDealership" />
+                        <Label text="123 Main Street, Florence, SC" />
+                        <Label text="(843)-123-4567" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             <Label text="General Information">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -204,7 +221,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="BOTTOM_CENTER" spacing="10.0">
                <children>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Save" HBox.hgrow="ALWAYS">
                      <padding>

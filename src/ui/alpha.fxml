@@ -50,7 +50,7 @@
                                           </Button>
                                        </bottom>
                                        <top>
-                                          <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
+                                          <GridPane hgap="50.0" vgap="5.0" BorderPane.alignment="CENTER">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -94,7 +94,7 @@
                                                       <TextField fx:id="customerPhone" prefWidth="250.0" promptText="Phone" BorderPane.alignment="CENTER" />
                                                    </right>
                                                 </BorderPane>
-                                                <BorderPane GridPane.rowIndex="2">
+                                                <BorderPane GridPane.rowIndex="3">
                                                    <left>
                                                       <Label text="Address" BorderPane.alignment="CENTER" />
                                                    </left>
@@ -102,20 +102,12 @@
                                                       <TextField fx:id="customerAddress" prefWidth="250.0" promptText="Address" BorderPane.alignment="CENTER" />
                                                    </right>
                                                 </BorderPane>
-                                                <BorderPane GridPane.rowIndex="3">
+                                                <BorderPane GridPane.rowIndex="2">
                                                    <left>
                                                       <Label text="City" BorderPane.alignment="CENTER" />
                                                    </left>
                                                    <right>
                                                       <TextField prefWidth="250.0" promptText="City" BorderPane.alignment="CENTER" />
-                                                   </right>
-                                                </BorderPane>
-                                                <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                   <left>
-                                                      <Label text="State" BorderPane.alignment="CENTER" />
-                                                   </left>
-                                                   <right>
-                                                      <ComboBox fx:id="stateComboBox" prefWidth="250.0" promptText="State" BorderPane.alignment="CENTER" />
                                                    </right>
                                                 </BorderPane>
                                                 <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -229,7 +221,7 @@
                                           </Button>
                                        </bottom>
                                        <top>
-                                          <GridPane hgap="5.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+                                          <GridPane hgap="50.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" />
                                               <ColumnConstraints hgrow="SOMETIMES" />
@@ -485,14 +477,6 @@
                                                       <TextField prefWidth="250.0" promptText="City" BorderPane.alignment="CENTER" />
                                                    </right>
                                                 </BorderPane>
-                                                <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                   <left>
-                                                      <Label text="State" BorderPane.alignment="CENTER" />
-                                                   </left>
-                                                   <right>
-                                                      <ComboBox fx:id="stateComboBox1" prefWidth="250.0" promptText="State" BorderPane.alignment="CENTER" />
-                                                   </right>
-                                                </BorderPane>
                                                 <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                    <left>
                                                       <Label text="Date Of Birth" BorderPane.alignment="CENTER" />
@@ -501,7 +485,7 @@
                                                       <DatePicker fx:id="customerDOB1" prefWidth="250.0" promptText="DOB" BorderPane.alignment="CENTER" />
                                                    </right>
                                                 </BorderPane>
-                                                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                    <left>
                                                       <Label text="Job Title" BorderPane.alignment="CENTER" />
                                                    </left>
@@ -515,7 +499,6 @@
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                              </columnConstraints>
                                              <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -544,33 +527,14 @@
                                        </VBox.margin>
                                     </Label>
                                     <Separator prefWidth="200.0" />
-                                    <GridPane hgap="5.0" vgap="5.0">
-                                       <children>
-                                          <BorderPane maxWidth="400.0">
-                                             <left>
-                                                <Label text="First Name" BorderPane.alignment="CENTER" />
-                                             </left>
-                                             <right>
-                                                <TextField prefWidth="250.0" promptText="First Name" BorderPane.alignment="CENTER" />
-                                             </right>
-                                          </BorderPane>
-                                          <BorderPane maxWidth="400.0" GridPane.columnIndex="1">
-                                             <left>
-                                                <Label text="Last Name" BorderPane.alignment="CENTER" />
-                                             </left>
-                                             <right>
-                                                <TextField prefWidth="250.0" promptText="Last Name" BorderPane.alignment="CENTER" />
-                                             </right>
-                                          </BorderPane>
-                                       </children>
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
+                                    <BorderPane>
+                                       <left>
+                                          <Label prefWidth="200.0" text="Employee ID" BorderPane.alignment="CENTER" />
+                                       </left>
+                                       <center>
+                                          <TextField BorderPane.alignment="CENTER" />
+                                       </center>
+                                    </BorderPane>
                                     <ListView fx:id="customerSearchListView1" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES" />
                                     <HBox spacing="10.0">
                                        <children>

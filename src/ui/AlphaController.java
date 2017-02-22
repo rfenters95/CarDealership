@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -35,7 +36,7 @@ public class AlphaController implements Initializable {
     @FXML private TextField customerPhone;
     @FXML private TextField customerAddress;
     @FXML private DatePicker customerDOB; //getValue() format=yyyy-mm-dd
-    @FXML private ComboBox<String> stateComboBox;
+
 
     @FXML private TextField vehicleMake;
     @FXML private TextField vehicleModel;
@@ -44,6 +45,8 @@ public class AlphaController implements Initializable {
     @FXML private TextField vehicleType;
     @FXML private TextField vehiclePrice;
     @FXML private ComboBox<String> vehicleCondition;
+
+    @FXML ImageView imageView;
 
     @FXML private TabPane tabPane;
     @FXML private Tab customerTab;
@@ -126,9 +129,6 @@ public class AlphaController implements Initializable {
 
         sessionEmployeeLabel.setText("Hello, " + Main.sessionEmployee);
         logoutLabel.setTextFill(Paint.valueOf("Blue"));
-
-        String[] states = {"AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"};
-        stateComboBox.getItems().addAll(states);
 
         customerDOB.setValue(LocalDate.now());
 
