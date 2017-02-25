@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="searchEmployeeTab" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchEmployeeTabController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308">
+               <children>
+                  <Label text="Search Employees">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <Separator maxWidth="1.7976931348623157E308" />
+            <TitledPane expanded="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="580.0" text="Search Parameters">
+               <content>
+                  <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Employee ID" />
+                        <TextField maxWidth="1.7976931348623157E308" promptText="Employee ID" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </content>
+            </TitledPane>
+            <ListView VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="20.0" VBox.vgrow="NEVER">
+               <children>
+                  <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Select" HBox.hgrow="ALWAYS" />
+                  <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="View Details" HBox.hgrow="ALWAYS" />
+                  <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="180.0" text="Search" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
