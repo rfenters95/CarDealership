@@ -3,6 +3,7 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
+import util.Session;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +25,9 @@ public class AlphaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        userSessionInfoTab.setText(Session.employee.getFirstName() + " " + Session.employee.getLastName());
+
         addEmployeeTabController.init(this);
         addVehicleTabController.init(this);
         searchCustomerTabController.init(this);

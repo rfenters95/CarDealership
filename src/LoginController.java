@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
             if (hasResults) {
                 String EmployeeID = resultSet.getString(1);
 
-                sql = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID=" + DataHandler.getWrappedValue(EmployeeID);
+                sql = "SELECT * FROM EMPLOYEES WHERE ID=" + DataHandler.getWrappedValue(EmployeeID);
                 resultSet = statement.executeQuery(sql);
                 hasResults = resultSet.next();
 
@@ -81,6 +81,7 @@ public class LoginController implements Initializable {
         Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         register_stage.hide();
         register_stage.setScene(register_scene);
+        register_stage.setResizable(true);
         register_stage.show();
     }
 

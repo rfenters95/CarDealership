@@ -5,9 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import util.DataHandler;
 import util.Employee;
 import util.Init;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class AddEmployeeTabController implements Init {
@@ -24,13 +28,30 @@ public class AddEmployeeTabController implements Init {
     @FXML private ComboBox<String> jobTitleCB;
 
     @FXML public void save(ActionEvent event) {
+
         try {
+
+            String sql = "SELECT ID FROM EMPLOYEES ORDER BY ID DESC";
+            Connection connection = DataHandler.getConnection();
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.next();
+
+            int EID = resultSet.getInt(1) + 1;
+
+
             Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB);
-            System.out.println(employee.getFirstName());
+            System.out.println(dateOfBirthDP.getValue().toString());
+
+            sql = "INSERT INTO EMPLOYEES VALUES" + employee.getDBInjection(EID);
+            statement.executeUpdate(sql);
+
         } catch (Exception e) {
             //TODO fix exception replicate with empty fields
-            System.out.println("Empty fields!");
+            e.printStackTrace();
         }
+
     }
 
     @Override

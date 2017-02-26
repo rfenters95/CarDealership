@@ -94,12 +94,11 @@ public class SearchCustomerTabController implements Init {
         }
     }
 
-    @FXML public void selectCustomer(ActionEvent event) {
+    @FXML public void select(ActionEvent event) {
         Session.customer = listView.getSelectionModel().getSelectedItem();
-        System.out.println(Session.customer.getRow());
     }
 
-    @FXML public void viewRecords(ActionEvent event) {
+    @FXML public void viewDetails(ActionEvent event) {
         if (Session.customer != null) {
             //popup records
         } else {
@@ -134,7 +133,6 @@ public class SearchCustomerTabController implements Init {
 
             String sql;
             ResultSet resultSet;
-            boolean hasResults;
 
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();

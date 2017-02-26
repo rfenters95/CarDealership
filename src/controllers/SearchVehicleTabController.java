@@ -63,7 +63,7 @@ public class SearchVehicleTabController implements Init {
         Session.vehicle = listView.getSelectionModel().getSelectedItem();
         System.out.println(Session.vehicle.getRow());
     }
-    @FXML public void view(ActionEvent event) {
+    @FXML public void viewDetails(ActionEvent event) {
         //launch invoice
     }
     @FXML public void search(ActionEvent event) {

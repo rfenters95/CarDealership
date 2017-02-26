@@ -39,6 +39,7 @@ public class Employee implements Comparable<Employee> {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.city = city;
         this.dateOfBirth = dateOfBirth;
         this.jobTitle = job;
     }
@@ -106,6 +107,10 @@ public class Employee implements Comparable<Employee> {
 
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getDBInjection(int eid) {
+        return String.format(" ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", eid, firstName, lastName, phone, email, address, city, dateOfBirth, jobTitle);
     }
 
     @Override
