@@ -51,8 +51,7 @@ public class AddEmployeeTabController implements Init, Initializable {
             statement.executeUpdate(sql);
 
         } catch (Exception e) {
-            //TODO fix exception replicate with empty fields
-            e.printStackTrace();
+            System.out.println("Error: Attempting to add an employee to database with empty fields!");
         }
 
     }
