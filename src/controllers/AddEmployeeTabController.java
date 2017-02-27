@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -9,12 +10,14 @@ import util.DataHandler;
 import util.Employee;
 import util.Init;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class AddEmployeeTabController implements Init {
+public class AddEmployeeTabController implements Init, Initializable {
 
     private AlphaController alphaController;
 
@@ -62,5 +65,10 @@ public class AddEmployeeTabController implements Init {
         jobs.add("Accountant");
         jobs.add("Manager");
         jobTitleCB.getItems().addAll(jobs);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("KJF");
     }
 }
