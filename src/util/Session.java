@@ -1,12 +1,14 @@
 package util;
 
 public class Session {
-    public static Employee employee;
-    public static Customer customer;
-    public static Vehicle vehicle;
+    public static Employee sessionUser;
+    public static Employee selectedEmployee;
+    public static Customer selectedCustomer;
+    public static Vehicle selectedVehicle;
     public static void clearSession() {
-        Session.employee = null;
-        Session.customer = null;
-        Session.vehicle = null;
+        Session.sessionUser = null;
+        Session.selectedEmployee = null;
+        Session.selectedCustomer = null;
+        Session.selectedVehicle = null;
     }
 }

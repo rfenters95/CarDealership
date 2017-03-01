@@ -2,10 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 import util.DataHandler;
 import util.Init;
@@ -28,6 +25,7 @@ public class SearchVehicleTabController implements Init {
     @FXML private ComboBox<String> colorCB;
     @FXML private ComboBox<String> typeCB;
     @FXML private ComboBox<String> priceCB;
+    @FXML private Button viewDetailsButton;
 
 
 
@@ -60,8 +58,10 @@ public class SearchVehicleTabController implements Init {
     }
 
     @FXML public void select(ActionEvent event) {
-        Session.vehicle = listView.getSelectionModel().getSelectedItem();
-        System.out.println(Session.vehicle.getRow());
+        if (listView.getSelectionModel().getSelectedItem() != null) {
+            Session.selectedVehicle = listView.getSelectionModel().getSelectedItem();
+            viewDetailsButton.setDisable(false);
+        }
     }
     @FXML public void viewDetails(ActionEvent event) {
         //launch invoice
@@ -105,6 +105,7 @@ public class SearchVehicleTabController implements Init {
     public void init(AlphaController alphaController) {
 
         this.alphaController = alphaController;
+        viewDetailsButton.setDisable(true);
 
         listView.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
             @Override

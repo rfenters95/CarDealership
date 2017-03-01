@@ -42,7 +42,7 @@
             <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="20.0" VBox.vgrow="NEVER">
                <children>
                   <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#select" prefHeight="30.0" prefWidth="180.0" text="Select" HBox.hgrow="ALWAYS" />
-                  <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewDetails" prefHeight="30.0" prefWidth="180.0" text="View Details" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="viewDetailsButton" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewDetails" prefHeight="30.0" prefWidth="180.0" text="View Details" HBox.hgrow="ALWAYS" />
                   <Button fx:id="searchButton" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="180.0" text="Search" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>

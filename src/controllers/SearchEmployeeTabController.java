@@ -2,10 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 import util.DataHandler;
 import util.Employee;
@@ -24,6 +21,7 @@ public class SearchEmployeeTabController implements Init {
     @FXML private TitledPane tPane;
     @FXML private TextField employeeID;
     @FXML private ListView<Employee> listView;
+    @FXML private Button viewDetailsButton;
 
     private void displayResultSet(ResultSet resultSet) throws SQLException {
 
@@ -80,11 +78,14 @@ public class SearchEmployeeTabController implements Init {
     }
 
     @FXML public void select(ActionEvent event) {
-        Session.employee = listView.getSelectionModel().getSelectedItem();
+        if (listView.getSelectionModel().getSelectedItem() != null) {
+            Session.selectedEmployee = listView.getSelectionModel().getSelectedItem();
+            viewDetailsButton.setDisable(false);
+        }
     }
 
     @FXML public void viewDetails(ActionEvent event) {
-        if (Session.employee != null) {
+        if (Session.selectedEmployee != null) {
             //popup records
         } else {
             //alert
@@ -95,6 +96,7 @@ public class SearchEmployeeTabController implements Init {
     public void init(AlphaController alphaController) {
 
         this.alphaController = alphaController;
+        viewDetailsButton.setDisable(true);
 
         listView.setCellFactory(new Callback<ListView<Employee>, ListCell<Employee>>() {
             @Override

@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -32,6 +29,7 @@ public class SearchCustomerTabController implements Init {
     @FXML private TextField lNameTF;
     @FXML private ListView<Customer> listView;
     @FXML private TitledPane tPane;
+    @FXML private Button viewDetailsButton;
 
     private void displayResultSet(ResultSet resultSet) throws SQLException {
 
@@ -101,12 +99,15 @@ public class SearchCustomerTabController implements Init {
     }
 
     @FXML public void select(ActionEvent event) {
-        Session.customer = listView.getSelectionModel().getSelectedItem();
+        if (listView.getSelectionModel().getSelectedItem() != null) {
+            Session.selectedCustomer = listView.getSelectionModel().getSelectedItem();
+            viewDetailsButton.setDisable(false);
+        }
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
 
-        if (Session.customer != null) {
+        if (Session.selectedCustomer != null) {
 
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
@@ -130,6 +131,7 @@ public class SearchCustomerTabController implements Init {
     public void init(AlphaController alphaController) {
 
         this.alphaController = alphaController;
+        viewDetailsButton.setDisable(true);
 
         listView.setCellFactory(new Callback<ListView<Customer>, ListCell<Customer>>() {
             @Override

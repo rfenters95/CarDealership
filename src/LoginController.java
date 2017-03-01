@@ -54,7 +54,7 @@ public class LoginController implements Initializable {
 
                 if (hasResults) {
 
-                    Session.employee = new Employee(resultSet);
+                    Session.sessionUser = new Employee(resultSet);
 
                     //if Session.employee.isAdmin
 

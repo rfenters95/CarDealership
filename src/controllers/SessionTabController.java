@@ -30,20 +30,20 @@ public class SessionTabController implements Init {
 
         boolean allSet = true;
 
-        if (Session.employee != null) {
-            employeeLabel.setText(Session.employee.getRow());
+        if (Session.sessionUser != null) {
+            employeeLabel.setText(Session.sessionUser.getRow());
         } else {
             allSet = false;
         }
 
-        if (Session.customer != null) {
-            customerLabel.setText(Session.customer.getRow());
+        if (Session.selectedCustomer != null) {
+            customerLabel.setText(Session.selectedCustomer.getRow());
         } else {
             allSet = false;
         }
 
-        if (Session.vehicle != null) {
-            vehicleLabel.setText(Session.vehicle.getRow());
+        if (Session.selectedVehicle != null) {
+            vehicleLabel.setText(Session.selectedVehicle.getRow());
         } else {
             allSet = false;
         }

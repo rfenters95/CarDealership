@@ -26,7 +26,7 @@ public class AlphaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        userSessionInfoTab.setText(Session.employee.getFirstName() + " " + Session.employee.getLastName());
+        userSessionInfoTab.setText(Session.sessionUser.getFirstName() + " " + Session.sessionUser.getLastName());
 
         addEmployeeTabController.init(this);
         addVehicleTabController.init(this);
