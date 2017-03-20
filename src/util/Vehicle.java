@@ -3,7 +3,10 @@ package util;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class Vehicle {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Vehicle implements Comparable<Vehicle> {
     private String make;
     private String model;
     private String year;
@@ -11,6 +14,16 @@ public class Vehicle {
     private String type;
     private double price;
     private boolean isNew;
+
+    public Vehicle(ResultSet resultSet) throws SQLException {
+        this.make = resultSet.getString(1).replace(" ", "");
+        this.model = resultSet.getString(2).replace(" ", "");
+        this.year = resultSet.getString(3).replace(" ", "");
+        this.color = resultSet.getString(4).replace(" ", "");
+        this.type = resultSet.getString(5).replace(" ", "");
+        this.price = resultSet.getDouble(6);
+        this.isNew = resultSet.getBoolean(7);
+    }
 
     public Vehicle(TextField make, TextField model, TextField year, TextField color, TextField type, TextField price, ComboBox<String> isNew) {
         this(make.getText(), model.getText(), year.getText(), color.getText(), type.getText(), Double.valueOf(price.getText()), (isNew.getSelectionModel().getSelectedItem()).equals("New"));
@@ -24,6 +37,19 @@ public class Vehicle {
         this.type = type;
         this.price = price;
         this.isNew = isNew;
+    }
+
+    @Override
+    public int compareTo(Vehicle o) {
+        int i = make.compareTo(o.make);
+        if (i == 0) {
+            return model.compareTo(o.model);
+        }
+        return i;
+    }
+
+    public String getRow() {
+        return make + " " + model;
     }
 
     public String getMake() {

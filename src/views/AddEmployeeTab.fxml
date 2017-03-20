@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="addEmployeeTab" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddEmployeeTabController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane alignment="CENTER_LEFT">
+               <children>
+                  <Label text="Add Employee">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <Separator />
+            <GridPane hgap="50.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" vgap="5.0" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="265.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="265.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="First Name" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" promptText="First Name" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Phone" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="phoneTF" maxWidth="1.7976931348623157E308" promptText="Phone" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Address" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="addressTF" maxWidth="1.7976931348623157E308" promptText="Address" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Last Name" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" promptText="Last Name" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Email" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="emailTF" maxWidth="1.7976931348623157E308" promptText="Email" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="City" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="cityTF" maxWidth="1.7976931348623157E308" promptText="City" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Date of BIrth" HBox.hgrow="ALWAYS" />
+                        <DatePicker fx:id="dateOfBirthDP" maxWidth="1.7976931348623157E308" promptText="Date of Birth" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Job Title" HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="jobTitleCB" maxWidth="1.7976931348623157E308" promptText="Job Title" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+            <StackPane alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#save" prefHeight="30.0" text="Save" />
+               </children>
+            </StackPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

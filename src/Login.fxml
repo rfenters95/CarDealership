@@ -3,8 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LoginController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
    <children>
       <BorderPane prefWidth="300.0">
          <right>
@@ -30,8 +29,7 @@
       </BorderPane>
       <BorderPane prefWidth="150.0">
          <right>
-             <Button fx:id="login" mnemonicParsing="false" onAction="#login" prefWidth="75.0" text="Login"
-                     BorderPane.alignment="CENTER"/>
+             <Button fx:id="login" mnemonicParsing="false" onAction="#login" prefWidth="75.0" text="Login" BorderPane.alignment="CENTER" />
          </right>
       </BorderPane>
    </children>
