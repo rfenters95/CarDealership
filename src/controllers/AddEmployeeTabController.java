@@ -12,7 +12,6 @@ import util.Init;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -31,29 +30,27 @@ public class AddEmployeeTabController implements Init, Initializable {
     @FXML private ComboBox<String> jobTitleCB;
 
     @FXML public void save(ActionEvent event) {
-
         try {
 
-            String sql = "SELECT ID FROM EMPLOYEES ORDER BY ID DESC";
+            String sql;
+
+            Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB);
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery(sql);
-            resultSet.next();
-
-            int EID = resultSet.getInt(1) + 1;
-
-
-            Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB);
-            System.out.println(dateOfBirthDP.getValue().toString());
-
-            sql = "INSERT INTO EMPLOYEES VALUES" + employee.getDBInjection(EID);
+            sql = "INSERT INTO `EMPLOYEES` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`, `JOB`, `SALARY`) VALUES (NULL, " + employee.getInsertSQL() + ", '$50,000');";
             statement.executeUpdate(sql);
 
         } catch (Exception e) {
-            System.out.println("Error: Attempting to add an employee to database with empty fields!");
+            System.out.println("Empty fields!");
         }
 
+        try {
+            alphaController.getSearchEmployeeTabController().updateResultSet();
+            alphaController.getSearchEmployeeTabController().displayResultSet();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -68,6 +65,6 @@ public class AddEmployeeTabController implements Init, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("KJF");
+        //this works
     }
 }

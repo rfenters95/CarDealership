@@ -11,39 +11,45 @@ import util.Session;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeSet;
 
 public class SearchEmployeeTabController implements Init {
     private AlphaController alphaController;
+    private ResultSet resultSet;
 
     @FXML private TitledPane tPane;
     @FXML private TextField employeeID;
     @FXML private ListView<Employee> listView;
     @FXML private Button viewDetailsButton;
 
-    private void displayResultSet(ResultSet resultSet) throws SQLException {
+    public void displayResultSet() {
 
-        boolean hasResults = resultSet.next();
+        try {
 
-        if (hasResults) {
+            boolean hasResults = resultSet.next();
 
-            listView.getItems().clear();
+            if (hasResults) {
 
-            TreeSet<Employee> Employees = new TreeSet<>();
+                listView.getItems().clear();
 
-            do {
+                TreeSet<Employee> employees = new TreeSet<>();
 
-                Employee Employee = new Employee(resultSet);
-                Employees.add(Employee);
+                do {
 
-            } while (resultSet.next());
+                    Employee employee = new Employee(resultSet);
+                    employees.add(employee);
 
-            listView.getItems().addAll(Employees);
+                } while (resultSet.next());
 
-        } else {
-            System.out.println("DB empty!");
+                listView.getItems().addAll(employees);
+
+            } else {
+                System.out.println("DB empty!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -54,7 +60,6 @@ public class SearchEmployeeTabController implements Init {
         try {
 
             String sql;
-            ResultSet resultSet;
             final String EID = employeeID.getText();
 
             Connection connection = DataHandler.getConnection();
@@ -62,9 +67,9 @@ public class SearchEmployeeTabController implements Init {
 
             if (!EID.isEmpty()) {
 
-                sql = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID=" + DataHandler.getWrappedValue(EID);
+                sql = "SELECT * FROM EMPLOYEES WHERE ID=" + DataHandler.getWrappedValue(EID);
                 resultSet = statement.executeQuery(sql);
-                displayResultSet(resultSet);
+                displayResultSet();
 
             } else {
 
@@ -116,20 +121,24 @@ public class SearchEmployeeTabController implements Init {
             }
         });
 
-        try {
+        updateResultSet();
+        displayResultSet();
+    }
 
+    public ResultSet updateResultSet() {
+        try {
             String sql;
-            ResultSet resultSet;
 
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
 
             sql = "SELECT * FROM EMPLOYEES";
             resultSet = statement.executeQuery(sql);
-            displayResultSet(resultSet);
 
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        return resultSet;
     }
 }

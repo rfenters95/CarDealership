@@ -19,14 +19,14 @@ public class Employee implements Comparable<Employee> {
     private String jobTitle;
 
     public Employee(ResultSet resultSet) throws SQLException {
-        this.firstName = resultSet.getString(2).replace(" ", "");
-        this.lastName = resultSet.getString(3).replace(" ", "");
-        this.phone = resultSet.getString(4).replace(" ", "");
-        this.email = resultSet.getString(5).replace(" ", "");
-        this.address = resultSet.getString(6).replace(" ", "");
-        this.city = resultSet.getString(7).replace(" ", "");
-        this.dateOfBirth = resultSet.getString(8).toString().replace(" ", "");
-        this.jobTitle = resultSet.getString(9).replace(" ", "");
+        this.firstName = resultSet.getString(2).trim();
+        this.lastName = resultSet.getString(3).trim();
+        this.phone = resultSet.getString(4).trim();
+        this.email = resultSet.getString(5).trim();
+        this.address = resultSet.getString(6).trim();
+        this.city = resultSet.getString(7).trim();
+        this.dateOfBirth = resultSet.getString(8).toString().trim();
+        this.jobTitle = resultSet.getString(9).trim();
     }
 
     public Employee(TextField firstName, TextField lastName, TextField phone, TextField email, TextField address, TextField city, DatePicker dateOfBirth, ComboBox<String> jobTitle) {
@@ -57,60 +57,16 @@ public class Employee implements Comparable<Employee> {
         return firstName + " " + lastName;
     }
 
-    public boolean isAdmin() {
-        return jobTitle.equals("Admin".replace(" ", ""));
-    }
-
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getDBInjection(int eid) {
-        return String.format(" ('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", eid, firstName, lastName, phone, email, address, city, dateOfBirth, jobTitle);
+    public String getInsertSQL() {
+        return String.format("%s, %s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(firstName), DataHandler.getWrappedValue(lastName), DataHandler.getWrappedValue(phone), DataHandler.getWrappedValue(email), DataHandler.getWrappedValue(address), DataHandler.getWrappedValue(city), DataHandler.getWrappedValue(dateOfBirth), DataHandler.getWrappedValue(jobTitle));
     }
 
     @Override

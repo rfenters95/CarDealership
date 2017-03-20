@@ -17,13 +17,13 @@ import util.Session;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeSet;
 
 public class SearchCustomerTabController implements Init {
 
     private AlphaController alphaController;
+    private ResultSet resultSet;
 
     @FXML private TextField fNameTF;
     @FXML private TextField lNameTF;
@@ -31,27 +31,33 @@ public class SearchCustomerTabController implements Init {
     @FXML private TitledPane tPane;
     @FXML private Button viewDetailsButton;
 
-    private void displayResultSet(ResultSet resultSet) throws SQLException {
+    public void displayResultSet() {
 
-        boolean hasResults = resultSet.next();
+        try {
 
-        if (hasResults) {
+            boolean hasResults = resultSet.next();
 
-            listView.getItems().clear();
+            if (hasResults) {
 
-            TreeSet<Customer> customers = new TreeSet<>();
+                listView.getItems().clear();
 
-            do {
+                TreeSet<Customer> customers = new TreeSet<>();
 
-                Customer customer = new Customer(resultSet);
-                customers.add(customer);
+                do {
 
-            } while (resultSet.next());
+                    Customer customer = new Customer(resultSet);
+                    customers.add(customer);
 
-            listView.getItems().addAll(customers);
+                } while (resultSet.next());
 
-        } else {
-            System.out.println("DB empty!");
+                listView.getItems().addAll(customers);
+
+            } else {
+                System.out.println("DB empty!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -71,21 +77,21 @@ public class SearchCustomerTabController implements Init {
 
             if (!fName.isEmpty() && !lName.isEmpty()) {
 
-                sql = "SELECT * FROM CUSTOMERS WHERE FNAME=" + DataHandler.getWrappedValue(fName) + " AND LNAME=" + DataHandler.getWrappedValue(lName);
+                sql = "SELECT * FROM CUSTOMERS WHERE FIRST_NAME=" + DataHandler.getWrappedValue(fName) + " AND LAST_NAME=" + DataHandler.getWrappedValue(lName);
                 resultSet = statement.executeQuery(sql);
-                displayResultSet(resultSet);
+                displayResultSet();
 
             } else if (!fName.isEmpty()) {
 
-                sql = "SELECT * FROM CUSTOMERS WHERE FNAME=" + DataHandler.getWrappedValue(fName);
+                sql = "SELECT * FROM CUSTOMERS WHERE FIRST_NAME=" + DataHandler.getWrappedValue(fName);
                 resultSet = statement.executeQuery(sql);
-                displayResultSet(resultSet);
+                displayResultSet();
 
             } else if (!lName.isEmpty()) {
 
-                sql = "SELECT * FROM CUSTOMERS WHERE LNAME=" + DataHandler.getWrappedValue(lName);
+                sql = "SELECT * FROM CUSTOMERS WHERE LAST_NAME=" + DataHandler.getWrappedValue(lName);
                 resultSet = statement.executeQuery(sql);
-                displayResultSet(resultSet);
+                displayResultSet();
 
             } else {
 
@@ -151,20 +157,24 @@ public class SearchCustomerTabController implements Init {
             }
         });
 
-        try {
+        updateResultSet();
+        displayResultSet();
+    }
 
+    public ResultSet updateResultSet() {
+        try {
             String sql;
-            ResultSet resultSet;
 
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
 
             sql = "SELECT * FROM CUSTOMERS";
             resultSet = statement.executeQuery(sql);
-            displayResultSet(resultSet);
 
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        return resultSet;
     }
 }

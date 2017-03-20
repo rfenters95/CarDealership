@@ -28,6 +28,7 @@ public class AlphaController implements Initializable {
 
         userSessionInfoTab.setText(Session.sessionUser.getFirstName() + " " + Session.sessionUser.getLastName());
 
+        addCustomerTabController.init(this);
         addEmployeeTabController.init(this);
         addVehicleTabController.init(this);
         searchCustomerTabController.init(this);
@@ -38,5 +39,33 @@ public class AlphaController implements Initializable {
 
     public Tab getUserSessionInfoTab() {
         return userSessionInfoTab;
+    }
+
+    public AddCustomerTabController getAddCustomerTabController() {
+        return addCustomerTabController;
+    }
+
+    public AddVehicleTabController getAddVehicleTabController() {
+        return addVehicleTabController;
+    }
+
+    public SearchCustomerTabController getSearchCustomerTabController() {
+        return searchCustomerTabController;
+    }
+
+    public SearchVehicleTabController getSearchVehicleTabController() {
+        return searchVehicleTabController;
+    }
+
+    public AddEmployeeTabController getAddEmployeeTabController() {
+        return addEmployeeTabController;
+    }
+
+    public SearchEmployeeTabController getSearchEmployeeTabController() {
+        return searchEmployeeTabController;
+    }
+
+    public SessionTabController getSessionTabController() {
+        return sessionTabController;
     }
 }

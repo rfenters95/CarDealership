@@ -12,24 +12,24 @@ public class Vehicle implements Comparable<Vehicle> {
     private String year;
     private String color;
     private String type;
-    private double price;
-    private boolean isNew;
+    private String price;
+    private String isNew;
 
     public Vehicle(ResultSet resultSet) throws SQLException {
-        this.make = resultSet.getString(1).replace(" ", "");
-        this.model = resultSet.getString(2).replace(" ", "");
-        this.year = resultSet.getString(3).replace(" ", "");
-        this.color = resultSet.getString(4).replace(" ", "");
-        this.type = resultSet.getString(5).replace(" ", "");
-        this.price = resultSet.getDouble(6);
-        this.isNew = resultSet.getBoolean(7);
+        this.make = resultSet.getString(2).trim();
+        this.model = resultSet.getString(3).trim();
+        this.year = resultSet.getString(4).trim();
+        this.color = resultSet.getString(5).trim();
+        this.type = resultSet.getString(6).trim();
+        this.price = resultSet.getString(7).trim();
+        this.isNew = resultSet.getString(8).trim();
     }
 
     public Vehicle(TextField make, TextField model, TextField year, TextField color, TextField type, TextField price, ComboBox<String> isNew) {
-        this(make.getText(), model.getText(), year.getText(), color.getText(), type.getText(), Double.valueOf(price.getText()), (isNew.getSelectionModel().getSelectedItem()).equals("New"));
+        this(make.getText(), model.getText(), year.getText(), color.getText(), type.getText(), price.getText(), isNew.getSelectionModel().getSelectedItem());
     }
 
-    public Vehicle(String make, String model, String year, String color, String type, double price, boolean isNew) {
+    public Vehicle(String make, String model, String year, String color, String type, String price, String isNew) {
         this.make = make;
         this.model = model;
         this.year = year;
@@ -56,55 +56,19 @@ public class Vehicle implements Comparable<Vehicle> {
         return make;
     }
 
-    public void setMake(String make) {
-        this.make = make;
-    }
-
     public String getModel() {
         return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getYear() {
         return year;
     }
 
-    public void setYear(String year) {
-        this.year = year;
-    }
-
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public boolean isNew() {
-        return isNew;
-    }
-
-    public void setNew(boolean aNew) {
-        isNew = aNew;
     }
 }

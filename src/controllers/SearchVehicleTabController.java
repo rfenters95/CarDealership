@@ -18,6 +18,7 @@ import java.util.TreeSet;
 public class SearchVehicleTabController implements Init {
 
     private AlphaController alphaController;
+    public ResultSet resultSet;
 
     @FXML private ComboBox<String> makeCB;
     @FXML private ComboBox<String> modelCB;
@@ -25,6 +26,7 @@ public class SearchVehicleTabController implements Init {
     @FXML private ComboBox<String> colorCB;
     @FXML private ComboBox<String> typeCB;
     @FXML private ComboBox<String> priceCB;
+    @FXML private ComboBox<String> isNewCB;
     @FXML private Button viewDetailsButton;
 
 
@@ -32,7 +34,7 @@ public class SearchVehicleTabController implements Init {
     @FXML private ListView<Vehicle> listView;
     @FXML private TitledPane tPane;
 
-    private void displayResultSet(ResultSet resultSet) throws SQLException {
+    private void displayResultSet() throws SQLException {
 
         boolean hasResults = resultSet.next();
 
@@ -71,30 +73,63 @@ public class SearchVehicleTabController implements Init {
 
         try {
 
-            String sql;
-            ResultSet resultSet;
+            String sql = "SELECT * FROM VEHICLES WHERE";
             final String make = makeCB.getSelectionModel().getSelectedItem();
             final String model = modelCB.getSelectionModel().getSelectedItem();
             final String year = yearCB.getSelectionModel().getSelectedItem();
             final String color = colorCB.getSelectionModel().getSelectedItem();
             final String type = typeCB.getSelectionModel().getSelectedItem();
+            final String price = priceCB.getSelectionModel().getSelectedItem();
+            final String isNew = isNewCB.getSelectionModel().getSelectedItem();
+            String[] attributes = {make, model, year, color, type, price, isNew};
+
+            boolean hasMultiple = false;
+            for (int i = 0, j = 0; i < attributes.length; i++) {
+                if (attributes[i] != null) {
+
+                    j++;
+                    if (j == 2) {
+                        hasMultiple = true;
+                    }
+
+
+                    if (hasMultiple) {
+                        sql += " AND";
+                    }
+
+
+                    switch (i) {
+                        case 0:
+                            sql += " MAKE=" + DataHandler.getWrappedValue(make);
+                            break;
+                        case 1:
+                            sql += " MODEL=" + DataHandler.getWrappedValue(model);
+                            break;
+                        case 2:
+                            sql += " YEAR=" + DataHandler.getWrappedValue(year);
+                            break;
+                        case 3:
+                            sql += " COLOR=" + DataHandler.getWrappedValue(color);
+                            break;
+                        case 4:
+                            sql += " TYPE=" + DataHandler.getWrappedValue(type);
+                            break;
+                        case 5:
+                            sql += " PRICE=" + DataHandler.getWrappedValue(price);
+                            break;
+                        case 6:
+                            sql += " IS_NEW=" + DataHandler.getWrappedValue(isNew);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
-
-            //TODO check for null too
-            if (!make.isEmpty() && !model.isEmpty()) {
-
-                sql = "SELECT * FROM VEHICLES WHERE MAKE=" + DataHandler.getWrappedValue(make)
-                        + " AND MODEL=" + DataHandler.getWrappedValue(model);
-                resultSet = statement.executeQuery(sql);
-                displayResultSet(resultSet);
-
-            } else {
-
-                System.out.println("Empty search parameters! skip type & price for demo");
-
-            }
+            resultSet = statement.executeQuery(sql);
+            displayResultSet();
 
         } catch (Exception e) {
             e.printStackTrace();
