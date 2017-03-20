@@ -1,7 +1,7 @@
 # CarDealership
 CS340 Project
 
-###Instructions
+### Instructions
 1. Fork project
 2. Open Intellij CE to welcome screen 
 3. Select `Check out from Version Control`
