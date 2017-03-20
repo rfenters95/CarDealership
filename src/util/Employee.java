@@ -25,7 +25,7 @@ public class Employee implements Comparable<Employee> {
         this.email = resultSet.getString(5).replace(" ", "");
         this.address = resultSet.getString(6).replace(" ", "");
         this.city = resultSet.getString(7).replace(" ", "");
-        this.dateOfBirth = resultSet.getDate(8).toString().replace(" ", "");
+        this.dateOfBirth = resultSet.getString(8).toString().replace(" ", "");
         this.jobTitle = resultSet.getString(9).replace(" ", "");
     }
 

@@ -6,13 +6,18 @@ import java.sql.SQLException;
 
 public class DataHandler {
 
+    /*
     private final static String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";
     private final static String user = "CarDealership";
     private final static String password = "rf1395";
+    */
+    private final static String jdbcUrl = "jdbc:mysql://localhost:8889/CarDealership";
+    private final static String user = "root";
+    private final static String password = "root";
     private static Connection conn;
 
     private static void connect() throws Exception {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+        //Class.forName("oracle.jdbc.driver.OracleDriver");
         conn = DriverManager.getConnection(jdbcUrl, user, password);
     }
     public static Connection getConnection() throws Exception {
