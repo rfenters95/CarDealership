@@ -4,12 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CustomerDetailsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeDetailsController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <children>
-      <Label text="Customer Details">
+      <Label text="Employee Details">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -59,10 +59,9 @@
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="Invoices" />
-            <ComboBox fx:id="invoiceCB" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS" />
+            <Label prefWidth="100.0" text="Commission" />
+            <Label fx:id="commissionLabel" text="Label" />
          </children>
       </HBox>
-      <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewInvoice" text="View Invoice" />
    </children>
 </VBox>

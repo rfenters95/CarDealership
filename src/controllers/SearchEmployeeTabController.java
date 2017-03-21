@@ -2,13 +2,19 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import util.DataHandler;
 import util.Employee;
 import util.Init;
 import util.Session;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -89,11 +95,24 @@ public class SearchEmployeeTabController implements Init {
         }
     }
 
-    @FXML public void viewDetails(ActionEvent event) {
+    @FXML public void viewDetails(ActionEvent event) throws IOException {
         if (Session.selectedEmployee != null) {
-            //popup records
+
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader fxmlLoader = new FXMLLoader();
+
+            fxmlLoader.setLocation(getClass().getResource("../views/EmployeeDetails.fxml"));
+            Parent newResource = fxmlLoader.load();
+            Scene newScene = new Scene(newResource);
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.showAndWait();
+
         } else {
-            //alert
+
+            System.out.println("Error: No Employee selected!");
+
         }
     }
 

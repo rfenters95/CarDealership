@@ -25,7 +25,7 @@ public class Employee implements Comparable<Employee> {
         this.email = resultSet.getString(5).trim();
         this.address = resultSet.getString(6).trim();
         this.city = resultSet.getString(7).trim();
-        this.dateOfBirth = resultSet.getString(8).toString().trim();
+        this.dateOfBirth = resultSet.getString(8).trim();
         this.jobTitle = resultSet.getString(9).trim();
     }
 
@@ -57,6 +57,10 @@ public class Employee implements Comparable<Employee> {
         return firstName + " " + lastName;
     }
 
+    public String getInsertSQL() {
+        return String.format("%s, %s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(firstName), DataHandler.getWrappedValue(lastName), DataHandler.getWrappedValue(phone), DataHandler.getWrappedValue(email), DataHandler.getWrappedValue(address), DataHandler.getWrappedValue(city), DataHandler.getWrappedValue(dateOfBirth), DataHandler.getWrappedValue(jobTitle));
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -65,8 +69,28 @@ public class Employee implements Comparable<Employee> {
         return lastName;
     }
 
-    public String getInsertSQL() {
-        return String.format("%s, %s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(firstName), DataHandler.getWrappedValue(lastName), DataHandler.getWrappedValue(phone), DataHandler.getWrappedValue(email), DataHandler.getWrappedValue(address), DataHandler.getWrappedValue(city), DataHandler.getWrappedValue(dateOfBirth), DataHandler.getWrappedValue(jobTitle));
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
     }
 
     @Override
