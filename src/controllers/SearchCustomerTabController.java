@@ -68,7 +68,6 @@ public class SearchCustomerTabController implements Init {
         try {
 
             String sql;
-            ResultSet resultSet;
             final String fName = fNameTF.getText();
             final String lName = lNameTF.getText();
 
@@ -96,6 +95,9 @@ public class SearchCustomerTabController implements Init {
             } else {
 
                 System.out.println("Empty search parameters!");
+                sql = "SELECT * FROM CUSTOMERS";
+                resultSet = statement.executeQuery(sql);
+                displayResultSet();
 
             }
 

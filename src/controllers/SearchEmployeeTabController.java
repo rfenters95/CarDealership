@@ -80,6 +80,9 @@ public class SearchEmployeeTabController implements Init {
             } else {
 
                 System.out.println("Empty search parameters!");
+                sql = "SELECT * FROM EMPLOYEES";
+                resultSet = statement.executeQuery(sql);
+                displayResultSet();
 
             }
 
