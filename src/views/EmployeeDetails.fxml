@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeDetailsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmployeeDetailsController">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
@@ -17,50 +17,74 @@
       <Separator prefWidth="200.0" />
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="First Name" />
-            <Label fx:id="fNameLabel" text="Label" />
+            <Label prefWidth="200.0" text="First Name" />
+            <TextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="Last Name" />
-            <Label fx:id="lNameLabel" text="Label" />
+            <Label prefWidth="200.0" text="Last Name" />
+            <TextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="Phone" />
-            <Label fx:id="phoneLabel" text="Label" />
+            <Label prefWidth="200.0" text="Phone" />
+            <TextField fx:id="phoneTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="Email" />
-            <Label fx:id="emailLabel" text="Label" />
+            <Label prefWidth="200.0" text="Email" />
+            <TextField fx:id="emailTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="Address" />
-            <Label fx:id="addressLabel" text="Label" />
+            <Label prefWidth="200.0" text="Address" />
+            <TextField fx:id="addressTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="City" />
-            <Label fx:id="cityLabel" text="Label" />
+            <Label prefWidth="200.0" text="City" />
+            <TextField fx:id="cityTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="Date Of Birth" />
-            <Label fx:id="DOBLabel" text="Label" />
+            <Label prefWidth="200.0" text="Date Of Birth" />
+            <TextField fx:id="dateOfBirthTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label prefWidth="100.0" text="Commission" />
-            <Label fx:id="commissionLabel" text="Label" />
+            <Label prefWidth="200.0" text="Job" />
+            <TextField fx:id="jobTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label prefWidth="200.0" text="Salary" />
+            <TextField fx:id="salaryTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label prefWidth="200.0" text="Work Status" />
+            <TextField fx:id="workStatusTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label fx:id="totalSalesLabel" prefWidth="200.0" text="Total Sales" />
+            <TextField fx:id="totalSalesTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label fx:id="commissionLabel" prefWidth="200.0" text="Commission" />
+            <TextField fx:id="commissionTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

@@ -17,6 +17,9 @@ public class Employee implements Comparable<Employee> {
     private String city;
     private String dateOfBirth;
     private String jobTitle;
+    private String salary;
+    private String workStatus;
+    private String totalSales;
 
     public Employee(ResultSet resultSet) throws SQLException {
         this.firstName = resultSet.getString(2).trim();
@@ -27,21 +30,25 @@ public class Employee implements Comparable<Employee> {
         this.city = resultSet.getString(7).trim();
         this.dateOfBirth = resultSet.getString(8).trim();
         this.jobTitle = resultSet.getString(9).trim();
+        this.salary = resultSet.getString(10).trim();
+        this.workStatus = resultSet.getString(11).trim();
+        if (this.jobTitle.equals("Sales")) {
+            this.totalSales = resultSet.getString(12).trim();
+        }
     }
 
-    public Employee(TextField firstName, TextField lastName, TextField phone, TextField email, TextField address, TextField city, DatePicker dateOfBirth, ComboBox<String> jobTitle) {
-        this(firstName.getText(), lastName.getText(), phone.getText(), email.getText(), address.getText(), city.getText(), dateOfBirth.getValue().toString(), jobTitle.getSelectionModel().getSelectedItem());
-    }
-
-    public Employee(String firstName, String lastName, String phone, String email, String address, String city, String dateOfBirth, String job) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.city = city;
-        this.dateOfBirth = dateOfBirth;
-        this.jobTitle = job;
+    public Employee(TextField firstName, TextField lastName, TextField phone, TextField email, TextField address, TextField city, DatePicker dateOfBirth, ComboBox<String> jobTitle, TextField salary) {
+        this.firstName = firstName.getText();
+        this.lastName = lastName.getText();
+        this.phone = phone.getText();
+        this.email = email.getText();
+        this.address = address.getText();
+        this.city = city.getText();
+        this.dateOfBirth = dateOfBirth.getValue().toString();
+        this.jobTitle = jobTitle.getSelectionModel().getSelectedItem();
+        this.salary = salary.getText();
+        this.workStatus = "1";
+        this.totalSales = "0";
     }
 
     @Override
@@ -58,7 +65,18 @@ public class Employee implements Comparable<Employee> {
     }
 
     public String getInsertSQL() {
-        return String.format("%s, %s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(firstName), DataHandler.getWrappedValue(lastName), DataHandler.getWrappedValue(phone), DataHandler.getWrappedValue(email), DataHandler.getWrappedValue(address), DataHandler.getWrappedValue(city), DataHandler.getWrappedValue(dateOfBirth), DataHandler.getWrappedValue(jobTitle));
+        return String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
+                DataHandler.getWrappedValue(firstName),
+                DataHandler.getWrappedValue(lastName),
+                DataHandler.getWrappedValue(phone),
+                DataHandler.getWrappedValue(email),
+                DataHandler.getWrappedValue(address),
+                DataHandler.getWrappedValue(city),
+                DataHandler.getWrappedValue(dateOfBirth),
+                DataHandler.getWrappedValue(jobTitle),
+                DataHandler.getWrappedValue(salary),
+                DataHandler.getWrappedValue(workStatus),
+                DataHandler.getWrappedValue(totalSales));
     }
 
     public String getFirstName() {
@@ -91,6 +109,18 @@ public class Employee implements Comparable<Employee> {
 
     public String getJobTitle() {
         return jobTitle;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public String getWorkStatus() {
+        return workStatus;
+    }
+
+    public String getTotalSales() {
+        return totalSales;
     }
 
     @Override

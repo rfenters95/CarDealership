@@ -28,6 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -68,7 +69,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Date of BIrth" HBox.hgrow="ALWAYS" />
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Date of Birth" HBox.hgrow="ALWAYS" />
                         <DatePicker fx:id="dateOfBirthDP" maxWidth="1.7976931348623157E308" promptText="Date of Birth" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
@@ -78,6 +79,13 @@
                         <ComboBox fx:id="jobTitleCB" maxWidth="1.7976931348623157E308" promptText="Job Title" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Salary" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="salaryTF" promptText="Salary" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
             <StackPane alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">

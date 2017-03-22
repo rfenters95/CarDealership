@@ -26,6 +26,7 @@ public class AddEmployeeTabController implements Init, Initializable {
     @FXML private TextField emailTF;
     @FXML private TextField addressTF;
     @FXML private TextField cityTF;
+    @FXML private TextField salaryTF;
     @FXML private DatePicker dateOfBirthDP;
     @FXML private ComboBox<String> jobTitleCB;
 
@@ -34,15 +35,15 @@ public class AddEmployeeTabController implements Init, Initializable {
 
             String sql;
 
-            Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB);
+            Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB, salaryTF);
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
 
-            sql = "INSERT INTO `EMPLOYEES` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`, `JOB`, `SALARY`) VALUES (NULL, " + employee.getInsertSQL() + ", '$50,000');";
+            sql = "INSERT INTO `EMPLOYEES` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`, `JOB`, `SALARY`, `WORK_STATUS`, `PERCENT_COMMISSION`, `TOTAL_SALES`) VALUES (NULL, " + employee.getInsertSQL() + ");";
             statement.executeUpdate(sql);
 
         } catch (Exception e) {
-            System.out.println("Empty fields!");
+            e.printStackTrace();
         }
 
         try {
@@ -57,7 +58,7 @@ public class AddEmployeeTabController implements Init, Initializable {
     public void init(AlphaController alphaController) {
         this.alphaController = alphaController;
         ArrayList<String> jobs = new ArrayList<>();
-        jobs.add("Salesman");
+        jobs.add("Sales");
         jobs.add("Accountant");
         jobs.add("Manager");
         jobTitleCB.getItems().addAll(jobs);
