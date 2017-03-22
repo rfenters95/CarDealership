@@ -33,7 +33,7 @@ public class InvoiceController implements Initializable {
     }
 
     @FXML public void saveInvoice(ActionEvent event) {
-
+        // do something
     }
 
     @Override
