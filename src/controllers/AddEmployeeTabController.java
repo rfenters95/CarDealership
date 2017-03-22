@@ -39,7 +39,7 @@ public class AddEmployeeTabController implements Init, Initializable {
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
 
-            sql = "INSERT INTO `EMPLOYEES` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`, `JOB`, `SALARY`, `WORK_STATUS`, `PERCENT_COMMISSION`, `TOTAL_SALES`) VALUES (NULL, " + employee.getInsertSQL() + ");";
+            sql = "INSERT INTO `EMPLOYEES` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`, `JOB`, `SALARY`, `WORK_STATUS`, `TOTAL_SALES`) VALUES (NULL, " + employee.getInsertSQL() + ");";
             statement.executeUpdate(sql);
 
         } catch (Exception e) {

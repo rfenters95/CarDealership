@@ -123,6 +123,23 @@ public class Employee implements Comparable<Employee> {
         return totalSales;
     }
 
+    public String getPercentCommission() {
+        double tSales = Double.parseDouble(totalSales);
+        if (tSales <= 100_000) {
+            return String.valueOf(0.05);
+        } else if (tSales > 100_000 && tSales >= 200_000) {
+            return String.valueOf(0.07);
+        } else {
+            return String.valueOf(0.1);
+        }
+    }
+
+    public String getCommission() {
+        double tSales = Double.parseDouble(totalSales);
+        double commission = Double.parseDouble(getPercentCommission());
+        return String.valueOf(tSales * commission);
+    }
+
     @Override
     public String toString() {
         return lastName + ", " + firstName;

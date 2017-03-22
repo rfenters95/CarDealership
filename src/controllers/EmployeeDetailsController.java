@@ -69,7 +69,13 @@ public class EmployeeDetailsController implements Initializable {
         workStatusTF.setDisable(true);
 
         if (employee.getJobTitle().equals("Sales")) {
+
+            totalSalesTF.setText(employee.getTotalSales());
             totalSalesTF.setDisable(true);
+
+            double pCommission = Double.parseDouble(employee.getPercentCommission()) * 100;
+            commissionLabel.setText("Commission (%" + pCommission + ")");
+            commissionTF.setText(employee.getCommission());
             commissionTF.setDisable(true);
         } else {
             totalSalesLabel.setVisible(false);
