@@ -70,8 +70,8 @@
                           </HBox>
                           <HBox alignment="CENTER_LEFT">
                              <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Condition" />
-                                <ComboBox fx:id="conditionCB" maxWidth="1.7976931348623157E308" promptText="Condition" HBox.hgrow="ALWAYS" />
+                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Used" />
+                                <ComboBox fx:id="usedCB" maxWidth="1.7976931348623157E308" promptText="Used" HBox.hgrow="ALWAYS" />
                              </children>
                           </HBox>
                        </children>

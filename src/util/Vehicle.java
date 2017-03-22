@@ -13,30 +13,30 @@ public class Vehicle implements Comparable<Vehicle> {
     private String color;
     private String type;
     private String price;
-    private String isNew;
+    private String used;
 
     public Vehicle(ResultSet resultSet) throws SQLException {
-        this.make = resultSet.getString(2).trim();
-        this.model = resultSet.getString(3).trim();
-        this.year = resultSet.getString(4).trim();
-        this.color = resultSet.getString(5).trim();
-        this.type = resultSet.getString(6).trim();
-        this.price = resultSet.getString(7).trim();
-        this.isNew = resultSet.getString(8).trim();
+        this.make = resultSet.getString(1).trim();
+        this.model = resultSet.getString(2).trim();
+        this.year = resultSet.getString(3).trim();
+        this.color = resultSet.getString(4).trim();
+        this.type = resultSet.getString(5).trim();
+        this.price = resultSet.getString(6).trim();
+        this.used = resultSet.getString(7).trim();
     }
 
-    public Vehicle(TextField make, TextField model, TextField year, TextField color, TextField type, TextField price, ComboBox<String> isNew) {
-        this(make.getText(), model.getText(), year.getText(), color.getText(), type.getText(), price.getText(), isNew.getSelectionModel().getSelectedItem());
+    public Vehicle(TextField make, TextField model, TextField year, TextField color, ComboBox<String> type, TextField price, ComboBox<String> used) {
+        this(make.getText(), model.getText(), year.getText(), color.getText(), type.getSelectionModel().getSelectedItem(), price.getText(), used.getSelectionModel().getSelectedItem());
     }
 
-    public Vehicle(String make, String model, String year, String color, String type, String price, String isNew) {
+    public Vehicle(String make, String model, String year, String color, String type, String price, String used) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.color = color;
         this.type = type;
         this.price = price;
-        this.isNew = isNew;
+        this.used = used;
     }
 
     @Override
@@ -46,6 +46,10 @@ public class Vehicle implements Comparable<Vehicle> {
             return model.compareTo(o.model);
         }
         return i;
+    }
+
+    public String getInsertSQL() {
+        return String.format("%s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(make), DataHandler.getWrappedValue(model), DataHandler.getWrappedValue(year), DataHandler.getWrappedValue(color), DataHandler.getWrappedValue(type), DataHandler.getWrappedValue(price), DataHandler.getWrappedValue(used));
     }
 
     public String getRow() {

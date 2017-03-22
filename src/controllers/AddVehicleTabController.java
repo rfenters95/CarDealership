@@ -4,8 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import util.DataHandler;
 import util.Init;
 import util.Vehicle;
+
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class AddVehicleTabController implements Init {
 
@@ -15,25 +19,47 @@ public class AddVehicleTabController implements Init {
     @FXML private TextField modelTF;
     @FXML private TextField yearTF;
     @FXML private TextField colorTF;
-    @FXML private TextField typeTF;
+    @FXML private ComboBox<String> typeCB;
     @FXML private TextField priceTF;
-    @FXML private ComboBox<String> conditionCB;
+    @FXML private ComboBox<String> usedCB;
 
 
 
     @FXML public void save(ActionEvent event) {
+
         try {
-            Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeTF, priceTF, conditionCB);
-            System.out.println(vehicle.getModel());
+
+            String sql;
+
+            Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF, usedCB);
+            Connection connection = DataHandler.getConnection();
+            Statement statement = connection.createStatement();
+
+            sql = "INSERT INTO `VEHICLES` (`MAKE`, `MODEL`, `YEAR`, `COLOR`, `TYPE`, `PRICE`, `USED`) VALUES (" + vehicle.getInsertSQL() + ");";
+            statement.executeUpdate(sql);
+
         } catch (Exception e) {
-            System.out.println("Empty fields");
+            //TODO fix exception replicate with empty fields
+            System.out.println("Empty fields!");
+        }
+
+        try {
+            alphaController.getSearchVehicleTabController().updateResultSet();
+            alphaController.getSearchVehicleTabController().displayResultSet();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void init(AlphaController alphaController) {
         this.alphaController = alphaController;
-        conditionCB.getItems().add("New");
-        conditionCB.getItems().add("Used");
+
+        usedCB.getItems().add("No");
+        usedCB.getItems().add("Yes");
+
+        typeCB.getItems().add("Family");
+        typeCB.getItems().add("Sports");
+        typeCB.getItems().add("Recreational");
     }
 }
