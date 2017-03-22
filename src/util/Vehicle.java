@@ -75,4 +75,12 @@ public class Vehicle implements Comparable<Vehicle> {
     public String getType() {
         return type;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getUsed() {
+        return used;
+    }
 }

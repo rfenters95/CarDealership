@@ -2,13 +2,19 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import util.DataHandler;
 import util.Init;
 import util.Session;
 import util.Vehicle;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,8 +71,27 @@ public class SearchVehicleTabController implements Init {
             viewDetailsButton.setDisable(false);
         }
     }
-    @FXML public void viewDetails(ActionEvent event) {
-        //launch invoice
+    @FXML public void viewDetails(ActionEvent event) throws IOException {
+
+        if (Session.selectedVehicle != null) {
+
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            newStage.setTitle("View Vehicle");
+
+            fxmlLoader.setLocation(getClass().getResource("../views/VehicleDetails.fxml"));
+            Parent newResource = fxmlLoader.load();
+            Scene newScene = new Scene(newResource);
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.showAndWait();
+
+        } else {
+
+            System.out.println("Error: No customer selected!");
+
+        }
     }
     @FXML public void search(ActionEvent event) {
 

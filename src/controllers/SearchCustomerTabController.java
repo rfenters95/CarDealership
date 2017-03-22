@@ -120,6 +120,7 @@ public class SearchCustomerTabController implements Init {
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader();
+            newStage.setTitle("View Customer");
 
             fxmlLoader.setLocation(getClass().getResource("../views/CustomerDetails.fxml"));
             Parent newResource = fxmlLoader.load();

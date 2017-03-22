@@ -104,6 +104,7 @@ public class SearchEmployeeTabController implements Init {
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader();
+            newStage.setTitle("View Employee");
 
             fxmlLoader.setLocation(getClass().getResource("../views/EmployeeDetails.fxml"));
             Parent newResource = fxmlLoader.load();

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <children>
+      <HBox>
+         <children>
+            <VBox>
+               <children>
+                  <Label text="CarDealership" />
+                  <Label text="123 Main Street, Florence, SC" />
+                  <Label text="(843)-123-4567" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Label text="General Information">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <GridPane hgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <left>
+                  <Label text="Salesman First Name" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <left>
+                  <Label text="Customer First Name" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <left>
+                  <Label text="Salesman Last Name" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <left>
+                  <Label text="Customer Last Name" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <left>
+                  <Label text="Phone" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <right>
+                  <DatePicker prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+               <left>
+                  <Label text="Date" BorderPane.alignment="CENTER" />
+               </left>
+            </BorderPane>
+         </children>
+      </GridPane>
+      <BorderPane prefWidth="200.0">
+         <left>
+            <Label prefWidth="100.0" text="Address" BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <TextField BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <Label text="Car Information">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <GridPane hgap="5.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <left>
+                  <Label text="Make" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <left>
+                  <Label text="Year" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <left>
+                  <Label text="Model" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <left>
+                  <Label text="Condition" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Label text="Transaction Information">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <GridPane hgap="5.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <left>
+                  <Label text="Sales Price" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <left>
+                  <Label text="Trade In Value" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <left>
+                  <Label text="Warranty Price" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <left>
+                  <Label text="Dealer Discount" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <left>
+                  <Label text="Payment Methods" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <ComboBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <left>
+                  <Label text="Total Price" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <TextField prefWidth="150.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <HBox alignment="BOTTOM_CENTER" spacing="10.0">
+         <children>
+            <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" text="Save" HBox.hgrow="ALWAYS" />
+            <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" text="Print" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
