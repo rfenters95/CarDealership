@@ -83,4 +83,5 @@ public class Vehicle implements Comparable<Vehicle> {
     public String getUsed() {
         return used;
     }
+
 }

@@ -10,12 +10,16 @@ import util.Session;
 import util.Vehicle;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class InvoiceController implements Initializable {
 
     @FXML private Label dateLabel;
-    //@FXML private Label dateLabel;
+
+    @FXML private Label eNameLabel;
 
     @FXML private Label cNameLabel;
     @FXML private Label cPhoneLabel;
@@ -29,9 +33,6 @@ public class InvoiceController implements Initializable {
     @FXML private Label vColorLabel;
     @FXML private Label vPriceLabel;
 
-    public InvoiceController() {
-    }
-
     @FXML public void saveInvoice(ActionEvent event) {
         // do something
     }
@@ -39,8 +40,12 @@ public class InvoiceController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Employee employee = Session.sessionUser;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        dateLabel.setText(dateFormat.format(date));
 
+        Employee employee = Session.sessionUser;
+        eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());
 
         Customer customer = Session.selectedCustomer;
         cNameLabel.setText(customer.getFirstName() + " " + customer.getLastName());

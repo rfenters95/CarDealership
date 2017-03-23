@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.DataHandler;
 import util.Init;
@@ -57,12 +58,18 @@ public class SessionTabController implements Init {
     }
 
     @FXML public void createInvoice(ActionEvent event) throws Exception {
-        Parent register_page = FXMLLoader.load(getClass().getResource("../views/Invoice.fxml"));
-        Scene register_scene = new Scene(register_page);
-        Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        register_stage.hide();
-        register_stage.setScene(register_scene);
-        register_stage.show();
+
+        Stage newStage = new Stage();
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        newStage.setTitle("Create Invoice");
+
+        fxmlLoader.setLocation(getClass().getResource("../views/Invoice.fxml"));
+        Parent newResource = fxmlLoader.load();
+        Scene newScene = new Scene(newResource);
+        newStage.setScene(newScene);
+        newStage.setResizable(false);
+        newStage.showAndWait();
     }
 
     @FXML public void hoverIn(MouseEvent event) {

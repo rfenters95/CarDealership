@@ -18,7 +18,7 @@
                   <HBox>
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Salesman Name" />
-                        <Label text="N/A" />
+                        <Label fx:id="eNameLabel" text="N/A" />
                      </children>
                   </HBox>
                </children>

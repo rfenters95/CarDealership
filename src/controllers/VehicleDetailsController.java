@@ -7,6 +7,7 @@ import util.Session;
 import util.Vehicle;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class VehicleDetailsController implements Initializable {
@@ -44,6 +45,9 @@ public class VehicleDetailsController implements Initializable {
         typeTF.setText(vehicle.getType());
         typeTF.setDisable(true);
 
+        double dPrice = Double.parseDouble(vehicle.getPrice());
+        DecimalFormat dPriceFormatter = new DecimalFormat("#,###.00");
+        priceTF.setText(String.format("$%s", dPriceFormatter.format(dPrice)));
         priceTF.setDisable(true);
 
     }
