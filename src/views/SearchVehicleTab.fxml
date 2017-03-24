@@ -3,82 +3,81 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 <AnchorPane fx:id="searchVehicleTab" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SearchVehicleTabController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308">
-               <children>
-                  <Label text="Search Inventory">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-            <Separator maxWidth="1.7976931348623157E308" />
-            <TitledPane fx:id="tPane" expanded="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="580.0" text="Search Parameters">
+            <StackPane alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" />
+            <TitledPane fx:id="tPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="580.0" text="Search Inventory">
                <content>
-                    <GridPane hgap="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" VBox.vgrow="ALWAYS">
-                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      </columnConstraints>
-                      <rowConstraints>
-                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      </rowConstraints>
-                       <children>
-                          <HBox alignment="CENTER_LEFT" GridPane.rowIndex="1">
+                  <VBox spacing="10.0">
+                     <children>
+                          <GridPane hgap="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vgap="5.0" VBox.vgrow="ALWAYS">
+                            <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
                              <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Make" />
-                                <ComboBox fx:id="makeCB" maxWidth="1.7976931348623157E308" promptText="Make" HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER_LEFT" GridPane.rowIndex="1">
+                                   <children>
+                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Make" />
+                                      <ComboBox fx:id="makeCB" maxWidth="1.7976931348623157E308" promptText="Make" HBox.hgrow="ALWAYS" />
+                                   </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" GridPane.rowIndex="2">
+                                   <children>
+                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Year" />
+                                      <ComboBox fx:id="yearCB" maxWidth="1.7976931348623157E308" promptText="Year" HBox.hgrow="ALWAYS" />
+                                   </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" GridPane.rowIndex="3">
+                                   <children>
+                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Type" />
+                                      <ComboBox fx:id="typeCB" maxWidth="1.7976931348623157E308" promptText="Type" HBox.hgrow="ALWAYS" />
+                                   </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                   <children>
+                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Model" />
+                                      <ComboBox fx:id="modelCB" maxWidth="1.7976931348623157E308" promptText="Model" HBox.hgrow="ALWAYS" />
+                                   </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                   <children>
+                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Color" />
+                                      <ComboBox fx:id="colorCB" maxWidth="1.7976931348623157E308" promptText="Color" HBox.hgrow="ALWAYS" />
+                                   </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                   <children>
+                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Price Range ($)" />
+                                      <ComboBox fx:id="priceCB" maxWidth="1.7976931348623157E308" promptText="Price Range ($)" HBox.hgrow="ALWAYS" />
+                                   </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT">
+                                   <children>
+                                      <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Used" />
+                                      <ComboBox fx:id="usedCB" maxWidth="1.7976931348623157E308" promptText="Used" HBox.hgrow="ALWAYS" />
+                                   </children>
+                                </HBox>
                              </children>
-                          </HBox>
-                          <HBox alignment="CENTER_LEFT" GridPane.rowIndex="2">
-                             <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Year" />
-                                <ComboBox fx:id="yearCB" maxWidth="1.7976931348623157E308" promptText="Year" HBox.hgrow="ALWAYS" />
-                             </children>
-                          </HBox>
-                          <HBox alignment="CENTER_LEFT" GridPane.rowIndex="3">
-                             <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Type" />
-                                <ComboBox fx:id="typeCB" maxWidth="1.7976931348623157E308" promptText="Type" HBox.hgrow="ALWAYS" />
-                             </children>
-                          </HBox>
-                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                             <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Model" />
-                                <ComboBox fx:id="modelCB" maxWidth="1.7976931348623157E308" promptText="Model" HBox.hgrow="ALWAYS" />
-                             </children>
-                          </HBox>
-                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                             <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Color" />
-                                <ComboBox fx:id="colorCB" maxWidth="1.7976931348623157E308" promptText="Color" HBox.hgrow="ALWAYS" />
-                             </children>
-                          </HBox>
-                          <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                             <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Price Range ($)" />
-                                <ComboBox fx:id="priceCB" maxWidth="1.7976931348623157E308" promptText="Price Range ($)" HBox.hgrow="ALWAYS" />
-                             </children>
-                          </HBox>
-                          <HBox alignment="CENTER_LEFT">
-                             <children>
-                                <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Used" />
-                                <ComboBox fx:id="usedCB" maxWidth="1.7976931348623157E308" promptText="Used" HBox.hgrow="ALWAYS" />
-                             </children>
-                          </HBox>
-                       </children>
-                    </GridPane>
+                          </GridPane>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Show All" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
                </content>
             </TitledPane>
-            <ListView fx:id="listView" VBox.vgrow="ALWAYS" />
+            <TitledPane collapsible="false" text="Results">
+               <content>
+                  <ListView fx:id="listView" VBox.vgrow="ALWAYS" />
+               </content>
+            </TitledPane>
             <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="20.0" VBox.vgrow="NEVER">
                <children>
                   <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#select" prefHeight="30.0" prefWidth="180.0" text="Select" HBox.hgrow="ALWAYS" />

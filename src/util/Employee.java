@@ -148,6 +148,6 @@ public class Employee implements Comparable<Employee> {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s, %s", jobTitle, firstName, lastName);
+        return String.format("[%s] %s, %s", jobTitle, lastName, firstName);
     }
 }

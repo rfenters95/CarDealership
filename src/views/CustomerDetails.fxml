@@ -18,43 +18,43 @@
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="First Name" />
-            <Label fx:id="fNameLabel" text="Label" />
+            <TextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Last Name" />
-            <Label fx:id="lNameLabel" text="Label" />
+            <TextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Phone" />
-            <Label fx:id="phoneLabel" text="Label" />
+            <TextField fx:id="phoneTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Email" />
-            <Label fx:id="emailLabel" text="Label" />
+            <TextField fx:id="emailTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Address" />
-            <Label fx:id="addressLabel" text="Label" />
+            <TextField fx:id="addressTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="City" />
-            <Label fx:id="cityLabel" text="Label" />
+            <TextField fx:id="cityTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Date Of Birth" />
-            <Label fx:id="DOBLabel" text="Label" />
+            <TextField fx:id="dateOfBirthTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">

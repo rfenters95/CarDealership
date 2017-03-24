@@ -7,9 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -30,13 +30,13 @@ public class CustomerDetailsController implements Initializable {
     private ResultSet resultSet;
     private AlphaController alphaController;
 
-    @FXML private Label fNameLabel;
-    @FXML private Label lNameLabel;
-    @FXML private Label phoneLabel;
-    @FXML private Label emailLabel;
-    @FXML private Label addressLabel;
-    @FXML private Label cityLabel;
-    @FXML private Label DOBLabel;
+    @FXML private TextField fNameTF;
+    @FXML private TextField lNameTF;
+    @FXML private TextField phoneTF;
+    @FXML private TextField emailTF;
+    @FXML private TextField addressTF;
+    @FXML private TextField cityTF;
+    @FXML private TextField dateOfBirthTF;
     @FXML private ComboBox<Invoice> invoiceCB;
 
     @FXML public void viewInvoice(ActionEvent event) throws IOException {
@@ -60,13 +60,27 @@ public class CustomerDetailsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         Customer customer = Session.selectedCustomer;
-        fNameLabel.setText(customer.getFirstName());
-        lNameLabel.setText(customer.getLastName());
-        phoneLabel.setText(customer.getPhone());
-        emailLabel.setText(customer.getEmail());
-        addressLabel.setText(customer.getAddress());
-        cityLabel.setText(customer.getCity());
-        DOBLabel.setText(customer.getDateOfBirth());
+
+        fNameTF.setText(customer.getFirstName());
+        fNameTF.setDisable(true);
+
+        lNameTF.setText(customer.getLastName());
+        lNameTF.setDisable(true);
+
+        phoneTF.setText(customer.getPhone());
+        phoneTF.setDisable(true);
+
+        emailTF.setText(customer.getEmail());
+        emailTF.setDisable(true);
+
+        addressTF.setText(customer.getAddress());
+        addressTF.setDisable(true);
+
+        cityTF.setText(customer.getCity());
+        cityTF.setDisable(true);
+
+        dateOfBirthTF.setText(customer.getDateOfBirth());
+        dateOfBirthTF.setDisable(true);
 
         invoiceCB.setCellFactory(new Callback<ListView<Invoice>, ListCell<Invoice>>() {
             @Override
