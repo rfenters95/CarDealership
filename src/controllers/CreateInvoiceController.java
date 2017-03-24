@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class InvoiceController implements Initializable {
+public class CreateInvoiceController implements Initializable {
 
     @FXML private Label dateLabel;
     private String dateString;

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewInvoiceController">
+   <children>
+      <TitledPane collapsible="false" text="General Information">
+         <content>
+            <VBox spacing="5.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Date" />
+                        <Label fx:id="dateLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Salesman Name" />
+                        <Label fx:id="eNameLabel" text="N/A" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </TitledPane>
+      <TitledPane collapsible="false" text="Customer Infomation">
+         <content>
+            <VBox spacing="5.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Name" />
+                        <Label fx:id="cNameLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Phone" />
+                        <Label fx:id="cPhoneLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Address" />
+                        <Label fx:id="cAddressLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="City" />
+                        <Label fx:id="cCityLabel" text="N/A" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </TitledPane>
+      <TitledPane collapsible="false" text="Vehicle Information">
+         <content>
+            <VBox spacing="5.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Used" />
+                        <Label fx:id="vUsedLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Make" />
+                        <Label fx:id="vMakeLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Model" />
+                        <Label fx:id="vModelLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Year" />
+                        <Label fx:id="vYearLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Color" />
+                        <Label fx:id="vColorLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Price" />
+                        <Label fx:id="vPriceLabel" text="N/A" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </TitledPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

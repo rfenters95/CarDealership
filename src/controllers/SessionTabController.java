@@ -64,12 +64,13 @@ public class SessionTabController implements Init {
         FXMLLoader fxmlLoader = new FXMLLoader();
         newStage.setTitle("Create Invoice");
 
-        fxmlLoader.setLocation(getClass().getResource("../views/Invoice.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("../views/CreateInvoice.fxml"));
         Parent newResource = fxmlLoader.load();
         Scene newScene = new Scene(newResource);
         newStage.setScene(newScene);
         newStage.setResizable(false);
         newStage.showAndWait();
+
     }
 
     @FXML public void hoverIn(MouseEvent event) {
