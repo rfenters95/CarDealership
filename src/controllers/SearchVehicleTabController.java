@@ -112,8 +112,9 @@ public class SearchVehicleTabController implements Init {
             final String used = (usedCB.getSelectionModel().getSelectedIndex() == 0) ? null : usedCB.getSelectionModel().getSelectedItem();
             String[] attributes = {make, model, year, color, type, price, used};
 
+            int j = 0; // flag indicates if all attributes are null
             boolean hasMultiple = false;
-            for (int i = 0, j = 0; i < attributes.length; i++) {
+            for (int i = 0; i < attributes.length; i++) {
                 if (attributes[i] != null) {
 
                     j++;
@@ -155,10 +156,23 @@ public class SearchVehicleTabController implements Init {
                 }
             }
 
-            Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
-            displayResultSet();
+            // if all attributes are null do not send sql fragment
+            if (j != 0) {
+
+                Connection connection = DataHandler.getConnection();
+                Statement statement = connection.createStatement();
+                resultSet = statement.executeQuery(sql);
+                displayResultSet();
+
+            } else {
+
+                sql = "SELECT * FROM VEHICLES";
+                Connection connection = DataHandler.getConnection();
+                Statement statement = connection.createStatement();
+                resultSet = statement.executeQuery(sql);
+                displayResultSet();
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
