@@ -60,7 +60,9 @@ public class SearchVehicleTabController implements Init {
             listView.getItems().addAll(vehicles);
 
         } else {
-            System.out.println("DB empty!");
+
+            listView.getItems().clear();
+
         }
 
     }
@@ -101,13 +103,13 @@ public class SearchVehicleTabController implements Init {
         try {
 
             String sql = "SELECT * FROM VEHICLES WHERE";
-            final String make = makeCB.getSelectionModel().getSelectedItem();
-            final String model = modelCB.getSelectionModel().getSelectedItem();
-            final String year = yearCB.getSelectionModel().getSelectedItem();
-            final String color = colorCB.getSelectionModel().getSelectedItem();
-            final String type = typeCB.getSelectionModel().getSelectedItem();
-            final String price = priceCB.getSelectionModel().getSelectedItem();
-            final String used = usedCB.getSelectionModel().getSelectedItem();
+            final String make = (makeCB.getSelectionModel().getSelectedIndex() == 0) ? null : makeCB.getSelectionModel().getSelectedItem();
+            final String model = (modelCB.getSelectionModel().getSelectedIndex() == 0) ? null : modelCB.getSelectionModel().getSelectedItem();
+            final String year = (yearCB.getSelectionModel().getSelectedIndex() == 0) ? null : yearCB.getSelectionModel().getSelectedItem();
+            final String color = (colorCB.getSelectionModel().getSelectedIndex() == 0) ? null : colorCB.getSelectionModel().getSelectedItem();
+            final String type = (typeCB.getSelectionModel().getSelectedIndex() == 0) ? null : typeCB.getSelectionModel().getSelectedItem();
+            final String price = (priceCB.getSelectionModel().getSelectedIndex() == 0) ? null : priceCB.getSelectionModel().getSelectedItem();
+            final String used = (usedCB.getSelectionModel().getSelectedIndex() == 0) ? null : usedCB.getSelectionModel().getSelectedItem();
             String[] attributes = {make, model, year, color, type, price, used};
 
             boolean hasMultiple = false;
@@ -127,25 +129,25 @@ public class SearchVehicleTabController implements Init {
 
                     switch (i) {
                         case 0:
-                            sql += " MAKE=" + DataHandler.getWrappedValue(make);
+                            sql += " `MAKE`=" + DataHandler.getWrappedValue(make);
                             break;
                         case 1:
-                            sql += " MODEL=" + DataHandler.getWrappedValue(model);
+                            sql += " `MODEL`=" + DataHandler.getWrappedValue(model);
                             break;
                         case 2:
-                            sql += " YEAR=" + DataHandler.getWrappedValue(year);
+                            sql += " `YEAR`=" + DataHandler.getWrappedValue(year);
                             break;
                         case 3:
-                            sql += " COLOR=" + DataHandler.getWrappedValue(color);
+                            sql += " `COLOR`=" + DataHandler.getWrappedValue(color);
                             break;
                         case 4:
-                            sql += " TYPE=" + DataHandler.getWrappedValue(type);
+                            sql += " `TYPE`=" + DataHandler.getWrappedValue(type);
                             break;
                         case 5:
-                            sql += " PRICE=" + DataHandler.getWrappedValue(price);
+                            sql += " `PRICE`" + price;
                             break;
                         case 6:
-                            sql += " USED=" + DataHandler.getWrappedValue(used);
+                            sql += " `USED`=" + DataHandler.getWrappedValue(used);
                             break;
                         default:
                             break;
@@ -169,8 +171,10 @@ public class SearchVehicleTabController implements Init {
         this.alphaController = alphaController;
         viewDetailsButton.setDisable(true);
 
+        usedCB.getItems().add("Any");
         usedCB.getItems().add("No");
         usedCB.getItems().add("Yes");
+        usedCB.getSelectionModel().select(0);
 
         listView.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
             @Override
@@ -224,11 +228,34 @@ public class SearchVehicleTabController implements Init {
                 } while (resultSet.next());
 
                 listView.getItems().addAll(vehicles);
+
+                makeCB.getItems().add("Any");
                 makeCB.getItems().addAll(makeCBItems);
+                makeCB.getSelectionModel().select(0);
+
+                modelCB.getItems().add("Any");
                 modelCB.getItems().addAll(modelCBItems);
+                modelCB.getSelectionModel().select(0);
+
+                yearCB.getItems().add("Any");
                 yearCB.getItems().addAll(yearCBItems);
+                yearCB.getSelectionModel().select(0);
+
+                colorCB.getItems().add("Any");
                 colorCB.getItems().addAll(colorCBItems);
+                colorCB.getSelectionModel().select(0);
+
+                typeCB.getItems().add("Any");
                 typeCB.getItems().addAll(typeCBItems);
+                typeCB.getSelectionModel().select(0);
+
+                priceCB.getItems().add("Any");
+                priceCB.getItems().add("<=20000");
+                priceCB.getItems().add("<=40000");
+                priceCB.getItems().add("<=60000");
+                priceCB.getItems().add("<=80000");
+                priceCB.getItems().add("<=100000");
+                priceCB.getSelectionModel().select(0);
 
             } else {
                 System.out.println("DB empty!");
