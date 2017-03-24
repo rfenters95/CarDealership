@@ -180,7 +180,7 @@ public class SearchVehicleTabController implements Init {
                     protected void updateItem(Vehicle item, boolean empty) {
                         super.updateItem(item, empty);
                         if(!empty && item != null) {
-                            setText(item.getRow());
+                            setText(item.toString());
                         } else {
                             setText("");
                             setGraphic(null);

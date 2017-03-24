@@ -134,7 +134,7 @@ public class SearchEmployeeTabController implements Init {
                     protected void updateItem(Employee item, boolean empty) {
                         super.updateItem(item, empty);
                         if(!empty && item != null) {
-                            setText(item.getRow());
+                            setText(item.toString());
                         } else {
                             setText("");
                             setGraphic(null);

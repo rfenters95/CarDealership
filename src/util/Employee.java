@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class Employee implements Comparable<Employee> {
 
+    private String ID;
     private String firstName;
     private String lastName;
     private String phone;
@@ -22,6 +23,7 @@ public class Employee implements Comparable<Employee> {
     private String totalSales;
 
     public Employee(ResultSet resultSet) throws SQLException {
+        this.ID = resultSet.getString(1).trim();
         this.firstName = resultSet.getString(2).trim();
         this.lastName = resultSet.getString(3).trim();
         this.phone = resultSet.getString(4).trim();
@@ -53,15 +55,15 @@ public class Employee implements Comparable<Employee> {
 
     @Override
     public int compareTo(Employee o) {
-        int i = lastName.compareTo(o.lastName);
+        int i = jobTitle.compareTo(o.jobTitle);
         if (i == 0) {
-            return firstName.compareTo(o.firstName);
+            int j = lastName.compareTo(o.lastName);
+            if (j == 0) {
+                return firstName.compareTo(o.firstName);
+            }
+            return j;
         }
         return i;
-    }
-
-    public String getRow() {
-        return firstName + " " + lastName;
     }
 
     public String getInsertSQL() {
@@ -77,6 +79,10 @@ public class Employee implements Comparable<Employee> {
                 DataHandler.getWrappedValue(salary),
                 DataHandler.getWrappedValue(workStatus),
                 DataHandler.getWrappedValue(totalSales));
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getFirstName() {
@@ -142,6 +148,6 @@ public class Employee implements Comparable<Employee> {
 
     @Override
     public String toString() {
-        return lastName + ", " + firstName;
+        return String.format("[%s] %s, %s", jobTitle, firstName, lastName);
     }
 }

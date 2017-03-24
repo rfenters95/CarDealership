@@ -35,6 +35,7 @@ public class AlphaController implements Initializable {
         searchVehicleTabController.init(this);
         searchEmployeeTabController.init(this);
         sessionTabController.init(this);
+
     }
 
     public Tab getUserSessionInfoTab() {

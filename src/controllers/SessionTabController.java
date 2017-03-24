@@ -32,19 +32,19 @@ public class SessionTabController implements Init {
         boolean allSet = true;
 
         if (Session.sessionUser != null) {
-            employeeLabel.setText(Session.sessionUser.getRow());
+            employeeLabel.setText(Session.sessionUser.toString());
         } else {
             allSet = false;
         }
 
         if (Session.selectedCustomer != null) {
-            customerLabel.setText(Session.selectedCustomer.getRow());
+            customerLabel.setText(Session.selectedCustomer.toString());
         } else {
             allSet = false;
         }
 
         if (Session.selectedVehicle != null) {
-            vehicleLabel.setText(Session.selectedVehicle.getRow());
+            vehicleLabel.setText(Session.selectedVehicle.toString());
         } else {
             allSet = false;
         }

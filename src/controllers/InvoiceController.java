@@ -4,12 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import util.Customer;
-import util.Employee;
-import util.Session;
-import util.Vehicle;
+import util.*;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +17,7 @@ import java.util.ResourceBundle;
 public class InvoiceController implements Initializable {
 
     @FXML private Label dateLabel;
+    private String dateString;
 
     @FXML private Label eNameLabel;
 
@@ -34,19 +34,52 @@ public class InvoiceController implements Initializable {
     @FXML private Label vPriceLabel;
 
     @FXML public void saveInvoice(ActionEvent event) {
-        // do something
+
+        try {
+
+            String sql;
+
+            Connection connection = DataHandler.getConnection();
+            Statement statement = connection.createStatement();
+
+            sql = String.format("INSERT INTO `INVOICES` (`CUSTOMER_ID`, `EMPLOYEE_ID`, `VEHICLE_ID`, `DATE`) VALUES (%s, %s, %s, %s)",
+                    DataHandler.getWrappedValue(Session.selectedCustomer.getID()),
+                    DataHandler.getWrappedValue(Session.sessionUser.getID()),
+                    DataHandler.getWrappedValue(Session.selectedVehicle.getID()),
+                    DataHandler.getWrappedValue(dateString));
+            statement.executeUpdate(sql);
+
+        } catch (Exception e) {
+
+            //Malformed SQL such as incomplete statement, wrong col names, duplicate pKey, no `` around col name or value
+            System.out.println("Empty fields!");
+
+        }
+
+        /*
+        try {
+            alphaController.getSearchCustomerTabController().updateResultSet();
+            alphaController.getSearchCustomerTabController().displayResultSet();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        */
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // Get today's date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        dateLabel.setText(dateFormat.format(date));
+        dateString = dateFormat.format(date);
+        dateLabel.setText(dateString);
 
+        // Display salesman info
         Employee employee = Session.sessionUser;
         eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());
 
+        // Display customer info
         Customer customer = Session.selectedCustomer;
         cNameLabel.setText(customer.getFirstName() + " " + customer.getLastName());
         cPhoneLabel.setText(customer.getPhone());
@@ -54,6 +87,7 @@ public class InvoiceController implements Initializable {
         cAddressLabel.setText(customer.getAddress());
         cCityLabel.setText(customer.getCity());
 
+        // Display vehicle info
         Vehicle vehicle = Session.selectedVehicle;
         vUsedLabel.setText(vehicle.getUsed());
         vMakeLabel.setText(vehicle.getMake());

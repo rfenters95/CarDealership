@@ -102,7 +102,7 @@ public class SearchCustomerTabController implements Init {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -150,7 +150,7 @@ public class SearchCustomerTabController implements Init {
                     protected void updateItem(Customer item, boolean empty) {
                         super.updateItem(item, empty);
                         if(!empty && item != null) {
-                            setText(item.getRow());
+                            setText(item.toString());
                         } else {
                             setText("");
                             setGraphic(null);

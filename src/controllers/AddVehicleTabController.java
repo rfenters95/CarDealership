@@ -35,12 +35,13 @@ public class AddVehicleTabController implements Init {
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
 
-            sql = "INSERT INTO `VEHICLES` (`MAKE`, `MODEL`, `YEAR`, `COLOR`, `TYPE`, `PRICE`, `USED`) VALUES (" + vehicle.getInsertSQL() + ");";
+            sql = String.format("INSERT INTO `VEHICLES` (`ID`, `MAKE`, `MODEL`, `YEAR`, `COLOR`, `TYPE`, `PRICE`, `USED`) VALUES (%s)", vehicle.getInsertSQL());
             statement.executeUpdate(sql);
 
         } catch (Exception e) {
-            //TODO fix exception replicate with empty fields
+
             System.out.println("Empty fields!");
+
         }
 
         try {

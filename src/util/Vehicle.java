@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Vehicle implements Comparable<Vehicle> {
+
+    private String ID;
     private String make;
     private String model;
     private String year;
@@ -16,13 +18,14 @@ public class Vehicle implements Comparable<Vehicle> {
     private String used;
 
     public Vehicle(ResultSet resultSet) throws SQLException {
-        this.make = resultSet.getString(1).trim();
-        this.model = resultSet.getString(2).trim();
-        this.year = resultSet.getString(3).trim();
-        this.color = resultSet.getString(4).trim();
-        this.type = resultSet.getString(5).trim();
-        this.price = resultSet.getString(6).trim();
-        this.used = resultSet.getString(7).trim();
+        this.ID = resultSet.getString(1).trim();
+        this.make = resultSet.getString(2).trim();
+        this.model = resultSet.getString(3).trim();
+        this.year = resultSet.getString(4).trim();
+        this.color = resultSet.getString(5).trim();
+        this.type = resultSet.getString(6).trim();
+        this.price = resultSet.getString(7).trim();
+        this.used = resultSet.getString(8).trim();
     }
 
     public Vehicle(TextField make, TextField model, TextField year, TextField color, ComboBox<String> type, TextField price, ComboBox<String> used) {
@@ -49,11 +52,11 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     public String getInsertSQL() {
-        return String.format("%s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(make), DataHandler.getWrappedValue(model), DataHandler.getWrappedValue(year), DataHandler.getWrappedValue(color), DataHandler.getWrappedValue(type), DataHandler.getWrappedValue(price), DataHandler.getWrappedValue(used));
+        return String.format("NULL, %s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(make), DataHandler.getWrappedValue(model), DataHandler.getWrappedValue(year), DataHandler.getWrappedValue(color), DataHandler.getWrappedValue(type), DataHandler.getWrappedValue(price), DataHandler.getWrappedValue(used));
     }
 
-    public String getRow() {
-        return make + " " + model;
+    public String getID() {
+        return ID;
     }
 
     public String getMake() {
@@ -84,4 +87,8 @@ public class Vehicle implements Comparable<Vehicle> {
         return used;
     }
 
+    @Override
+    public String toString() {
+        return make + " " + model;
+    }
 }

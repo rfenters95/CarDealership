@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Customer implements Comparable<Customer> {
+
+    private String ID;
     private String firstName;
     private String lastName;
     private String phone;
@@ -16,6 +18,7 @@ public class Customer implements Comparable<Customer> {
     private String dateOfBirth;
 
     public Customer(ResultSet resultSet) throws SQLException {
+        this.ID = resultSet.getString(1).trim();
         this.firstName = resultSet.getString(2).trim();
         this.lastName = resultSet.getString(3).trim();
         this.phone = resultSet.getString(4).trim();
@@ -53,16 +56,16 @@ public class Customer implements Comparable<Customer> {
         return i;
     }
 
-    public String getRow() {
-        return firstName + " " + lastName;
-    }
-
     private boolean isValidArgument(String argument) {
         return argument != null && !argument.isEmpty();
     }
 
     public String getInsertSQL() {
         return String.format("%s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(firstName), DataHandler.getWrappedValue(lastName), DataHandler.getWrappedValue(phone), DataHandler.getWrappedValue(email), DataHandler.getWrappedValue(address), DataHandler.getWrappedValue(city), DataHandler.getWrappedValue(dateOfBirth));
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getFirstName() {
