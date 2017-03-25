@@ -24,6 +24,7 @@ public class AddCustomerTabController implements Init {
     @FXML private DatePicker dateOfBirthDP;
 
     @FXML public void save(ActionEvent event) {
+
         try {
 
             String sql;
@@ -36,16 +37,22 @@ public class AddCustomerTabController implements Init {
             statement.executeUpdate(sql);
 
         } catch (Exception e) {
-            //TODO fix exception replicate with empty fields
+
             System.out.println("Empty fields!");
+
         }
 
         try {
+
             alphaController.getSearchCustomerTabController().updateResultSet();
             alphaController.getSearchCustomerTabController().displayResultSet();
+
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
+
     }
 
     @Override

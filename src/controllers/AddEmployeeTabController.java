@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -10,13 +9,12 @@ import util.DataHandler;
 import util.Employee;
 import util.Init;
 
-import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class AddEmployeeTabController implements Init, Initializable {
+public class AddEmployeeTabController implements Init {
 
     private AlphaController alphaController;
 
@@ -31,27 +29,47 @@ public class AddEmployeeTabController implements Init, Initializable {
     @FXML private ComboBox<String> jobTitleCB;
 
     @FXML public void save(ActionEvent event) {
+
+        Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB, salaryTF);
+
         try {
 
-            String sql;
-
-            Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB, salaryTF);
             Connection connection = DataHandler.getConnection();
+
+            // Add EMPLOYEES entry
             Statement statement = connection.createStatement();
 
-            sql = "INSERT INTO `EMPLOYEES` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`, `JOB`, `SALARY`, `WORK_STATUS`, `TOTAL_SALES`) VALUES (NULL, " + employee.getInsertSQL() + ");";
+            String sql = "INSERT INTO `EMPLOYEES` " +
+                    "(`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, " +
+                    "`DATE_OF_BIRTH`, `JOB`, `SALARY`, `WORK_STATUS`, `TOTAL_SALES`) VALUES " +
+                    "(NULL, " + employee.getInsertSQL() + ");";
+
             statement.executeUpdate(sql);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            // Add USERS entry
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `USERS` (`ID`, `USERNAME`, `PASSWORD`) VALUES (NULL, ?, ?);");
 
-        try {
+            String username = employee.getEmail().substring(0, employee.getEmail().indexOf('@'));
+            String password = String.valueOf(employee.getFirstName().charAt(0)) + String.valueOf(employee.getLastName().charAt(0));
+
+            username = username.toLowerCase();
+            password = password.toLowerCase();
+
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        } finally {
+
             alphaController.getSearchEmployeeTabController().updateResultSet();
             alphaController.getSearchEmployeeTabController().displayResultSet();
-        } catch (Exception e) {
-            e.printStackTrace();
+
         }
+
     }
 
     @Override
@@ -64,8 +82,4 @@ public class AddEmployeeTabController implements Init, Initializable {
         jobTitleCB.getItems().addAll(jobs);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //this works
-    }
 }

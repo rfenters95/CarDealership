@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.util.TreeSet;
 
 public class SearchEmployeeTabController implements Init {
+
     private AlphaController alphaController;
     private ResultSet resultSet;
 
