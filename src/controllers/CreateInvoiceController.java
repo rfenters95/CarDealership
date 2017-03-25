@@ -8,8 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import util.*;
 
 import java.io.IOException;
@@ -28,7 +31,7 @@ public class CreateInvoiceController implements Initializable {
     @FXML private Label discountLabel;
     @FXML private Label totalPriceLabel;
     @FXML private ComboBox<String> paymentMethodCB;
-    @FXML private ComboBox<String> warrantyCB;
+    @FXML private ComboBox<USD> warrantyCB;
     @FXML private ComboBox<String> tradeInCB;
 
     @FXML private Label cNameLabel;
@@ -80,9 +83,27 @@ public class CreateInvoiceController implements Initializable {
         paymentMethodCB.getItems().add("Credit");
         paymentMethodCB.getItems().add("Finance");
 
-        warrantyCB.getItems().add("$0");
-        warrantyCB.getItems().add("$3000");
-        warrantyCB.getItems().add("$5000");
+        warrantyCB.getItems().add(new USD(0).setStringValue("$0"));
+        warrantyCB.getItems().add(new USD(3000));
+        warrantyCB.getItems().add(new USD(5000));
+
+        warrantyCB.setCellFactory(new Callback<ListView<USD>, ListCell<USD>>() {
+            @Override
+            public ListCell<USD> call(ListView<USD> param) {
+                return new ListCell<USD>() {
+                    @Override
+                    protected void updateItem(USD item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(!empty && item != null) {
+                            setText(item.toString());
+                        } else {
+                            setText("");
+                            setGraphic(null);
+                        }
+                    }
+                };
+            }
+        });
 
         tradeInCB.getItems().add("No");
         tradeInCB.getItems().add("Yes");
@@ -138,7 +159,7 @@ public class CreateInvoiceController implements Initializable {
         warrantyCB.setOnAction(e -> {
 
             double vehiclePrice = Double.parseDouble(vehicle.getPrice());
-            double warrantyPrice = Double.parseDouble(warrantyCB.getSelectionModel().getSelectedItem().substring(1));
+            double warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getDoubleValue();
             double totalPrice = vehiclePrice + warrantyPrice;
 
             totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));

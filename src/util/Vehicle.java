@@ -59,6 +59,10 @@ public class Vehicle implements Comparable<Vehicle> {
         return String.format("NULL, %s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(make), DataHandler.getWrappedValue(model), DataHandler.getWrappedValue(year), DataHandler.getWrappedValue(color), DataHandler.getWrappedValue(type), DataHandler.getWrappedValue(price), DataHandler.getWrappedValue(used));
     }
 
+    public boolean isNull() {
+        return make == null && model == null && year == null && color == null && type == null && price == null && used == null;
+    }
+
     public String getID() {
         return ID;
     }

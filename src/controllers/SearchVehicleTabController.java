@@ -123,7 +123,7 @@ public class SearchVehicleTabController implements Init {
 
         try {
 
-            String sql = "SELECT * FROM VEHICLES WHERE";
+            String sql = "SELECT * FROM `VEHICLES` WHERE";
             final String make = (makeCB.getSelectionModel().getSelectedIndex() == 0) ? null : makeCB.getSelectionModel().getSelectedItem();
             final String model = (modelCB.getSelectionModel().getSelectedIndex() == 0) ? null : modelCB.getSelectionModel().getSelectedItem();
             final String year = (yearCB.getSelectionModel().getSelectedIndex() == 0) ? null : yearCB.getSelectionModel().getSelectedItem();
