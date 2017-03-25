@@ -55,22 +55,24 @@ public class LoginController implements Initializable {
                 if (hasResults) {
 
                     Session.sessionUser = new Employee(resultSet);
-
-                    //if Session.employee.isAdmin
-
                     loadResource(event, "views/Alpha.fxml");
 
-                    //else
-
                 } else {
+
                     System.out.println("Could not find employee matching that ID");
+
                 }
+
             } else {
+
                 System.out.println("Bad login combo!");
+
             }
 
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
 
     }

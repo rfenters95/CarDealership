@@ -22,9 +22,15 @@ public class AlphaController implements Initializable {
     @FXML private SessionTabController sessionTabController;
 
     @FXML private Tab userSessionInfoTab;
+    @FXML private Tab employeeTab;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
+        if (!Session.sessionUser.isAdmin()) {
+            employeeTab.setDisable(true);
+        }
 
         userSessionInfoTab.setText(Session.sessionUser.getFirstName() + " " + Session.sessionUser.getLastName());
 

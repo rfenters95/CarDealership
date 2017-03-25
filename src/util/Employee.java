@@ -22,6 +22,8 @@ public class Employee implements Comparable<Employee> {
     private String workStatus;
     private String totalSales;
 
+    private boolean isAdmin; // derived from jobTitle
+
     public Employee(ResultSet resultSet) throws SQLException {
         this.ID = resultSet.getString(1).trim();
         this.firstName = resultSet.getString(2).trim();
@@ -36,6 +38,9 @@ public class Employee implements Comparable<Employee> {
         this.workStatus = resultSet.getString(11).trim();
         if (this.jobTitle.equals("Sales")) {
             this.totalSales = resultSet.getString(12).trim();
+        } else {
+            // Assumes that all positions other than sales have admin access
+            this.isAdmin = true;
         }
     }
 
@@ -127,6 +132,10 @@ public class Employee implements Comparable<Employee> {
 
     public String getTotalSales() {
         return totalSales;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
     public String getPercentCommission() {
