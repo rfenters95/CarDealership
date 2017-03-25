@@ -15,6 +15,7 @@ public class AlphaController implements Initializable {
 
     @FXML private SearchCustomerTabController searchCustomerTabController;
     @FXML private SearchVehicleTabController searchVehicleTabController;
+    @FXML private AddTradeInVehicleController addTradeInVehicleController;
 
     @FXML private AddEmployeeTabController addEmployeeTabController;
     @FXML private SearchEmployeeTabController searchEmployeeTabController;
@@ -41,6 +42,8 @@ public class AlphaController implements Initializable {
         searchVehicleTabController.init(this);
         searchEmployeeTabController.init(this);
         sessionTabController.init(this);
+
+        Session.alphaController = this;
 
     }
 

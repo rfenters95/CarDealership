@@ -40,28 +40,34 @@ public class SearchVehicleTabController implements Init {
     @FXML private ListView<Vehicle> listView;
     @FXML private TitledPane tPane;
 
-    public void displayResultSet() throws SQLException {
+    public void displayResultSet() {
 
-        boolean hasResults = resultSet.next();
+        try {
 
-        TreeSet<Vehicle> vehicles = new TreeSet<>();
+            boolean hasResults = resultSet.next();
+            TreeSet<Vehicle> vehicles = new TreeSet<>();
 
-        if (hasResults) {
+            if (hasResults) {
 
-            listView.getItems().clear();
+                // Empty old listView items
+                listView.getItems().clear();
 
-            do {
+                do {
+                    Vehicle vehicle = new Vehicle(resultSet);
+                    vehicles.add(vehicle);
+                } while (resultSet.next());
 
-                Vehicle vehicle = new Vehicle(resultSet);
-                vehicles.add(vehicle);
+                listView.getItems().addAll(vehicles);
 
-            } while (resultSet.next());
+            } else {
 
-            listView.getItems().addAll(vehicles);
+                listView.getItems().clear();
 
-        } else {
+            }
 
-            listView.getItems().clear();
+        } catch (SQLException e) {
+
+            e.printStackTrace();
 
         }
 

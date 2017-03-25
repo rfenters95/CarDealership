@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -43,6 +44,12 @@
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Warranty" />
                         <ComboBox fx:id="warrantyCB" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Trade-In?" />
+                        <ComboBox fx:id="tradeInCB" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </children>

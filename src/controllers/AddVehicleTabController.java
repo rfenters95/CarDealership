@@ -40,16 +40,15 @@ public class AddVehicleTabController implements Init {
 
         } catch (Exception e) {
 
-            System.out.println("Empty fields!");
+            e.printStackTrace();
 
-        }
+        } finally {
 
-        try {
             alphaController.getSearchVehicleTabController().updateResultSet();
             alphaController.getSearchVehicleTabController().displayResultSet();
-        } catch (Exception e) {
-            e.printStackTrace();
+
         }
+
     }
 
     @Override

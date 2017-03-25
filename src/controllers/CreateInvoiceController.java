@@ -2,17 +2,20 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import util.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 
 public class CreateInvoiceController implements Initializable {
@@ -26,6 +29,7 @@ public class CreateInvoiceController implements Initializable {
     @FXML private Label totalPriceLabel;
     @FXML private ComboBox<String> paymentMethodCB;
     @FXML private ComboBox<String> warrantyCB;
+    @FXML private ComboBox<String> tradeInCB;
 
     @FXML private Label cNameLabel;
     @FXML private Label cPhoneLabel;
@@ -43,17 +47,15 @@ public class CreateInvoiceController implements Initializable {
 
         try {
 
-            String sql;
-
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `INVOICES` (`CUSTOMER_ID`, `EMPLOYEE_ID`, `VEHICLE_ID`, `DATE`) VALUES (?, ?, ?, ?)");
 
-            sql = String.format("INSERT INTO `INVOICES` (`CUSTOMER_ID`, `EMPLOYEE_ID`, `VEHICLE_ID`, `DATE`) VALUES (%s, %s, %s, %s)",
-                    DataHandler.getWrappedValue(Session.selectedCustomer.getID()),
-                    DataHandler.getWrappedValue(Session.sessionUser.getID()),
-                    DataHandler.getWrappedValue(Session.selectedVehicle.getID()),
-                    DataHandler.getWrappedValue(dateString));
-            statement.executeUpdate(sql);
+            preparedStatement.setString(1, Session.selectedCustomer.getID());
+            preparedStatement.setString(2, Session.sessionUser.getID());
+            preparedStatement.setString(3, Session.selectedVehicle.getID());
+            preparedStatement.setString(4, dateString);
+
+            preparedStatement.executeUpdate();
 
         } catch (Exception e) {
 
@@ -67,9 +69,7 @@ public class CreateInvoiceController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         // Get today's date
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        dateString = dateFormat.format(date);
+        dateString = Formatter.getFormattedDate();
         dateLabel.setText(dateString);
 
         // Display salesman info
@@ -83,6 +83,40 @@ public class CreateInvoiceController implements Initializable {
         warrantyCB.getItems().add("$0");
         warrantyCB.getItems().add("$3000");
         warrantyCB.getItems().add("$5000");
+
+        tradeInCB.getItems().add("No");
+        tradeInCB.getItems().add("Yes");
+
+        tradeInCB.setOnAction(event -> {
+
+            try {
+
+                if (tradeInCB.getSelectionModel().getSelectedItem().equals("Yes")) {
+
+                    Stage newStage = new Stage();
+                    newStage.initModality(Modality.APPLICATION_MODAL);
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    newStage.setTitle("Add Trade-In Vehicle");
+
+                    fxmlLoader.setLocation(getClass().getResource("../views/AddTradeInVehicle.fxml"));
+                    Parent newResource = fxmlLoader.load();
+                    Scene newScene = new Scene(newResource);
+                    newStage.setScene(newScene);
+                    newStage.setResizable(false);
+                    newStage.showAndWait();
+
+                    Session.alphaController.getSearchVehicleTabController().updateResultSet();
+                    Session.alphaController.getSearchVehicleTabController().displayResultSet();
+
+                }
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+
+            }
+
+        });
 
         // Display customer info
         Customer customer = Session.selectedCustomer;
@@ -99,7 +133,7 @@ public class CreateInvoiceController implements Initializable {
         vModelLabel.setText(vehicle.getModel());
         vYearLabel.setText(vehicle.getYear());
         vColorLabel.setText(vehicle.getColor());
-        vPriceLabel.setText("$" + vehicle.getPrice());
+        vPriceLabel.setText(Formatter.priceFormatter(Double.parseDouble(vehicle.getPrice())));
 
         warrantyCB.setOnAction(e -> {
 
@@ -107,12 +141,12 @@ public class CreateInvoiceController implements Initializable {
             double warrantyPrice = Double.parseDouble(warrantyCB.getSelectionModel().getSelectedItem().substring(1));
             double totalPrice = vehiclePrice + warrantyPrice;
 
-            totalPriceLabel.setText("$" + String.valueOf(totalPrice));
+            totalPriceLabel.setText(Formatter.priceFormatter(totalPrice));
 
             if (totalPrice > 50000) {
                 discountLabel.setText("One year of free car washes");
             } else {
-                discountLabel.setText("No discounts");
+                discountLabel.setText("None");
             }
 
         });
