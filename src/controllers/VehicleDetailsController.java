@@ -18,9 +18,10 @@ public class VehicleDetailsController implements Initializable {
     @FXML private TextField colorTF;
     @FXML private TextField typeTF;
     @FXML private TextField priceTF;
+    //@FXML private Label inStockLabel;
 
     /*
-    @FXML public void viewInvoice(ActionEvent event) {
+    @FXML public void view(ActionEvent event) {
         
     }
     */
@@ -49,6 +50,30 @@ public class VehicleDetailsController implements Initializable {
         DecimalFormat dPriceFormatter = new DecimalFormat("#,###.00");
         priceTF.setText(String.format("$%s", dPriceFormatter.format(dPrice)));
         priceTF.setDisable(true);
+
+        /*
+        try {
+
+            String sql = "SELECT COUNT(`MAKE`) FROM `VEHICLES` " +
+                    "WHERE `MAKE` = ? AND `MODEL` = ? " +
+                    "AND `YEAR` = ? AND `COLOR` = ?";
+
+            Connection connection = DataHandler.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, vehicle.getMake());
+            preparedStatement.setString(2, vehicle.getModel());
+            preparedStatement.setString(3, vehicle.getYear());
+            preparedStatement.setString(4, vehicle.getColor());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                inStockLabel.setText(resultSet.getString(1));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        */
 
     }
 }
