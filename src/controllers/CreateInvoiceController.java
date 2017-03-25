@@ -3,6 +3,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import util.*;
 
@@ -20,6 +21,11 @@ public class CreateInvoiceController implements Initializable {
     private String dateString;
 
     @FXML private Label eNameLabel;
+
+    @FXML private Label discountLabel;
+    @FXML private Label totalPriceLabel;
+    @FXML private ComboBox<String> paymentMethodCB;
+    @FXML private ComboBox<String> warrantyCB;
 
     @FXML private Label cNameLabel;
     @FXML private Label cPhoneLabel;
@@ -51,19 +57,10 @@ public class CreateInvoiceController implements Initializable {
 
         } catch (Exception e) {
 
-            //Malformed SQL such as incomplete statement, wrong col names, duplicate pKey, no `` around col name or value
             System.out.println("Empty fields!");
 
         }
 
-        /*
-        try {
-            alphaController.getSearchCustomerTabController().updateResultSet();
-            alphaController.getSearchCustomerTabController().displayResultSet();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     @Override
@@ -78,6 +75,14 @@ public class CreateInvoiceController implements Initializable {
         // Display salesman info
         Employee employee = Session.sessionUser;
         eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());
+
+        paymentMethodCB.getItems().add("Cash");
+        paymentMethodCB.getItems().add("Credit");
+        paymentMethodCB.getItems().add("Finance");
+
+        warrantyCB.getItems().add("$0");
+        warrantyCB.getItems().add("$3000");
+        warrantyCB.getItems().add("$5000");
 
         // Display customer info
         Customer customer = Session.selectedCustomer;
@@ -94,7 +99,24 @@ public class CreateInvoiceController implements Initializable {
         vModelLabel.setText(vehicle.getModel());
         vYearLabel.setText(vehicle.getYear());
         vColorLabel.setText(vehicle.getColor());
-        vPriceLabel.setText(vehicle.getPrice());
+        vPriceLabel.setText("$" + vehicle.getPrice());
+
+        warrantyCB.setOnAction(e -> {
+
+            double vehiclePrice = Double.parseDouble(vehicle.getPrice());
+            double warrantyPrice = Double.parseDouble(warrantyCB.getSelectionModel().getSelectedItem().substring(1));
+            double totalPrice = vehiclePrice + warrantyPrice;
+
+            totalPriceLabel.setText("$" + String.valueOf(totalPrice));
+
+            if (totalPrice > 50000) {
+                discountLabel.setText("One year of free car washes");
+            } else {
+                discountLabel.setText("No discounts");
+            }
+
+        });
 
     }
+
 }

@@ -74,7 +74,7 @@ public class EmployeeDetailsController implements Initializable {
             totalSalesTF.setDisable(true);
 
             double pCommission = Double.parseDouble(employee.getPercentCommission()) * 100;
-            commissionLabel.setText("Commission (%" + pCommission + "");
+            commissionLabel.setText("Commission (%" + pCommission + ")");
             commissionTF.setText(employee.getCommission());
             commissionTF.setDisable(true);
         } else {

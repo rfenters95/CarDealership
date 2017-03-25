@@ -5,20 +5,44 @@
 <?import javafx.scene.layout.*?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateInvoiceController">
    <children>
-      <TitledPane collapsible="false" text="General Information">
+      <TitledPane collapsible="false" text="Transaction Information">
          <content>
             <VBox spacing="5.0">
                <children>
-                  <HBox>
+                  <HBox alignment="CENTER_LEFT">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Date" />
                         <Label fx:id="dateLabel" text="N/A" />
                      </children>
                   </HBox>
-                  <HBox>
+                  <HBox alignment="CENTER_LEFT">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Salesman Name" />
                         <Label fx:id="eNameLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Discount" />
+                        <Label fx:id="discountLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Total Price" />
+                        <Label fx:id="totalPriceLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Payment Method" />
+                        <ComboBox fx:id="paymentMethodCB" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Warranty" />
+                        <ComboBox fx:id="warrantyCB" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </children>
