@@ -67,12 +67,31 @@ public class SearchVehicleTabController implements Init {
 
     }
 
+    @FXML public void showAll(ActionEvent event) {
+
+        try {
+
+            String sql = "SELECT * FROM VEHICLES";
+            Connection connection = DataHandler.getConnection();
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            displayResultSet();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
     @FXML public void select(ActionEvent event) {
         if (listView.getSelectionModel().getSelectedItem() != null) {
             Session.selectedVehicle = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
         }
     }
+
     @FXML public void viewDetails(ActionEvent event) throws IOException {
 
         if (Session.selectedVehicle != null) {
@@ -278,6 +297,7 @@ public class SearchVehicleTabController implements Init {
         } catch (Exception e) {
             System.out.println(e);
         }
+
     }
 
     public ResultSet updateResultSet() {
