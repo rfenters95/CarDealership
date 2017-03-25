@@ -133,7 +133,7 @@ public class CreateInvoiceController implements Initializable {
         vModelLabel.setText(vehicle.getModel());
         vYearLabel.setText(vehicle.getYear());
         vColorLabel.setText(vehicle.getColor());
-        vPriceLabel.setText(Formatter.priceFormatter(Double.parseDouble(vehicle.getPrice())));
+        vPriceLabel.setText(Formatter.USDFormatter(Double.parseDouble(vehicle.getPrice())));
 
         warrantyCB.setOnAction(e -> {
 
@@ -141,7 +141,7 @@ public class CreateInvoiceController implements Initializable {
             double warrantyPrice = Double.parseDouble(warrantyCB.getSelectionModel().getSelectedItem().substring(1));
             double totalPrice = vehiclePrice + warrantyPrice;
 
-            totalPriceLabel.setText(Formatter.priceFormatter(totalPrice));
+            totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));
 
             if (totalPrice > 50000) {
                 discountLabel.setText("One year of free car washes");

@@ -63,6 +63,6 @@
             <ComboBox fx:id="invoiceCB" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewInvoice" text="View Invoice" />
+      <Button fx:id="viewInvoiceButton" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewInvoice" text="View Invoice" />
    </children>
 </VBox>

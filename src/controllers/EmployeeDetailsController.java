@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import util.Employee;
+import util.Formatter;
 import util.Session;
 
 import java.net.URL;
@@ -44,7 +45,7 @@ public class EmployeeDetailsController implements Initializable {
         lNameTF.setText(employee.getLastName());
         lNameTF.setDisable(true);
 
-        phoneTF.setText(employee.getPhone());
+        phoneTF.setText(Formatter.phoneFormatter(employee.getPhone()));
         phoneTF.setDisable(true);
 
         emailTF.setText(employee.getEmail());
@@ -62,7 +63,7 @@ public class EmployeeDetailsController implements Initializable {
         jobTF.setText(employee.getJobTitle());
         jobTF.setDisable(true);
 
-        salaryTF.setText(employee.getSalary());
+        salaryTF.setText(Formatter.USDFormatter(employee.getSalary()));
         salaryTF.setDisable(true);
 
         workStatusTF.setText(employee.getWorkStatus().equals("1") ? "Active" : "Inactive");

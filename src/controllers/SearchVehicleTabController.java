@@ -15,10 +15,7 @@ import util.Session;
 import util.Vehicle;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.TreeSet;
 
 public class SearchVehicleTabController implements Init {
@@ -77,10 +74,9 @@ public class SearchVehicleTabController implements Init {
 
         try {
 
-            String sql = "SELECT * FROM VEHICLES";
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM VEHICLES");
+            resultSet = preparedStatement.executeQuery();
             displayResultSet();
 
         } catch (Exception e) {

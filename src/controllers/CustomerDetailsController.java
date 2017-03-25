@@ -6,23 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import util.Customer;
-import util.DataHandler;
-import util.Invoice;
-import util.Session;
+import util.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class CustomerDetailsController implements Initializable {
@@ -38,6 +32,7 @@ public class CustomerDetailsController implements Initializable {
     @FXML private TextField cityTF;
     @FXML private TextField dateOfBirthTF;
     @FXML private ComboBox<Invoice> invoiceCB;
+    @FXML private Button viewInvoiceButton;
 
     @FXML public void viewInvoice(ActionEvent event) throws IOException {
         Session.selectedInvoice = invoiceCB.getSelectionModel().getSelectedItem();
@@ -67,7 +62,7 @@ public class CustomerDetailsController implements Initializable {
         lNameTF.setText(customer.getLastName());
         lNameTF.setDisable(true);
 
-        phoneTF.setText(customer.getPhone());
+        phoneTF.setText(Formatter.phoneFormatter(customer.getPhone()));
         phoneTF.setDisable(true);
 
         emailTF.setText(customer.getEmail());
@@ -102,21 +97,30 @@ public class CustomerDetailsController implements Initializable {
 
         try {
 
-            String sql;
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `INVOICES` WHERE `CUSTOMER_ID`=?");
 
-            sql = String.format("SELECT * FROM INVOICES WHERE CUSTOMER_ID=%s", Session.selectedCustomer.getID());
-            resultSet = statement.executeQuery(sql);
+            preparedStatement.setString(1, Session.selectedCustomer.getID());
+            resultSet = preparedStatement.executeQuery();
 
-            // for every invoice in resultSet add date to comboBox
             while (resultSet.next()) {
                 Invoice invoice = new Invoice(resultSet);
                 invoiceCB.getItems().add(invoice);
             }
 
+            if (!invoiceCB.getItems().isEmpty()) {
+                invoiceCB.getSelectionModel().select(0);
+            } else {
+                invoiceCB.setPromptText("None");
+                invoiceCB.setDisable(true);
+                viewInvoiceButton.setDisable(true);
+            }
+
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
+
     }
 }
