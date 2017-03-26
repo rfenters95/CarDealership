@@ -24,7 +24,7 @@ public class AddTradeInVehicleController implements Initializable {
         try {
 
             Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF);
-            vehicle.insertEntry();
+            Vehicle.insertEntry(vehicle);
 
         } catch (Exception e) {
 

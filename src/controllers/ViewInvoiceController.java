@@ -68,23 +68,23 @@ public class ViewInvoiceController implements Initializable {
             // Get today's date
             dateLabel.setText(Session.selectedInvoice.getDate());
 
-            // Display salesman info
+            // Display Employee info
             eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());
 
-            // Display customer info
+            // Display Customer info
             cNameLabel.setText(customer.getFirstName() + " " + customer.getLastName());
-            cPhoneLabel.setText(customer.getPhone());
+            cPhoneLabel.setText(Formatter.phoneFormatter(customer.getPhone()));
             cAddressLabel.setText(customer.getAddress());
             cAddressLabel.setText(customer.getAddress());
             cCityLabel.setText(customer.getCity());
 
-            // Display vehicle info
+            // Display Vehicle info
             vUsedLabel.setText(vehicle.getUsed());
             vMakeLabel.setText(vehicle.getMake());
             vModelLabel.setText(vehicle.getModel());
             vYearLabel.setText(vehicle.getYear());
             vColorLabel.setText(vehicle.getColor());
-            vPriceLabel.setText(vehicle.getPrice());
+            vPriceLabel.setText(Formatter.USDFormatter(vehicle.getPrice()));
 
 
         } catch (Exception e) {

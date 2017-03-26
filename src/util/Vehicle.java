@@ -60,18 +60,19 @@ public class Vehicle implements Comparable<Vehicle> {
         return i;
     }
 
-    public void insertEntry() throws Exception {
+    public static void insertEntry(Vehicle vehicle) throws Exception {
         Connection connection = DataHandler.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `VEHICLES` " +
                 "(`ID`, `MAKE`, `MODEL`, `YEAR`, `COLOR`, `TYPE`, `PRICE`, `USED`, `IN_STOCK`) VALUES " +
-                "(NULL, ?, ?, ?, ?, ?, ?, ?, \"Yes\");");
-        preparedStatement.setString(1, make);
-        preparedStatement.setString(2, model);
-        preparedStatement.setString(3, year);
-        preparedStatement.setString(4, color);
-        preparedStatement.setString(5, type);
-        preparedStatement.setString(6, price);
-        preparedStatement.setString(7, used);
+                "(NULL, ?, ?, ?, ?, ?, ?, ?, ?);");
+        preparedStatement.setString(1, vehicle.getMake());
+        preparedStatement.setString(2, vehicle.getModel());
+        preparedStatement.setString(3, vehicle.getYear());
+        preparedStatement.setString(4, vehicle.getColor());
+        preparedStatement.setString(5, vehicle.getType());
+        preparedStatement.setString(6, vehicle.getPrice());
+        preparedStatement.setString(7, vehicle.getUsed());
+        preparedStatement.setString(8, vehicle.getInStock());
         preparedStatement.executeUpdate();
     }
 

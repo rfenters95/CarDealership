@@ -19,14 +19,12 @@ public class AddVehicleTabController implements Init {
     @FXML private TextField priceTF;
     @FXML private ComboBox<String> usedCB;
 
-
-
     @FXML public void save(ActionEvent event) {
 
         try {
 
             Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF, usedCB);
-            vehicle.insertEntry();
+            Vehicle.insertEntry(vehicle);
 
         } catch (Exception e) {
 

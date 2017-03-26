@@ -54,8 +54,9 @@ public class SearchVehicleTabController implements Init {
                     Vehicle vehicle = new Vehicle(resultSet);
                     if (vehicle.getInStock().equals("Yes")) {
                         listView.getItems().add(vehicle);
-                        hasResults = resultSet.next();
                     }
+
+                    hasResults = resultSet.next();
 
                 }
 
