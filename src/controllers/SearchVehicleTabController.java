@@ -37,6 +37,15 @@ public class SearchVehicleTabController implements Init {
     @FXML private TitledPane tPane;
     @FXML private TitledPane vehicleResultsTP;
 
+    private void clearResults() {
+        listView.getItems().clear();
+        makeCB.getItems().clear();
+        modelCB.getItems().clear();
+        yearCB.getItems().clear();
+        colorCB.getItems().clear();
+        typeCB.getItems().clear();
+    }
+
     void displayResultSet() {
 
         try {
@@ -44,15 +53,27 @@ public class SearchVehicleTabController implements Init {
             boolean hasResults = resultSet.next();
             if (hasResults) {
 
-                // Empty old listView items
-                listView.getItems().clear();
+                // Clear old results
+                clearResults();
+
+                TreeSet<String> makeCBItems = new TreeSet<>();
+                TreeSet<String> modelCBItems = new TreeSet<>();
+                TreeSet<String> yearCBItems = new TreeSet<>();
+                TreeSet<String> colorCBItems = new TreeSet<>();
+                TreeSet<String> typeCBItems = new TreeSet<>();
 
                 int numberOfResults = 0;
                 while (hasResults) {
 
                     Vehicle vehicle = new Vehicle(resultSet);
+
                     if (vehicle.getInStock().equals("Yes")) {
                         listView.getItems().add(vehicle);
+                        makeCBItems.add(vehicle.getMake());
+                        modelCBItems.add(vehicle.getModel());
+                        yearCBItems.add(vehicle.getYear());
+                        colorCBItems.add(vehicle.getColor());
+                        typeCBItems.add(vehicle.getType());
                         numberOfResults++;
                     }
 
@@ -62,10 +83,15 @@ public class SearchVehicleTabController implements Init {
 
                 vehicleResultsTP.setText(String.format("Results - %d", numberOfResults));
                 Collections.sort(listView.getItems());
+                makeCB.getItems().addAll(makeCBItems);
+                modelCB.getItems().addAll(modelCBItems);
+                yearCB.getItems().addAll(yearCBItems);
+                colorCB.getItems().addAll(colorCBItems);
+                typeCB.getItems().addAll(typeCBItems);
 
             } else {
 
-                listView.getItems().clear();
+                clearResults();
 
             }
 
@@ -235,75 +261,35 @@ public class SearchVehicleTabController implements Init {
             }
         });
 
+        makeCB.getItems().add("Any");
+        makeCB.getSelectionModel().select(0);
+
+        modelCB.getItems().add("Any");
+        modelCB.getSelectionModel().select(0);
+
+        yearCB.getItems().add("Any");
+        yearCB.getSelectionModel().select(0);
+
+        colorCB.getItems().add("Any");
+        colorCB.getSelectionModel().select(0);
+
+        typeCB.getItems().add("Any");
+        typeCB.getSelectionModel().select(0);
+
+        priceCB.getItems().add("Any");
+        priceCB.getItems().add("<=20000");
+        priceCB.getItems().add("<=40000");
+        priceCB.getItems().add("<=60000");
+        priceCB.getItems().add("<=80000");
+        priceCB.getItems().add("<=100000");
+        priceCB.getSelectionModel().select(0);
+
         try {
 
             Connection connection = DataHandler.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM VEHICLES");
-
             resultSet = statement.executeQuery();
-            boolean hasResults = resultSet.next();
-
-            makeCB.getItems().add("Any");
-            makeCB.getSelectionModel().select(0);
-
-            modelCB.getItems().add("Any");
-            modelCB.getSelectionModel().select(0);
-
-            yearCB.getItems().add("Any");
-            yearCB.getSelectionModel().select(0);
-
-            colorCB.getItems().add("Any");
-            colorCB.getSelectionModel().select(0);
-
-            typeCB.getItems().add("Any");
-            typeCB.getSelectionModel().select(0);
-
-            priceCB.getItems().add("Any");
-            priceCB.getItems().add("<=20000");
-            priceCB.getItems().add("<=40000");
-            priceCB.getItems().add("<=60000");
-            priceCB.getItems().add("<=80000");
-            priceCB.getItems().add("<=100000");
-            priceCB.getSelectionModel().select(0);
-
-            if (hasResults) {
-
-                TreeSet<String> makeCBItems = new TreeSet<>();
-                TreeSet<String> modelCBItems = new TreeSet<>();
-                TreeSet<String> yearCBItems = new TreeSet<>();
-                TreeSet<String> colorCBItems = new TreeSet<>();
-                TreeSet<String> typeCBItems = new TreeSet<>();
-
-                int numberOfResults = 0;
-                while (hasResults) {
-
-                    Vehicle vehicle = new Vehicle(resultSet);
-
-                    if (vehicle.getInStock().equals("Yes")) {
-                        listView.getItems().add(vehicle);
-                        makeCBItems.add(vehicle.getMake());
-                        modelCBItems.add(vehicle.getModel());
-                        yearCBItems.add(vehicle.getYear());
-                        colorCBItems.add(vehicle.getColor());
-                        typeCBItems.add(vehicle.getType());
-                        numberOfResults++;
-                    }
-
-                    hasResults = resultSet.next();
-
-                }
-
-                vehicleResultsTP.setText(String.format("Results - %d", numberOfResults));
-                Collections.sort(listView.getItems());
-                makeCB.getItems().addAll(makeCBItems);
-                modelCB.getItems().addAll(modelCBItems);
-                yearCB.getItems().addAll(yearCBItems);
-                colorCB.getItems().addAll(colorCBItems);
-                typeCB.getItems().addAll(typeCBItems);
-
-            } else {
-                System.out.println("DB empty!");
-            }
+            displayResultSet();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -311,6 +297,9 @@ public class SearchVehicleTabController implements Init {
 
     }
 
+    /*
+    * Used after changes have been made to db to show all results
+    * */
     void updateResultSet() {
 
         try {
