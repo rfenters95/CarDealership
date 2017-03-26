@@ -9,13 +9,21 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class ViewInvoiceController implements Initializable {
 
     @FXML private Label dateLabel;
 
     @FXML private Label eNameLabel;
+
+    @FXML private Label discountLabel; // derived from date + totalPrice
+    @FXML private Label totalPriceLabel; // derived from vPrice + warranty
+    @FXML private Label paymentMethodLabel; // stored in Invoice
+    @FXML private Label tradeInValueLabel; // stored in Invoice
+    @FXML private Label warrantyLabel; // stored in Invoice
 
     @FXML private Label cNameLabel;
     @FXML private Label cPhoneLabel;
@@ -34,8 +42,8 @@ public class ViewInvoiceController implements Initializable {
 
         try {
 
-            // Get Customer, Employee, and Vehicle info from db matching those from Invoice
             Invoice invoice = Session.selectedInvoice;
+
             Connection connection = DataHandler.getConnection();
 
             // Get Customer info from db
@@ -86,6 +94,20 @@ public class ViewInvoiceController implements Initializable {
             vColorLabel.setText(vehicle.getColor());
             vPriceLabel.setText(Formatter.USDFormatter(vehicle.getPrice()));
 
+            paymentMethodLabel.setText(invoice.getPaymentMethod());
+            tradeInValueLabel.setText(Formatter.USDFormatter(invoice.getTradeInValue()));
+            warrantyLabel.setText(Formatter.USDFormatter(invoice.getWarrantyValue()));
+
+            double totalPrice = Double.valueOf(vehicle.getPrice()) + Double.valueOf(invoice.getWarrantyValue());
+            totalPriceLabel.setText(Formatter.USDFormatter(String.valueOf(totalPrice)));
+
+            Date discountStartDate = Formatter.parseDate(invoice.getDate());
+            long timePassed = discountStartDate.getTime() - new Date().getTime();
+            if (TimeUnit.MILLISECONDS.toDays(timePassed) > 365) {
+                discountLabel.setText("Discount expired!");
+            } else {
+                discountLabel.setText("One year of free cash washes");
+            }
 
         } catch (Exception e) {
 

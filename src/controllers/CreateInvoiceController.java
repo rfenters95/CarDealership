@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -17,14 +14,11 @@ import util.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 
 public class CreateInvoiceController implements Initializable {
 
     @FXML private Label dateLabel;
-    private String dateString;
 
     @FXML private Label eNameLabel;
 
@@ -33,6 +27,7 @@ public class CreateInvoiceController implements Initializable {
     @FXML private ComboBox<String> paymentMethodCB;
     @FXML private ComboBox<USD> warrantyCB;
     @FXML private ComboBox<String> tradeInCB;
+    @FXML private TextField tradeInValueTF;
 
     @FXML private Label cNameLabel;
     @FXML private Label cPhoneLabel;
@@ -46,33 +41,39 @@ public class CreateInvoiceController implements Initializable {
     @FXML private Label vColorLabel;
     @FXML private Label vPriceLabel;
 
+    private Customer customer;
+    private Employee employee;
+    private Vehicle vehicle;
+    private String date;
+    private String paymentMethod;
+    private String warrantyValue;
+
     @FXML public void saveInvoice(ActionEvent event) {
 
         try {
 
-            Connection connection = DataHandler.getConnection();
+            Invoice invoice = new Invoice(
+                    customer.getID(),
+                    employee.getID(),
+                    vehicle.getID(),
+                    date,
+                    paymentMethod,
+                    tradeInValueTF.getText(),
+                    warrantyValue
+            );
 
-            // Save invoice to db
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `INVOICES` (`CUSTOMER_ID`, `EMPLOYEE_ID`, `VEHICLE_ID`, `DATE`) VALUES (?, ?, ?, ?)");
-            preparedStatement.setString(1, Session.selectedCustomer.getID());
-            preparedStatement.setString(2, Session.sessionUser.getID());
-            preparedStatement.setString(3, Session.selectedVehicle.getID());
-            preparedStatement.setString(4, dateString);
-            preparedStatement.executeUpdate();
+            // Save Invoice to db
+            Invoice.saveInvoice(invoice);
 
-            // Delete vehicle from database
-            preparedStatement = connection.prepareStatement("UPDATE `VEHICLES` SET `IN_STOCK` = \"No\" WHERE `ID` = ?");
-            preparedStatement.setString(1, Session.selectedVehicle.getID());
-            preparedStatement.executeUpdate();
+            // Delete vehicle from db
+            Vehicle.removeVehicle();
 
             // Update listView in searchVehicleTab
             Session.alphaController.getSearchVehicleTabController().updateResultSet();
             Session.alphaController.getSearchVehicleTabController().displayResultSet();
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
 
     }
@@ -81,16 +82,22 @@ public class CreateInvoiceController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         // Get today's date
-        dateString = Formatter.getFormattedDate();
-        dateLabel.setText(dateString);
+        date = Formatter.getFormattedDate();
+        dateLabel.setText(date);
 
         // Display salesman info
-        Employee employee = Session.sessionUser;
+        employee = Session.sessionUser;
         eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());
 
         paymentMethodCB.getItems().add("Cash");
         paymentMethodCB.getItems().add("Credit");
         paymentMethodCB.getItems().add("Finance");
+
+        tradeInValueTF.setDisable(true);
+
+        paymentMethodCB.setOnAction(e -> {
+            paymentMethod = paymentMethodCB.getSelectionModel().getSelectedItem();
+        });
 
         warrantyCB.getItems().add(new USD(0).setStringValue("$0"));
         warrantyCB.getItems().add(new USD(3000));
@@ -116,7 +123,6 @@ public class CreateInvoiceController implements Initializable {
 
         tradeInCB.getItems().add("No");
         tradeInCB.getItems().add("Yes");
-
         tradeInCB.setOnAction(event -> {
 
             try {
@@ -138,26 +144,26 @@ public class CreateInvoiceController implements Initializable {
                     Session.alphaController.getSearchVehicleTabController().updateResultSet();
                     Session.alphaController.getSearchVehicleTabController().displayResultSet();
 
+                    tradeInValueTF.setDisable(false);
+
                 }
 
             } catch (IOException e) {
-
                 e.printStackTrace();
-
             }
 
         });
 
-        // Display customer info
-        Customer customer = Session.selectedCustomer;
+        // Display Customer info
+        customer = Session.selectedCustomer;
         cNameLabel.setText(customer.getFirstName() + " " + customer.getLastName());
         cPhoneLabel.setText(customer.getPhone());
         cAddressLabel.setText(customer.getAddress());
         cAddressLabel.setText(customer.getAddress());
         cCityLabel.setText(customer.getCity());
 
-        // Display vehicle info
-        Vehicle vehicle = Session.selectedVehicle;
+        // Display Vehicle info
+        vehicle = Session.selectedVehicle;
         vUsedLabel.setText(vehicle.getUsed());
         vMakeLabel.setText(vehicle.getMake());
         vModelLabel.setText(vehicle.getModel());
@@ -170,7 +176,7 @@ public class CreateInvoiceController implements Initializable {
             double vehiclePrice = Double.parseDouble(vehicle.getPrice());
             double warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getDoubleValue();
             double totalPrice = vehiclePrice + warrantyPrice;
-
+            warrantyValue = String.valueOf(warrantyPrice);
             totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));
 
             if (totalPrice > 50000) {

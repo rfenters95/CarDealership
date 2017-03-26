@@ -146,6 +146,7 @@ public class SearchEmployeeTabController implements Init {
             newStage.setScene(newScene);
             newStage.setResizable(false);
             newStage.showAndWait();
+
         } else {
             System.out.println("Error: No Employee selected!");
         }

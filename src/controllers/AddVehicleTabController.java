@@ -41,6 +41,7 @@ public class AddVehicleTabController implements Init {
 
     @Override
     public void init(AlphaController alphaController) {
+
         this.alphaController = alphaController;
 
         usedCB.getItems().add("No");
@@ -49,5 +50,6 @@ public class AddVehicleTabController implements Init {
         typeCB.getItems().add("Family");
         typeCB.getItems().add("Sports");
         typeCB.getItems().add("Recreational");
+
     }
 }

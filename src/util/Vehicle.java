@@ -51,6 +51,13 @@ public class Vehicle implements Comparable<Vehicle> {
         this.inStock = "Yes";
     }
 
+    public static void removeVehicle() throws Exception {
+        Connection connection = DataHandler.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `VEHICLES` SET `IN_STOCK` = \"No\" WHERE `ID` = ?");
+        preparedStatement.setString(1, Session.selectedVehicle.getID());
+        preparedStatement.executeUpdate();
+    }
+
     @Override
     public int compareTo(Vehicle o) {
         int i = make.compareTo(o.make);

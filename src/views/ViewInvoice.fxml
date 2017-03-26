@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewInvoiceController">
    <children>
-      <TitledPane collapsible="false" text="General Information">
+      <TitledPane collapsible="false" text="Transaction Information">
          <content>
             <VBox spacing="5.0">
                <children>
@@ -19,6 +19,36 @@
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Salesman Name" />
                         <Label fx:id="eNameLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Discount" />
+                        <Label fx:id="discountLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Warranty" />
+                        <Label fx:id="warrantyLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Trade-In Value" />
+                        <Label fx:id="tradeInValueLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Payment Method" />
+                        <Label fx:id="paymentMethodLabel" text="N/A" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="Total Price" />
+                        <Label fx:id="totalPriceLabel" text="N/A" />
                      </children>
                   </HBox>
                </children>
