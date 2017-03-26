@@ -48,6 +48,18 @@ public class SearchVehicleTabController implements Init {
 
     void displayResultSet() {
 
+        tPane.setText(String.format(
+                "Search Inventory - {Make = %s, Model = %s, Year = %s, " +
+                        "Color = %s, Type = %s, Price = %s, Used = %s}",
+                makeCB.getSelectionModel().getSelectedItem(),
+                modelCB.getSelectionModel().getSelectedItem(),
+                yearCB.getSelectionModel().getSelectedItem(),
+                colorCB.getSelectionModel().getSelectedItem(),
+                typeCB.getSelectionModel().getSelectedItem(),
+                priceCB.getSelectionModel().getSelectedItem(),
+                usedCB.getSelectionModel().getSelectedItem()
+        ));
+
         try {
 
             boolean hasResults = resultSet.next();

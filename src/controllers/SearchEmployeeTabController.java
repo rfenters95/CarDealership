@@ -67,6 +67,10 @@ public class SearchEmployeeTabController implements Init {
 
         try {
 
+            // Clear old resultSet
+            employeeID.clear();
+
+            // Display all Employees
             String sql = "SELECT * FROM EMPLOYEES";
             Connection connection = DataHandler.getConnection();
             Statement statement = connection.createStatement();
@@ -74,9 +78,7 @@ public class SearchEmployeeTabController implements Init {
             displayResultSet();
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
 
     }
@@ -86,29 +88,28 @@ public class SearchEmployeeTabController implements Init {
 
         try {
 
-            String sql;
             final String EID = employeeID.getText();
 
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
 
             if (!EID.isEmpty()) {
 
-                sql = "SELECT * FROM EMPLOYEES WHERE ID=" + DataHandler.getWrappedValue(EID);
-                resultSet = statement.executeQuery(sql);
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `EMPLOYEES` WHERE ID=?");
+                preparedStatement.setString(1, EID);
+                resultSet = preparedStatement.executeQuery();
                 displayResultSet();
 
             } else {
 
                 System.out.println("Empty search parameters!");
-                sql = "SELECT * FROM EMPLOYEES";
-                resultSet = statement.executeQuery(sql);
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `EMPLOYEES`");
+                resultSet = preparedStatement.executeQuery();
                 displayResultSet();
 
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -120,8 +121,8 @@ public class SearchEmployeeTabController implements Init {
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
-        if (Session.selectedEmployee != null) {
 
+        if (Session.selectedEmployee != null) {
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -133,12 +134,10 @@ public class SearchEmployeeTabController implements Init {
             newStage.setScene(newScene);
             newStage.setResizable(false);
             newStage.showAndWait();
-
         } else {
-
             System.out.println("Error: No Employee selected!");
-
         }
+
     }
 
     @Override
@@ -176,6 +175,7 @@ public class SearchEmployeeTabController implements Init {
             Connection connection = DataHandler.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES");
             resultSet = preparedStatement.executeQuery();
+            employeeID.clear();
 
         } catch (Exception e) {
             e.printStackTrace();
