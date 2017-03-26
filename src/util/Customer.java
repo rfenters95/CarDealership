@@ -59,7 +59,7 @@ public class Customer implements Comparable<Customer> {
                 "`EMAIL` = ?, " +
                 "`ADDRESS` = ?, " +
                 "`CITY` = ?, " +
-                "`DATE_OF_BIRTH` = ?, WHERE " +
+                "`DATE_OF_BIRTH` = ? WHERE " +
                 "`ID` = ?");
         preparedStatement.setString(1, customer.getID());
         preparedStatement.setString(2, customer.getFirstName());

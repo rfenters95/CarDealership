@@ -63,7 +63,7 @@ public class EmployeeDetailsController implements Initializable {
         try {
             Session.selectedEmployee.setFirstName(fNameTF.getText());
             Session.selectedEmployee.setLastName(lNameTF.getText());
-            Session.selectedEmployee.setPhone(phoneTF.getText());
+            Session.selectedEmployee.setPhone(Formatter.parsePhone(phoneTF.getText()));
             Session.selectedEmployee.setEmail(emailTF.getText());
             Session.selectedEmployee.setAddress(addressTF.getText());
             Session.selectedEmployee.setCity(cityTF.getText());

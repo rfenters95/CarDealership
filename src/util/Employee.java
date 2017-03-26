@@ -70,7 +70,7 @@ public class Employee implements Comparable<Employee> {
                 "`EMAIL` = ?, " +
                 "`ADDRESS` = ?, " +
                 "`CITY` = ?, " +
-                "`DATE_OF_BIRTH` = ?, WHERE " +
+                "`DATE_OF_BIRTH` = ? WHERE " +
                 "`ID` = ?");
         preparedStatement.setString(1, employee.getID());
         preparedStatement.setString(2, employee.getFirstName());
