@@ -28,11 +28,15 @@ public class SearchCustomerTabController implements Init {
 
     @FXML private TextField fNameTF;
     @FXML private TextField lNameTF;
+
     @FXML private ListView<Customer> listView;
+
     @FXML private TitledPane tPane;
+    @FXML private TitledPane customerResultsTP;
+
     @FXML private Button viewDetailsButton;
 
-    @FXML private TitledPane customerResultsTP;
+    @FXML private Label selectedLabel;
 
     void displayResultSet() {
 
@@ -138,6 +142,7 @@ public class SearchCustomerTabController implements Init {
         if (listView.getSelectionModel().getSelectedItem() != null) {
             Session.selectedCustomer = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
+            selectedLabel.setText("Selected - " + Session.selectedCustomer.toString());
         }
     }
 
@@ -169,6 +174,8 @@ public class SearchCustomerTabController implements Init {
 
         this.alphaController = alphaController;
         viewDetailsButton.setDisable(true);
+
+        selectedLabel.setText("Selected - None");
 
         listView.setCellFactory(new Callback<ListView<Customer>, ListCell<Customer>>() {
             @Override

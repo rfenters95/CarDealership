@@ -28,9 +28,14 @@ public class SearchEmployeeTabController implements Init {
 
     @FXML private TitledPane tPane;
     @FXML private TitledPane employeeResultsTP;
+
     @FXML private TextField employeeID;
+
     @FXML private ListView<Employee> listView;
+
     @FXML private Button viewDetailsButton;
+
+    @FXML private Label selectedLabel;
 
     void displayResultSet() {
 
@@ -122,12 +127,14 @@ public class SearchEmployeeTabController implements Init {
         if (listView.getSelectionModel().getSelectedItem() != null) {
             Session.selectedEmployee = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
+            selectedLabel.setText("Selected - " + Session.selectedEmployee.toString());
         }
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
 
         if (Session.selectedEmployee != null) {
+
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -150,6 +157,8 @@ public class SearchEmployeeTabController implements Init {
 
         this.alphaController = alphaController;
         viewDetailsButton.setDisable(true);
+
+        selectedLabel.setText("Selected - None");
 
         listView.setCellFactory(new Callback<ListView<Employee>, ListCell<Employee>>() {
             @Override

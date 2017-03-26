@@ -31,11 +31,15 @@ public class SearchVehicleTabController implements Init {
     @FXML private ComboBox<String> typeCB;
     @FXML private ComboBox<String> priceCB;
     @FXML private ComboBox<String> usedCB;
+
     @FXML private Button viewDetailsButton;
 
     @FXML private ListView<Vehicle> listView;
+
     @FXML private TitledPane tPane;
     @FXML private TitledPane vehicleResultsTP;
+
+    @FXML private Label selectedLabel;
 
     private void clearResults() {
         listView.getItems().clear();
@@ -136,6 +140,7 @@ public class SearchVehicleTabController implements Init {
         if (listView.getSelectionModel().getSelectedItem() != null) {
             Session.selectedVehicle = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
+            selectedLabel.setText("Selected - " + Session.selectedVehicle.toString());
         }
     }
 
@@ -249,6 +254,8 @@ public class SearchVehicleTabController implements Init {
 
         this.alphaController = alphaController;
         viewDetailsButton.setDisable(true);
+
+        selectedLabel.setText("Selected - None");
 
         usedCB.getItems().add("Any");
         usedCB.getItems().add("No");
