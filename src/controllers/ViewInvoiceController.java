@@ -102,7 +102,7 @@ public class ViewInvoiceController implements Initializable {
             totalPriceLabel.setText(Formatter.USDFormatter(String.valueOf(totalPrice)));
 
             Date discountStartDate = Formatter.parseDate(invoice.getDate());
-            long timePassed = discountStartDate.getTime() - new Date().getTime();
+            long timePassed = new Date().getTime() - discountStartDate.getTime();
             if (TimeUnit.MILLISECONDS.toDays(timePassed) > 365) {
                 discountLabel.setText("Discount expired!");
             } else {
