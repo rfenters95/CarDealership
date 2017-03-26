@@ -58,7 +58,7 @@ public class CreateInvoiceController implements Initializable {
                     vehicle.getID(),
                     date,
                     paymentMethod,
-                    tradeInValueTF.getText(),
+                    (!tradeInValueTF.getText().isEmpty()) ? tradeInValueTF.getText() : "0",
                     warrantyValue
             );
 
