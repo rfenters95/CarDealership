@@ -51,18 +51,27 @@ public class CreateInvoiceController implements Initializable {
         try {
 
             Connection connection = DataHandler.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `INVOICES` (`CUSTOMER_ID`, `EMPLOYEE_ID`, `VEHICLE_ID`, `DATE`) VALUES (?, ?, ?, ?)");
 
+            // Save invoice to db
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `INVOICES` (`CUSTOMER_ID`, `EMPLOYEE_ID`, `VEHICLE_ID`, `DATE`) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, Session.selectedCustomer.getID());
             preparedStatement.setString(2, Session.sessionUser.getID());
             preparedStatement.setString(3, Session.selectedVehicle.getID());
             preparedStatement.setString(4, dateString);
-
             preparedStatement.executeUpdate();
+
+            // Delete vehicle from database
+            preparedStatement = connection.prepareStatement("UPDATE `VEHICLES` SET `IN_STOCK` = \"No\" WHERE `ID` = ?");
+            preparedStatement.setString(1, Session.selectedVehicle.getID());
+            preparedStatement.executeUpdate();
+
+            // Update listView in searchVehicleTab
+            Session.alphaController.getSearchVehicleTabController().updateResultSet();
+            Session.alphaController.getSearchVehicleTabController().displayResultSet();
 
         } catch (Exception e) {
 
-            System.out.println("Empty fields!");
+            e.printStackTrace();
 
         }
 

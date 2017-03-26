@@ -16,6 +16,7 @@ import util.Vehicle;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Collections;
 import java.util.TreeSet;
 
 public class SearchVehicleTabController implements Init {
@@ -37,24 +38,28 @@ public class SearchVehicleTabController implements Init {
     @FXML private ListView<Vehicle> listView;
     @FXML private TitledPane tPane;
 
-    public void displayResultSet() {
+    void displayResultSet() {
 
         try {
 
             boolean hasResults = resultSet.next();
-            TreeSet<Vehicle> vehicles = new TreeSet<>();
 
             if (hasResults) {
 
                 // Empty old listView items
                 listView.getItems().clear();
 
-                do {
-                    Vehicle vehicle = new Vehicle(resultSet);
-                    vehicles.add(vehicle);
-                } while (resultSet.next());
+                while (hasResults) {
 
-                listView.getItems().addAll(vehicles);
+                    Vehicle vehicle = new Vehicle(resultSet);
+                    if (vehicle.getInStock().equals("Yes")) {
+                        listView.getItems().add(vehicle);
+                        hasResults = resultSet.next();
+                    }
+
+                }
+
+                Collections.sort(listView.getItems());
 
             } else {
 
@@ -187,10 +192,9 @@ public class SearchVehicleTabController implements Init {
 
             } else {
 
-                sql = "SELECT * FROM VEHICLES";
                 Connection connection = DataHandler.getConnection();
-                Statement statement = connection.createStatement();
-                resultSet = statement.executeQuery(sql);
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM VEHICLES");
+                resultSet = preparedStatement.executeQuery();
                 displayResultSet();
 
             }
@@ -231,91 +235,91 @@ public class SearchVehicleTabController implements Init {
 
         try {
 
-            String sql;
-            boolean hasResults;
-
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM VEHICLES");
 
-            sql = "SELECT * FROM VEHICLES";
-            resultSet = statement.executeQuery(sql);
-            hasResults = resultSet.next();
+            resultSet = statement.executeQuery();
+            boolean hasResults = resultSet.next();
 
-            TreeSet<Vehicle> vehicles = new TreeSet<>();
-            TreeSet<String> makeCBItems = new TreeSet<>();
-            TreeSet<String> modelCBItems = new TreeSet<>();
-            TreeSet<String> yearCBItems = new TreeSet<>();
-            TreeSet<String> colorCBItems = new TreeSet<>();
-            TreeSet<String> typeCBItems = new TreeSet<>();
+            makeCB.getItems().add("Any");
+            makeCB.getSelectionModel().select(0);
+
+            modelCB.getItems().add("Any");
+            modelCB.getSelectionModel().select(0);
+
+            yearCB.getItems().add("Any");
+            yearCB.getSelectionModel().select(0);
+
+            colorCB.getItems().add("Any");
+            colorCB.getSelectionModel().select(0);
+
+            typeCB.getItems().add("Any");
+            typeCB.getSelectionModel().select(0);
+
+            priceCB.getItems().add("Any");
+            priceCB.getItems().add("<=20000");
+            priceCB.getItems().add("<=40000");
+            priceCB.getItems().add("<=60000");
+            priceCB.getItems().add("<=80000");
+            priceCB.getItems().add("<=100000");
+            priceCB.getSelectionModel().select(0);
 
             if (hasResults) {
 
-                do {
+                TreeSet<String> makeCBItems = new TreeSet<>();
+                TreeSet<String> modelCBItems = new TreeSet<>();
+                TreeSet<String> yearCBItems = new TreeSet<>();
+                TreeSet<String> colorCBItems = new TreeSet<>();
+                TreeSet<String> typeCBItems = new TreeSet<>();
+
+                while (hasResults) {
 
                     Vehicle vehicle = new Vehicle(resultSet);
-                    vehicles.add(vehicle);
-                    makeCBItems.add(vehicle.getMake());
-                    modelCBItems.add(vehicle.getModel());
-                    yearCBItems.add(vehicle.getYear());
-                    colorCBItems.add(vehicle.getColor());
-                    typeCBItems.add(vehicle.getType());
 
-                } while (resultSet.next());
+                    if (vehicle.getInStock().equals("Yes")) {
+                        listView.getItems().add(vehicle);
+                        makeCBItems.add(vehicle.getMake());
+                        modelCBItems.add(vehicle.getModel());
+                        yearCBItems.add(vehicle.getYear());
+                        colorCBItems.add(vehicle.getColor());
+                        typeCBItems.add(vehicle.getType());
+                    }
 
-                listView.getItems().addAll(vehicles);
+                    hasResults = resultSet.next();
 
-                makeCB.getItems().add("Any");
+                }
+
+                Collections.sort(listView.getItems());
                 makeCB.getItems().addAll(makeCBItems);
-                makeCB.getSelectionModel().select(0);
-
-                modelCB.getItems().add("Any");
                 modelCB.getItems().addAll(modelCBItems);
-                modelCB.getSelectionModel().select(0);
-
-                yearCB.getItems().add("Any");
                 yearCB.getItems().addAll(yearCBItems);
-                yearCB.getSelectionModel().select(0);
-
-                colorCB.getItems().add("Any");
                 colorCB.getItems().addAll(colorCBItems);
-                colorCB.getSelectionModel().select(0);
-
-                typeCB.getItems().add("Any");
                 typeCB.getItems().addAll(typeCBItems);
-                typeCB.getSelectionModel().select(0);
-
-                priceCB.getItems().add("Any");
-                priceCB.getItems().add("<=20000");
-                priceCB.getItems().add("<=40000");
-                priceCB.getItems().add("<=60000");
-                priceCB.getItems().add("<=80000");
-                priceCB.getItems().add("<=100000");
-                priceCB.getSelectionModel().select(0);
 
             } else {
                 System.out.println("DB empty!");
             }
 
         } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-
-    public ResultSet updateResultSet() {
-        try {
-            String sql;
-
-            Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-
-            sql = "SELECT * FROM VEHICLES";
-            resultSet = statement.executeQuery(sql);
-
-        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return resultSet;
     }
+
+    void updateResultSet() {
+
+        try {
+
+            Connection connection = DataHandler.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM VEHICLES");
+            resultSet = preparedStatement.executeQuery();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
 }

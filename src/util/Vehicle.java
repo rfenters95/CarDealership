@@ -3,6 +3,8 @@ package util;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,6 +18,7 @@ public class Vehicle implements Comparable<Vehicle> {
     private String type;
     private String price;
     private String used;
+    private String inStock;
 
     public Vehicle(ResultSet resultSet) throws SQLException {
         this.ID = resultSet.getString(1).trim();
@@ -26,6 +29,7 @@ public class Vehicle implements Comparable<Vehicle> {
         this.type = resultSet.getString(6).trim();
         this.price = resultSet.getString(7).trim();
         this.used = resultSet.getString(8).trim();
+        this.inStock = resultSet.getString(9).trim();
     }
 
     public Vehicle(TextField make, TextField model, TextField year, TextField color, ComboBox<String> type, TextField price, ComboBox<String> used) {
@@ -44,6 +48,7 @@ public class Vehicle implements Comparable<Vehicle> {
         this.type = type;
         this.price = price;
         this.used = used;
+        this.inStock = "Yes";
     }
 
     @Override
@@ -55,12 +60,19 @@ public class Vehicle implements Comparable<Vehicle> {
         return i;
     }
 
-    public String getInsertSQL() {
-        return String.format("NULL, %s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(make), DataHandler.getWrappedValue(model), DataHandler.getWrappedValue(year), DataHandler.getWrappedValue(color), DataHandler.getWrappedValue(type), DataHandler.getWrappedValue(price), DataHandler.getWrappedValue(used));
-    }
-
-    public boolean isNull() {
-        return make == null && model == null && year == null && color == null && type == null && price == null && used == null;
+    public void insertEntry() throws Exception {
+        Connection connection = DataHandler.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `VEHICLES` " +
+                "(`ID`, `MAKE`, `MODEL`, `YEAR`, `COLOR`, `TYPE`, `PRICE`, `USED`, `IN_STOCK`) VALUES " +
+                "(NULL, ?, ?, ?, ?, ?, ?, ?, \"Yes\");");
+        preparedStatement.setString(1, make);
+        preparedStatement.setString(2, model);
+        preparedStatement.setString(3, year);
+        preparedStatement.setString(4, color);
+        preparedStatement.setString(5, type);
+        preparedStatement.setString(6, price);
+        preparedStatement.setString(7, used);
+        preparedStatement.executeUpdate();
     }
 
     public String getID() {
@@ -93,6 +105,10 @@ public class Vehicle implements Comparable<Vehicle> {
 
     public String getUsed() {
         return used;
+    }
+
+    public String getInStock() {
+        return inStock;
     }
 
     @Override

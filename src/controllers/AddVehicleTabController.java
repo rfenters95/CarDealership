@@ -4,12 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import util.DataHandler;
 import util.Init;
 import util.Vehicle;
-
-import java.sql.Connection;
-import java.sql.Statement;
 
 public class AddVehicleTabController implements Init {
 
@@ -29,14 +25,8 @@ public class AddVehicleTabController implements Init {
 
         try {
 
-            String sql;
-
             Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF, usedCB);
-            Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-
-            sql = String.format("INSERT INTO `VEHICLES` (`ID`, `MAKE`, `MODEL`, `YEAR`, `COLOR`, `TYPE`, `PRICE`, `USED`) VALUES (%s)", vehicle.getInsertSQL());
-            statement.executeUpdate(sql);
+            vehicle.insertEntry();
 
         } catch (Exception e) {
 

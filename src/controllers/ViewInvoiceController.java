@@ -7,8 +7,8 @@ import util.*;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class ViewInvoiceController implements Initializable {
@@ -34,33 +34,36 @@ public class ViewInvoiceController implements Initializable {
 
         try {
 
+            // Get Customer, Employee, and Vehicle info from db matching those from Invoice
             Invoice invoice = Session.selectedInvoice;
-            Customer customer;
-            Employee employee;
-            Vehicle vehicle;
-
-            String sql;
-            ResultSet resultSet;
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
 
-            sql = String.format("SELECT * FROM CUSTOMERS WHERE ID=%s", DataHandler.getWrappedValue(invoice.getCustomerID()));
-            resultSet = statement.executeQuery(sql);
+            // Get Customer info from db
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CUSTOMERS WHERE ID=?");
+            preparedStatement.setString(1, invoice.getCustomerID());
+            ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            customer = new Customer(resultSet);
+            // Create Customer from resultSet
+            Customer customer = new Customer(resultSet);
 
-            sql = String.format("SELECT * FROM EMPLOYEES WHERE ID=%s", DataHandler.getWrappedValue(invoice.getEmployeeID()));
-            resultSet = statement.executeQuery(sql);
+            // Get Employee info from db
+            preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE ID=?");
+            preparedStatement.setString(1, invoice.getEmployeeID());
+            resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            employee = new Employee(resultSet);
+            // Create Employee from resultSet
+            Employee employee = new Employee(resultSet);
 
-            sql = String.format("SELECT * FROM VEHICLES WHERE ID=%s", DataHandler.getWrappedValue(invoice.getVehicleID()));
-            resultSet = statement.executeQuery(sql);
+            // Get Vehicle info from db
+            preparedStatement = connection.prepareStatement("SELECT * FROM VEHICLES WHERE ID=?");
+            preparedStatement.setString(1, invoice.getVehicleID());
+            resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            vehicle = new Vehicle(resultSet);
+            // Create Vehicle from resultSet
+            Vehicle vehicle = new Vehicle(resultSet);
 
             // Get today's date
             dateLabel.setText(Session.selectedInvoice.getDate());
@@ -85,7 +88,9 @@ public class ViewInvoiceController implements Initializable {
 
 
         } catch (Exception e) {
+
             e.printStackTrace();
+
         }
 
     }
