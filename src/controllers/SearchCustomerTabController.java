@@ -38,6 +38,13 @@ public class SearchCustomerTabController implements Init {
 
         try {
 
+            final String fName = fNameTF.getText();
+            final String lName = lNameTF.getText();
+            tPane.setText(String.format("Search Customers - {First Name = %s, Last Name = %s}",
+                    !fName.isEmpty() ? fName : "Any",
+                    !lName.isEmpty() ? lName : "Any"
+            ));
+
             boolean hasResults = resultSet.next();
             if (hasResults) {
 

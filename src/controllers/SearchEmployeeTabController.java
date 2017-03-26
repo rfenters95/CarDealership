@@ -34,6 +34,11 @@ public class SearchEmployeeTabController implements Init {
 
     void displayResultSet() {
 
+        tPane.setText(String.format(
+                "Search Employees - {EID = %s}",
+                !employeeID.getText().isEmpty() ? employeeID.getText() : "Any"
+        ));
+
         try {
 
             boolean hasResults = resultSet.next();
