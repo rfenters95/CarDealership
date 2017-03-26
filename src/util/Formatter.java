@@ -18,6 +18,12 @@ public class Formatter {
         return "$" + decimalFormat.format(Double.valueOf(value));
     }
 
+    public static String USDtoString(String value) {
+        value = value.replace("$", "");
+        value = value.replace(",", "");
+        return value;
+    }
+
     public static String getFormattedDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();

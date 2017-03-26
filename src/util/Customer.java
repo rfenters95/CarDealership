@@ -3,6 +3,8 @@ package util;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -45,6 +47,30 @@ public class Customer implements Comparable<Customer> {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    public static void updateEntry(Customer customer) throws Exception {
+        Connection connection = DataHandler.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `CUSTOMERS` SET " +
+                "`ID` = ?, " +
+                "`FIRST_NAME` = ?, " +
+                "`LAST_NAME` = ?, " +
+                "`PHONE` = ?, " +
+                "`EMAIL` = ?, " +
+                "`ADDRESS` = ?, " +
+                "`CITY` = ?, " +
+                "`DATE_OF_BIRTH` = ?, WHERE " +
+                "`ID` = ?");
+        preparedStatement.setString(1, customer.getID());
+        preparedStatement.setString(2, customer.getFirstName());
+        preparedStatement.setString(3, customer.getLastName());
+        preparedStatement.setString(4, customer.getPhone());
+        preparedStatement.setString(5, customer.getEmail());
+        preparedStatement.setString(6, customer.getAddress());
+        preparedStatement.setString(7, customer.getCity());
+        preparedStatement.setString(8, customer.getDateOfBirth());
+        preparedStatement.setString(9, customer.getID());
+        preparedStatement.executeUpdate();
     }
 
     @Override
@@ -94,6 +120,34 @@ public class Customer implements Comparable<Customer> {
 
     public String getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
