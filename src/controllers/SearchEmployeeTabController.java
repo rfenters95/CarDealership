@@ -19,7 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.TreeSet;
+import java.util.Collections;
 
 public class SearchEmployeeTabController implements Init {
 
@@ -50,18 +50,17 @@ public class SearchEmployeeTabController implements Init {
             if (hasResults) {
 
                 listView.getItems().clear();
-                TreeSet<Employee> employees = new TreeSet<>();
 
                 int numberOfResults = 0;
                 while (hasResults) {
                     Employee employee = new Employee(resultSet);
-                    employees.add(employee);
+                    listView.getItems().add(employee);
                     numberOfResults++;
                     hasResults = resultSet.next();
                 }
 
                 employeeResultsTP.setText(String.format("Results - %d", numberOfResults));
-                listView.getItems().addAll(employees);
+                Collections.sort(listView.getItems());
 
             } else {
                 System.out.println("DB empty!");

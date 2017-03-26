@@ -19,7 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.TreeSet;
+import java.util.Collections;
 
 public class SearchCustomerTabController implements Init {
 
@@ -53,18 +53,17 @@ public class SearchCustomerTabController implements Init {
             if (hasResults) {
 
                 listView.getItems().clear();
-                TreeSet<Customer> customers = new TreeSet<>();
 
                 int numberOfResults = 0;
                 while (hasResults) {
                     Customer customer = new Customer(resultSet);
-                    customers.add(customer);
+                    listView.getItems().add(customer);
                     numberOfResults++;
                     hasResults = resultSet.next();
                 }
 
                 customerResultsTP.setText(String.format("Results - %d", numberOfResults));
-                listView.getItems().addAll(customers);
+                Collections.sort(listView.getItems());
 
             } else {
                 System.out.println("DB empty!");

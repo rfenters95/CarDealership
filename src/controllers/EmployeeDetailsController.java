@@ -3,9 +3,11 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import util.Employee;
 import util.Formatter;
 import util.Session;
@@ -60,6 +62,7 @@ public class EmployeeDetailsController implements Initializable {
     }
 
     @FXML public void save(ActionEvent event) throws IOException {
+
         try {
             Session.selectedEmployee.setFirstName(fNameTF.getText());
             Session.selectedEmployee.setLastName(lNameTF.getText());
@@ -72,6 +75,13 @@ public class EmployeeDetailsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Session.alphaController.getSearchEmployeeTabController().updateResultSet();
+        Session.alphaController.getSearchEmployeeTabController().displayResultSet();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+
     }
 
     @Override

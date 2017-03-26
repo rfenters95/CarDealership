@@ -3,8 +3,10 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import util.Formatter;
 import util.Session;
 import util.Vehicle;
@@ -46,6 +48,7 @@ public class VehicleDetailsController implements Initializable {
     }
 
     @FXML public void save(ActionEvent event) {
+
         try {
             Session.selectedVehicle.setMake(makeTF.getText());
             Session.selectedVehicle.setModel(modelTF.getText());
@@ -57,6 +60,13 @@ public class VehicleDetailsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Session.alphaController.getSearchVehicleTabController().updateResultSet();
+        Session.alphaController.getSearchVehicleTabController().displayResultSet();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+
     }
 
     @Override

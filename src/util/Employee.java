@@ -62,7 +62,7 @@ public class Employee implements Comparable<Employee> {
 
     public static void updateEntry(Employee employee) throws Exception {
         Connection connection = DataHandler.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `CUSTOMERS` SET " +
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `EMPLOYEES` SET " +
                 "`ID` = ?, " +
                 "`FIRST_NAME` = ?, " +
                 "`LAST_NAME` = ?, " +
