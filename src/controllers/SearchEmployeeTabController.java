@@ -16,6 +16,7 @@ import util.Session;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.TreeSet;
@@ -26,29 +27,30 @@ public class SearchEmployeeTabController implements Init {
     private ResultSet resultSet;
 
     @FXML private TitledPane tPane;
+    @FXML private TitledPane employeeResultsTP;
     @FXML private TextField employeeID;
     @FXML private ListView<Employee> listView;
     @FXML private Button viewDetailsButton;
 
-    public void displayResultSet() {
+    void displayResultSet() {
 
         try {
 
             boolean hasResults = resultSet.next();
-
             if (hasResults) {
 
                 listView.getItems().clear();
-
                 TreeSet<Employee> employees = new TreeSet<>();
 
-                do {
-
+                int numberOfResults = 0;
+                while (hasResults) {
                     Employee employee = new Employee(resultSet);
                     employees.add(employee);
+                    numberOfResults++;
+                    hasResults = resultSet.next();
+                }
 
-                } while (resultSet.next());
-
+                employeeResultsTP.setText(String.format("Results - %d", numberOfResults));
                 listView.getItems().addAll(employees);
 
             } else {
@@ -165,22 +167,18 @@ public class SearchEmployeeTabController implements Init {
 
         updateResultSet();
         displayResultSet();
+
     }
 
-    public ResultSet updateResultSet() {
+    void updateResultSet() {
         try {
-            String sql;
 
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-
-            sql = "SELECT * FROM EMPLOYEES";
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES");
+            resultSet = preparedStatement.executeQuery();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
-
-        return resultSet;
     }
 }

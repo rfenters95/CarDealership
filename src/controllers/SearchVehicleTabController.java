@@ -33,33 +33,34 @@ public class SearchVehicleTabController implements Init {
     @FXML private ComboBox<String> usedCB;
     @FXML private Button viewDetailsButton;
 
-
-
     @FXML private ListView<Vehicle> listView;
     @FXML private TitledPane tPane;
+    @FXML private TitledPane vehicleResultsTP;
 
     void displayResultSet() {
 
         try {
 
             boolean hasResults = resultSet.next();
-
             if (hasResults) {
 
                 // Empty old listView items
                 listView.getItems().clear();
 
+                int numberOfResults = 0;
                 while (hasResults) {
 
                     Vehicle vehicle = new Vehicle(resultSet);
                     if (vehicle.getInStock().equals("Yes")) {
                         listView.getItems().add(vehicle);
+                        numberOfResults++;
                     }
 
                     hasResults = resultSet.next();
 
                 }
 
+                vehicleResultsTP.setText(String.format("Results - %d", numberOfResults));
                 Collections.sort(listView.getItems());
 
             } else {
@@ -273,6 +274,7 @@ public class SearchVehicleTabController implements Init {
                 TreeSet<String> colorCBItems = new TreeSet<>();
                 TreeSet<String> typeCBItems = new TreeSet<>();
 
+                int numberOfResults = 0;
                 while (hasResults) {
 
                     Vehicle vehicle = new Vehicle(resultSet);
@@ -284,12 +286,14 @@ public class SearchVehicleTabController implements Init {
                         yearCBItems.add(vehicle.getYear());
                         colorCBItems.add(vehicle.getColor());
                         typeCBItems.add(vehicle.getType());
+                        numberOfResults++;
                     }
 
                     hasResults = resultSet.next();
 
                 }
 
+                vehicleResultsTP.setText(String.format("Results - %d", numberOfResults));
                 Collections.sort(listView.getItems());
                 makeCB.getItems().addAll(makeCBItems);
                 modelCB.getItems().addAll(modelCBItems);

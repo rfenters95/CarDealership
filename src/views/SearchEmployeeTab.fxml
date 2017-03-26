@@ -23,7 +23,7 @@
                   </VBox>
                </content>
             </TitledPane>
-            <TitledPane collapsible="false" text="Results">
+            <TitledPane fx:id="employeeResultsTP" collapsible="false" text="Results">
                <content>
                   <ListView fx:id="listView" VBox.vgrow="ALWAYS" />
                </content>

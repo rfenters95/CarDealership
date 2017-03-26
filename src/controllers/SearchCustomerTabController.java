@@ -16,6 +16,7 @@ import util.Session;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.TreeSet;
@@ -31,25 +32,27 @@ public class SearchCustomerTabController implements Init {
     @FXML private TitledPane tPane;
     @FXML private Button viewDetailsButton;
 
-    public void displayResultSet() {
+    @FXML private TitledPane customerResultsTP;
+
+    void displayResultSet() {
 
         try {
 
             boolean hasResults = resultSet.next();
-
             if (hasResults) {
 
                 listView.getItems().clear();
-
                 TreeSet<Customer> customers = new TreeSet<>();
 
-                do {
-
+                int numberOfResults = 0;
+                while (hasResults) {
                     Customer customer = new Customer(resultSet);
                     customers.add(customer);
+                    numberOfResults++;
+                    hasResults = resultSet.next();
+                }
 
-                } while (resultSet.next());
-
+                customerResultsTP.setText(String.format("Results - %d", numberOfResults));
                 listView.getItems().addAll(customers);
 
             } else {
@@ -182,20 +185,20 @@ public class SearchCustomerTabController implements Init {
         displayResultSet();
     }
 
-    public ResultSet updateResultSet() {
+    void updateResultSet() {
+
         try {
-            String sql;
 
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-
-            sql = "SELECT * FROM CUSTOMERS";
-            resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CUSTOMERS");
+            resultSet = preparedStatement.executeQuery();
 
         } catch (Exception e) {
-            System.out.println(e);
+
+            e.printStackTrace();
+
         }
 
-        return resultSet;
     }
+
 }
