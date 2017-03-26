@@ -13,7 +13,6 @@ import util.Vehicle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class VehicleDetailsController implements Initializable {
@@ -89,9 +88,7 @@ public class VehicleDetailsController implements Initializable {
         typeTF.setText(vehicle.getType());
         typeTF.setDisable(inputEnabled);
 
-        double dPrice = Double.parseDouble(vehicle.getPrice());
-        DecimalFormat dPriceFormatter = new DecimalFormat("#,###.00");
-        priceTF.setText(String.format("$%s", dPriceFormatter.format(dPrice)));
+        priceTF.setText(Formatter.USDFormatter(vehicle.getPrice()));
         priceTF.setDisable(inputEnabled);
 
     }
