@@ -133,16 +133,20 @@ public class SearchCustomerTabController implements Init {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Session.alert("Error: No customer selected!");
         }
     }
 
     @FXML public void select(ActionEvent event) {
+
         if (listView.getSelectionModel().getSelectedItem() != null) {
             Session.selectedCustomer = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
             selectedLabel.setText("Selected - " + Session.selectedCustomer.toString());
+        } else {
+            Session.alert("Error: No customer selected!");
         }
+
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
@@ -161,11 +165,8 @@ public class SearchCustomerTabController implements Init {
             newStage.setResizable(false);
             newStage.showAndWait();
 
-        } else {
-
-            System.out.println("Error: No customer selected!");
-
         }
+
     }
 
     @Override
