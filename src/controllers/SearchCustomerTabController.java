@@ -19,7 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.TreeSet;
+import java.util.Collections;
 
 public class SearchCustomerTabController implements Init {
 
@@ -53,18 +53,17 @@ public class SearchCustomerTabController implements Init {
             if (hasResults) {
 
                 listView.getItems().clear();
-                TreeSet<Customer> customers = new TreeSet<>();
 
                 int numberOfResults = 0;
                 while (hasResults) {
                     Customer customer = new Customer(resultSet);
-                    customers.add(customer);
+                    listView.getItems().add(customer);
                     numberOfResults++;
                     hasResults = resultSet.next();
                 }
 
                 customerResultsTP.setText(String.format("Results - %d", numberOfResults));
-                listView.getItems().addAll(customers);
+                Collections.sort(listView.getItems());
 
             } else {
                 System.out.println("DB empty!");
@@ -134,16 +133,20 @@ public class SearchCustomerTabController implements Init {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Session.alert("Error: No customer selected!");
         }
     }
 
     @FXML public void select(ActionEvent event) {
+
         if (listView.getSelectionModel().getSelectedItem() != null) {
             Session.selectedCustomer = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
             selectedLabel.setText("Selected - " + Session.selectedCustomer.toString());
+        } else {
+            Session.alert("Error: No customer selected!");
         }
+
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
@@ -162,11 +165,8 @@ public class SearchCustomerTabController implements Init {
             newStage.setResizable(false);
             newStage.showAndWait();
 
-        } else {
-
-            System.out.println("Error: No customer selected!");
-
         }
+
     }
 
     @Override

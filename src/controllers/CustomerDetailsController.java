@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -34,7 +35,10 @@ public class CustomerDetailsController implements Initializable {
     @FXML private ComboBox<Invoice> invoiceCB;
     @FXML private Button viewInvoiceButton;
 
+    private boolean inputDisabled = true;
+
     @FXML public void viewInvoice(ActionEvent event) throws IOException {
+
         Session.selectedInvoice = invoiceCB.getSelectionModel().getSelectedItem();
 
         Stage newStage = new Stage();
@@ -48,6 +52,50 @@ public class CustomerDetailsController implements Initializable {
         newStage.setScene(newScene);
         newStage.setResizable(false);
         newStage.showAndWait();
+
+    }
+
+    @FXML public void edit(ActionEvent event) throws IOException {
+
+        inputDisabled = !inputDisabled;
+        Button button = (Button) event.getSource();
+
+        if (inputDisabled) {
+            button.setText("Edit");
+        } else {
+            button.setText("View");
+        }
+
+        fNameTF.setDisable(inputDisabled);
+        lNameTF.setDisable(inputDisabled);
+        phoneTF.setDisable(inputDisabled);
+        emailTF.setDisable(inputDisabled);
+        addressTF.setDisable(inputDisabled);
+        cityTF.setDisable(inputDisabled);
+        dateOfBirthTF.setDisable(inputDisabled);
+
+    }
+
+    @FXML public void save(ActionEvent event) throws IOException {
+
+        try {
+            Session.selectedCustomer.setFirstName(fNameTF.getText());
+            Session.selectedCustomer.setLastName(lNameTF.getText());
+            Session.selectedCustomer.setPhone(Formatter.parsePhone(phoneTF.getText()));
+            Session.selectedCustomer.setEmail(emailTF.getText());
+            Session.selectedCustomer.setAddress(addressTF.getText());
+            Session.selectedCustomer.setCity(cityTF.getText());
+            Session.selectedCustomer.setDateOfBirth(dateOfBirthTF.getText());
+            Customer.updateEntry(Session.selectedCustomer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Session.alphaController.getSearchCustomerTabController().updateResultSet();
+        Session.alphaController.getSearchCustomerTabController().displayResultSet();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
 
     }
 

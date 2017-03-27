@@ -4,6 +4,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -56,6 +58,30 @@ public class Employee implements Comparable<Employee> {
         this.salary = salary.getText();
         this.workStatus = "1";
         this.totalSales = "0";
+    }
+
+    public static void updateEntry(Employee employee) throws Exception {
+        Connection connection = DataHandler.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `EMPLOYEES` SET " +
+                "`ID` = ?, " +
+                "`FIRST_NAME` = ?, " +
+                "`LAST_NAME` = ?, " +
+                "`PHONE` = ?, " +
+                "`EMAIL` = ?, " +
+                "`ADDRESS` = ?, " +
+                "`CITY` = ?, " +
+                "`DATE_OF_BIRTH` = ? WHERE " +
+                "`ID` = ?");
+        preparedStatement.setString(1, employee.getID());
+        preparedStatement.setString(2, employee.getFirstName());
+        preparedStatement.setString(3, employee.getLastName());
+        preparedStatement.setString(4, employee.getPhone());
+        preparedStatement.setString(5, employee.getEmail());
+        preparedStatement.setString(6, employee.getAddress());
+        preparedStatement.setString(7, employee.getCity());
+        preparedStatement.setString(8, employee.getDateOfBirth());
+        preparedStatement.setString(9, employee.getID());
+        preparedStatement.executeUpdate();
     }
 
     @Override
@@ -132,6 +158,54 @@ public class Employee implements Comparable<Employee> {
 
     public String getTotalSales() {
         return totalSales;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public void setWorkStatus(String workStatus) {
+        this.workStatus = workStatus;
+    }
+
+    public void setTotalSales(String totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public boolean isAdmin() {

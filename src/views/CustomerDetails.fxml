@@ -64,5 +64,11 @@
          </children>
       </HBox>
       <Button fx:id="viewInvoiceButton" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#viewInvoice" text="View Invoice" />
+      <HBox spacing="5.0">
+         <children>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#edit" text="Edit" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#save" text="Save" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
    </children>
 </VBox>

@@ -9,7 +9,7 @@ import java.util.Date;
 public class Formatter {
 
     public static String USDFormatter(double value) {
-        DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
         return "$" + decimalFormat.format(value);
     }
 
@@ -20,6 +20,12 @@ public class Formatter {
         } else {
             return "$0";
         }
+    }
+
+    public static String USDtoString(String value) {
+        value = value.replace("$", "");
+        value = value.replace(",", "");
+        return value;
     }
 
     public static String getFormattedDate() {
@@ -35,5 +41,9 @@ public class Formatter {
 
     public static String phoneFormatter(String phone) {
         return String.format("(%s)-%s-%s", phone.substring(0, 3), phone.substring(3, 6), phone.substring(6));
+    }
+
+    public static String parsePhone(String value) {
+        return value.replace("(", "").replace(")", "").replace("-", "");
     }
 }
