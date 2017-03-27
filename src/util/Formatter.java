@@ -14,8 +14,12 @@ public class Formatter {
     }
 
     public static String USDFormatter(String value) {
-        DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        return "$" + decimalFormat.format(Double.valueOf(value));
+        if (!value.equals("0")) {
+            DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
+            return "$" + decimalFormat.format(Double.valueOf(value));
+        } else {
+            return "$0";
+        }
     }
 
     public static String USDtoString(String value) {

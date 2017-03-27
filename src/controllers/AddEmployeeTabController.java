@@ -74,12 +74,14 @@ public class AddEmployeeTabController implements Init {
 
     @Override
     public void init(AlphaController alphaController) {
+
         this.alphaController = alphaController;
         ArrayList<String> jobs = new ArrayList<>();
         jobs.add("Sales");
         jobs.add("Accountant");
         jobs.add("Manager");
         jobTitleCB.getItems().addAll(jobs);
+
     }
 
 }
