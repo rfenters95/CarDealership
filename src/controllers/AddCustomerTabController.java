@@ -5,11 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import util.Customer;
-import util.DataHandler;
 import util.Init;
-
-import java.sql.Connection;
-import java.sql.Statement;
+import util.Session;
 
 public class AddCustomerTabController implements Init {
 
@@ -27,29 +24,15 @@ public class AddCustomerTabController implements Init {
 
         try {
 
-            String sql;
-
             Customer customer = new Customer(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP);
-            Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-
-            sql = "INSERT INTO `CUSTOMERS` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`) VALUES (NULL, " + customer.getInsertSQL() + ");";
-            statement.executeUpdate(sql);
-
-        } catch (Exception e) {
-
-            System.out.println("Empty fields!");
-
-        }
-
-        try {
-
+            Customer.insertEntry(customer);
             alphaController.getSearchCustomerTabController().updateResultSet();
             alphaController.getSearchCustomerTabController().displayResultSet();
+            Session.alert("Added Customer!");
 
         } catch (Exception e) {
 
-            e.printStackTrace();
+            Session.alert("Empty Fields!");
 
         }
 

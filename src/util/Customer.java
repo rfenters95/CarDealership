@@ -49,6 +49,22 @@ public class Customer implements Comparable<Customer> {
         }
     }
 
+    public static void insertEntry(Customer customer) throws Exception {
+        Connection connection = DataHandler.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO `CUSTOMERS` " +
+                        "(`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`) VALUES " +
+                        "(NULL, ?, ?, ?, ?, ?, ?, ?);");
+        preparedStatement.setString(1, customer.getFirstName());
+        preparedStatement.setString(2, customer.getLastName());
+        preparedStatement.setString(3, customer.getPhone());
+        preparedStatement.setString(4, customer.getEmail());
+        preparedStatement.setString(5, customer.getAddress());
+        preparedStatement.setString(6, customer.getCity());
+        preparedStatement.setString(7, customer.getDateOfBirth());
+        preparedStatement.executeUpdate();
+    }
+
     public static void updateEntry(Customer customer) throws Exception {
         Connection connection = DataHandler.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `CUSTOMERS` SET " +
@@ -84,10 +100,6 @@ public class Customer implements Comparable<Customer> {
 
     private boolean isValidArgument(String argument) {
         return argument != null && !argument.isEmpty();
-    }
-
-    public String getInsertSQL() {
-        return String.format("%s, %s, %s, %s, %s, %s, %s", DataHandler.getWrappedValue(firstName), DataHandler.getWrappedValue(lastName), DataHandler.getWrappedValue(phone), DataHandler.getWrappedValue(email), DataHandler.getWrappedValue(address), DataHandler.getWrappedValue(city), DataHandler.getWrappedValue(dateOfBirth));
     }
 
     public String getID() {

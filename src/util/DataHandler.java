@@ -29,4 +29,5 @@ public class DataHandler {
     public static String getWrappedValue(String value) {
         return "'" + value + "'";
     }
+
 }

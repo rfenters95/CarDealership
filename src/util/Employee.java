@@ -60,6 +60,22 @@ public class Employee implements Comparable<Employee> {
         this.totalSales = "0";
     }
 
+    public static void insertEntry(Employee employee) throws Exception {
+        Connection connection = DataHandler.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO `EMPLOYEES` " +
+                        "(`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`) VALUES " +
+                        "(NULL, ?, ?, ?, ?, ?, ?, ?);");
+        preparedStatement.setString(1, employee.getFirstName());
+        preparedStatement.setString(2, employee.getLastName());
+        preparedStatement.setString(3, employee.getPhone());
+        preparedStatement.setString(4, employee.getEmail());
+        preparedStatement.setString(5, employee.getAddress());
+        preparedStatement.setString(6, employee.getCity());
+        preparedStatement.setString(7, employee.getDateOfBirth());
+        preparedStatement.executeUpdate();
+    }
+
     public static void updateEntry(Employee employee) throws Exception {
         Connection connection = DataHandler.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `EMPLOYEES` SET " +
