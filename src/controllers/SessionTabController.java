@@ -49,7 +49,7 @@ public class SessionTabController implements Init {
             allSet = false;
         }
 
-        if (allSet && Session.sessionUser.getJobTitle().equals("Sales")) {
+        if (allSet) {
             createInvoiceButton.setDisable(false);
         } else {
             createInvoiceButton.setDisable(true);
@@ -90,7 +90,7 @@ public class SessionTabController implements Init {
             register_stage.setScene(register_scene);
             register_stage.show();
         } catch (Exception e) {
-            System.out.println(e);
+            Session.alert(e.getMessage());
         }
     }
 
@@ -104,6 +104,10 @@ public class SessionTabController implements Init {
         tab.setOnSelectionChanged(event -> {
             updateSessionInfo();
         });
+
+        if (!Session.sessionUser.getJobTitle().equals("Sales")) {
+            createInvoiceButton.setVisible(false);
+        }
 
     }
 }

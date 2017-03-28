@@ -55,9 +55,6 @@ public class EmployeeDetailsController implements Initializable {
         dateOfBirthTF.setDisable(inputDisabled);
         jobTF.setDisable(inputDisabled);
         salaryTF.setDisable(inputDisabled);
-        workStatusTF.setDisable(inputDisabled);
-        totalSalesTF.setDisable(inputDisabled);
-        commissionTF.setDisable(inputDisabled);
 
     }
 
