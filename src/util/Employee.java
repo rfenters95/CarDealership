@@ -74,6 +74,21 @@ public class Employee implements Comparable<Employee> {
         preparedStatement.setString(6, employee.getCity());
         preparedStatement.setString(7, employee.getDateOfBirth());
         preparedStatement.executeUpdate();
+
+        // Add USERS entry
+        preparedStatement = connection.prepareStatement("INSERT INTO `USERS` " +
+                "(`ID`, `USERNAME`, `PASSWORD`) VALUES " +
+                "(NULL, ?, ?);");
+
+        String username = employee.getEmail().substring(0, employee.getEmail().indexOf('@'));
+        String password = String.valueOf(employee.getFirstName().charAt(0)) + String.valueOf(employee.getLastName().charAt(0));
+
+        username = username.toLowerCase();
+        password = password.toLowerCase();
+
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+        preparedStatement.executeUpdate();
     }
 
     public static void updateEntry(Employee employee) throws Exception {
@@ -89,7 +104,7 @@ public class Employee implements Comparable<Employee> {
                 "`JOB` = ?," +
                 "`SALARY` = ?," +
                 "`WORK_STATUS` = ?," +
-                "`TOTAL_SALES` = ?," +
+                "`TOTAL_SALES` = ?" +
                 " WHERE `ID` = ?");
         preparedStatement.setString(1, employee.getFirstName());
         preparedStatement.setString(2, employee.getLastName());
@@ -98,11 +113,25 @@ public class Employee implements Comparable<Employee> {
         preparedStatement.setString(5, employee.getAddress());
         preparedStatement.setString(6, employee.getCity());
         preparedStatement.setString(7, employee.getDateOfBirth());
-        preparedStatement.setString(7, employee.getJobTitle());
-        preparedStatement.setString(7, employee.getSalary());
-        preparedStatement.setString(7, employee.getWorkStatus());
-        preparedStatement.setString(7, employee.getTotalSales());
-        preparedStatement.setString(8, employee.getID());
+        preparedStatement.setString(8, employee.getJobTitle());
+        preparedStatement.setString(9, employee.getSalary());
+        preparedStatement.setString(10, employee.getWorkStatus());
+        preparedStatement.setString(11, employee.getTotalSales());
+        preparedStatement.setString(12, employee.getID());
+        preparedStatement.executeUpdate();
+
+        // Add USERS entry
+        preparedStatement = connection.prepareStatement("UPDATE `USERS` SET `USERNAME` = ? `PASSWORD` = ? WHERE `ID` = ?");
+
+        String username = employee.getEmail().substring(0, employee.getEmail().indexOf('@'));
+        String password = String.valueOf(employee.getFirstName().charAt(0)) + String.valueOf(employee.getLastName().charAt(0));
+
+        username = username.toLowerCase();
+        password = password.toLowerCase();
+
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+        preparedStatement.setString(3, employee.getID());
         preparedStatement.executeUpdate();
     }
 
@@ -117,21 +146,6 @@ public class Employee implements Comparable<Employee> {
             return j;
         }
         return i;
-    }
-
-    public String getInsertSQL() {
-        return String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
-                DataHandler.getWrappedValue(firstName),
-                DataHandler.getWrappedValue(lastName),
-                DataHandler.getWrappedValue(phone),
-                DataHandler.getWrappedValue(email),
-                DataHandler.getWrappedValue(address),
-                DataHandler.getWrappedValue(city),
-                DataHandler.getWrappedValue(dateOfBirth),
-                DataHandler.getWrappedValue(jobTitle),
-                DataHandler.getWrappedValue(salary),
-                DataHandler.getWrappedValue(workStatus),
-                DataHandler.getWrappedValue(totalSales));
     }
 
     public String getID() {

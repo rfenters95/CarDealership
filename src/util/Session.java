@@ -19,7 +19,12 @@ public class Session {
 
     public static AlphaController alphaController;
 
-    public static String alertMessage;
+    private static String alertMessage;
+
+    public static String getAlertMessage() {
+        return alertMessage;
+    }
+
     public static void alert(String alertMessage) {
 
         try {
