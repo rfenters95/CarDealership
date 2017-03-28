@@ -17,3 +17,4 @@ CS340 Project
 3. Extract .jar from MySQL Java Connector
 4. Import MySQL Java Connector .jar into Intellij
 5. Start MAMP server
+6. Import db from https://gist.github.com/rfenters95/c783fee1183fc3ee3eb5f94bcdbd82cd
