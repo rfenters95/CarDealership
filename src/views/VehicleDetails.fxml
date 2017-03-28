@@ -53,8 +53,8 @@
       </HBox>
       <HBox spacing="5.0">
          <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#edit" text="Edit" HBox.hgrow="ALWAYS" />
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#save" text="Save" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#edit" prefWidth="137.5" text="Edit" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#save" prefWidth="137.5" text="Save" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>
