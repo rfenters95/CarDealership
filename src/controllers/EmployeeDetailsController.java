@@ -128,6 +128,7 @@ public class EmployeeDetailsController implements Initializable {
             commissionLabel.setText("Commission (%" + pCommission + ")");
             commissionTF.setText(employee.getCommission());
             commissionTF.setDisable(true);
+
         } else {
             totalSalesLabel.setVisible(false);
             totalSalesTF.setVisible(false);

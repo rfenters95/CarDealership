@@ -86,7 +86,6 @@ public class Vehicle implements Comparable<Vehicle> {
     public static void updateEntry(Vehicle vehicle) throws Exception {
         Connection connection = DataHandler.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `VEHICLES` SET " +
-                "`ID` = ?, " +
                 "`MAKE` = ?, " +
                 "`MODEL` = ?, " +
                 "`YEAR` = ?, " +
@@ -96,16 +95,15 @@ public class Vehicle implements Comparable<Vehicle> {
                 "`USED` = ?, " +
                 "`IN_STOCK` = ? WHERE " +
                 "`ID` = ?");
-        preparedStatement.setString(1, vehicle.getID());
-        preparedStatement.setString(2, vehicle.getMake());
-        preparedStatement.setString(3, vehicle.getModel());
-        preparedStatement.setString(4, vehicle.getYear());
-        preparedStatement.setString(5, vehicle.getColor());
-        preparedStatement.setString(6, vehicle.getType());
-        preparedStatement.setString(7, vehicle.getPrice());
-        preparedStatement.setString(8, vehicle.getUsed());
-        preparedStatement.setString(9, vehicle.getInStock());
-        preparedStatement.setString(10, vehicle.getID());
+        preparedStatement.setString(1, vehicle.getMake());
+        preparedStatement.setString(2, vehicle.getModel());
+        preparedStatement.setString(3, vehicle.getYear());
+        preparedStatement.setString(4, vehicle.getColor());
+        preparedStatement.setString(5, vehicle.getType());
+        preparedStatement.setString(6, vehicle.getPrice());
+        preparedStatement.setString(7, vehicle.getUsed());
+        preparedStatement.setString(8, vehicle.getInStock());
+        preparedStatement.setString(9, vehicle.getID());
         preparedStatement.executeUpdate();
     }
 

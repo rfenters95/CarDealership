@@ -71,6 +71,12 @@ public class CreateInvoiceController implements Initializable {
             // Delete vehicle from db
             Vehicle.removeVehicle();
 
+            // Update employee totalSales
+            double currentSales = Double.valueOf(employee.getTotalSales());
+            double currentSale = Double.valueOf(Formatter.USDtoString(totalPriceLabel.getText()));
+            employee.setTotalSales(String.valueOf(currentSales + currentSale));
+            Employee.updateEntry(employee);
+
             // Update listView in searchVehicleTab
             Session.alphaController.getSearchVehicleTabController().updateResultSet();
             Session.alphaController.getSearchVehicleTabController().displayResultSet();
@@ -163,7 +169,7 @@ public class CreateInvoiceController implements Initializable {
         // Display Customer info
         customer = Session.selectedCustomer;
         cNameLabel.setText(customer.getFirstName() + " " + customer.getLastName());
-        cPhoneLabel.setText(customer.getPhone());
+        cPhoneLabel.setText(Formatter.phoneFormatter(customer.getPhone()));
         cAddressLabel.setText(customer.getAddress());
         cAddressLabel.setText(customer.getAddress());
         cCityLabel.setText(customer.getCity());
@@ -181,7 +187,14 @@ public class CreateInvoiceController implements Initializable {
 
             double vehiclePrice = Double.parseDouble(vehicle.getPrice());
             double warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getDoubleValue();
-            double totalPrice = vehiclePrice + warrantyPrice;
+
+            double totalPrice;
+            if (!tradeInValueTF.isDisabled()) {
+                double tradeInPrice = Double.valueOf(tradeInValueTF.getText());
+                totalPrice = vehiclePrice + warrantyPrice - tradeInPrice;
+            } else {
+                totalPrice = vehiclePrice + warrantyPrice;
+            }
             warrantyValue = String.valueOf(warrantyPrice);
             totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));
 

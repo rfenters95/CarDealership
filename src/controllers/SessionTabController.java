@@ -49,7 +49,7 @@ public class SessionTabController implements Init {
             allSet = false;
         }
 
-        if (allSet) {
+        if (allSet && !Session.sessionUser.getJobTitle().equals("Sales")) {
             createInvoiceButton.setDisable(false);
         } else {
             createInvoiceButton.setDisable(true);
