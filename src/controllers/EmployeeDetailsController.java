@@ -68,6 +68,8 @@ public class EmployeeDetailsController implements Initializable {
             Session.selectedEmployee.setAddress(addressTF.getText());
             Session.selectedEmployee.setCity(cityTF.getText());
             Session.selectedEmployee.setDateOfBirth(dateOfBirthTF.getText());
+            Session.selectedEmployee.setDateOfBirth(jobTF.getText());
+            Session.selectedEmployee.setDateOfBirth(salaryTF.getText());
             Employee.updateEntry(Session.selectedEmployee);
         } catch (Exception e) {
             e.printStackTrace();
