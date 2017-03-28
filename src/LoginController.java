@@ -16,8 +16,8 @@ import util.Session;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -32,24 +32,19 @@ public class LoginController implements Initializable {
 
         try {
 
-            String sql;
-            ResultSet resultSet;
-            boolean hasResults;
-            final String user = username.getText();
-            final String pass = password.getText();
-
             Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-
-            sql = "SELECT * FROM USERS WHERE USERNAME=" + DataHandler.getWrappedValue(user) + " AND PASSWORD=" + DataHandler.getWrappedValue(pass);
-            resultSet = statement.executeQuery(sql);
-            hasResults = resultSet.next();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `USERS` WHERE USERNAME = ? AND PASSWORD = ?");
+            preparedStatement.setString(1, username.getText());
+            preparedStatement.setString(2, password.getText());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean hasResults = resultSet.next();
 
             if (hasResults) {
-                String EmployeeID = resultSet.getString(1);
 
-                sql = "SELECT * FROM EMPLOYEES WHERE ID=" + DataHandler.getWrappedValue(EmployeeID);
-                resultSet = statement.executeQuery(sql);
+                String employeeID = resultSet.getString(1);
+                preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE ID = ?");
+                preparedStatement.setString(1, employeeID);
+                resultSet = preparedStatement.executeQuery();
                 hasResults = resultSet.next();
 
                 if (hasResults) {
@@ -58,21 +53,15 @@ public class LoginController implements Initializable {
                     loadResource(event, "views/Alpha.fxml");
 
                 } else {
-
-                    System.out.println("Could not find employee matching that ID");
-
+                    Session.alert("Invalid login combo!");
                 }
 
             } else {
-
-                System.out.println("Bad login combo!");
-
+                Session.alert("Invalid login combo!");
             }
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-
+            Session.alert(e.getMessage());
         }
 
     }
