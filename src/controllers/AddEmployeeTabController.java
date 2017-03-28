@@ -30,16 +30,12 @@ public class AddEmployeeTabController implements Init {
 
             Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB, salaryTF);
             Employee.insertEntry(employee);
-
             alphaController.getSearchEmployeeTabController().updateResultSet();
             alphaController.getSearchEmployeeTabController().displayResultSet();
-
             Session.alert("Employee Added!");
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-
+            Session.alert(e.getMessage());
         }
 
     }

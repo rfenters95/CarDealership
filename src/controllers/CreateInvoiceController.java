@@ -81,7 +81,7 @@ public class CreateInvoiceController implements Initializable {
             Session.alphaController.getSearchVehicleTabController().updateResultSet();
             Session.alphaController.getSearchVehicleTabController().displayResultSet();
 
-            Session.alert("Invoice created!");
+            Session.alert("Invoice Created!");
             stage.close();
 
         } catch (Exception e) {
@@ -107,9 +107,7 @@ public class CreateInvoiceController implements Initializable {
 
         tradeInValueTF.setDisable(true);
 
-        paymentMethodCB.setOnAction(e -> {
-            paymentMethod = paymentMethodCB.getSelectionModel().getSelectedItem();
-        });
+        paymentMethodCB.setOnAction(e -> paymentMethod = paymentMethodCB.getSelectionModel().getSelectedItem());
 
         warrantyCB.getItems().add(new USD(0).setStringValue("$0"));
         warrantyCB.getItems().add(new USD(3000));
@@ -158,6 +156,8 @@ public class CreateInvoiceController implements Initializable {
 
                     tradeInValueTF.setDisable(false);
 
+                } else {
+                    tradeInValueTF.setDisable(true);
                 }
 
             } catch (IOException e) {

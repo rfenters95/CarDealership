@@ -31,9 +31,7 @@ public class AddCustomerTabController implements Init {
             Session.alert("Added Customer!");
 
         } catch (Exception e) {
-
-            Session.alert("Empty Fields!");
-
+            Session.alert(e.getMessage());
         }
 
     }

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import util.Init;
+import util.Session;
 import util.Vehicle;
 
 public class AddVehicleTabController implements Init {
@@ -25,16 +26,12 @@ public class AddVehicleTabController implements Init {
 
             Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF, usedCB);
             Vehicle.insertEntry(vehicle);
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        } finally {
-
             alphaController.getSearchVehicleTabController().updateResultSet();
             alphaController.getSearchVehicleTabController().displayResultSet();
+            Session.alert("Employee Added!");
 
+        } catch (Exception e) {
+            Session.alert(e.getMessage());
         }
 
     }

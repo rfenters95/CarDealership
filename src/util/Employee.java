@@ -121,7 +121,7 @@ public class Employee implements Comparable<Employee> {
         preparedStatement.executeUpdate();
 
         // Add USERS entry
-        preparedStatement = connection.prepareStatement("UPDATE `USERS` SET `USERNAME` = ? `PASSWORD` = ? WHERE `ID` = ?");
+        preparedStatement = connection.prepareStatement("UPDATE `USERS` SET `USERNAME` = ?, `PASSWORD` = ? WHERE `ID` = ?");
 
         String username = employee.getEmail().substring(0, employee.getEmail().indexOf('@'));
         String password = String.valueOf(employee.getFirstName().charAt(0)) + String.valueOf(employee.getLastName().charAt(0));
