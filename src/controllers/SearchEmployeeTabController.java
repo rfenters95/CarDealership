@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Collections;
 
 public class SearchEmployeeTabController implements Init {
@@ -74,21 +73,8 @@ public class SearchEmployeeTabController implements Init {
 
     @FXML public void showAll(ActionEvent event) {
 
-        try {
-
-            // Clear old resultSet
-            employeeID.clear();
-
-            // Display all Employees
-            String sql = "SELECT * FROM EMPLOYEES";
-            Connection connection = DataHandler.getConnection();
-            Statement statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
-            displayResultSet();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        updateResultSet();
+        displayResultSet();
 
     }
 

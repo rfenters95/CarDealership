@@ -121,18 +121,8 @@ public class SearchVehicleTabController implements Init {
 
     @FXML public void showAll(ActionEvent event) {
 
-        try {
-
-            Connection connection = DataHandler.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM VEHICLES");
-            resultSet = preparedStatement.executeQuery();
-            displayResultSet();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
+        updateResultSet();
+        displayResultSet();
 
     }
 
@@ -161,10 +151,9 @@ public class SearchVehicleTabController implements Init {
             newStage.showAndWait();
 
         } else {
-
-            System.out.println("Error: No customer selected!");
-
+            Session.getInstance().alert("Error: No customer selected!");
         }
+
     }
     @FXML public void search(ActionEvent event) {
 
