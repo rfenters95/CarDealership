@@ -9,7 +9,8 @@ import java.util.Date;
 public class Formatter {
 
     public static String parseName(String input) {
-        return input.replaceAll("[^A-Za-z]", "");
+        String temp = input.replaceAll("[^A-Za-z]", "").toLowerCase();
+        return Character.toUpperCase(temp.charAt(0)) + temp.substring(1);
     }
 
     public static String parseNumber(String input) {
