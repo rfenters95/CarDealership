@@ -16,35 +16,40 @@ public class Session {
     public Customer selectedCustomer;
     public Vehicle selectedVehicle;
     public Invoice selectedInvoice;
-
     public AlphaController alphaController;
+    private String alertMessage;
 
+    /*
+    * Applies Singleton pattern to this class */
+    private Session() {}
     private static Session instance = new Session();
     public static Session getInstance() {
         return instance;
     }
 
-    private String alertMessage;
-    public String getAlertMessage() {
-        return alertMessage;
-    }
-
+    /*
+    * Display all entries from `Customers` table after add/remove from database */
     public void reloadCustomers() {
         alphaController.getSearchCustomerTabController().updateResultSet();
         alphaController.getSearchCustomerTabController().displayResultSet();
     }
 
+    /*
+    * Display all entries from `Employees` table after add/remove from database */
     public void reloadEmployees() {
         alphaController.getSearchEmployeeTabController().updateResultSet();
         alphaController.getSearchEmployeeTabController().displayResultSet();
     }
 
+    /*
+    * Display all entries from `Vehicles` table after add/remove from database */
     public void reloadVehicles() {
         alphaController.getSearchVehicleTabController().updateResultSet();
         alphaController.getSearchVehicleTabController().displayResultSet();
     }
 
-
+    /*
+    * Creates alert windows to alert users of problems or invalid inputs */
     public void alert(String alertMessage) {
 
         try {
@@ -66,6 +71,8 @@ public class Session {
 
     }
 
+    /*
+    * Clears values stored throughout user session */
     public void clearSession() {
 
         this.sessionUser = null;
@@ -77,4 +84,9 @@ public class Session {
         this.alertMessage = null;
 
     }
+
+    public String getAlertMessage() {
+        return alertMessage;
+    }
+
 }

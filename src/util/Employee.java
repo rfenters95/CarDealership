@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Employee implements Comparable<Employee> {
 
@@ -265,8 +266,17 @@ public class Employee implements Comparable<Employee> {
         return String.valueOf(tSales * commission);
     }
 
+    public static ArrayList<String> getJobList() {
+        ArrayList<String> jobs = new ArrayList<>();
+        jobs.add("Sales");
+        jobs.add("Accountant");
+        jobs.add("Manager");
+        return jobs;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s, %s", jobTitle, lastName, firstName);
     }
+
 }

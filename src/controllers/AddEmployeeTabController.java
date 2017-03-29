@@ -9,8 +9,6 @@ import util.Employee;
 import util.Init;
 import util.Session;
 
-import java.util.ArrayList;
-
 public class AddEmployeeTabController implements Init {
 
     private AlphaController alphaController;
@@ -43,12 +41,7 @@ public class AddEmployeeTabController implements Init {
     public void init(AlphaController alphaController) {
 
         this.alphaController = alphaController;
-
-        ArrayList<String> jobs = new ArrayList<>();
-        jobs.add("Sales");
-        jobs.add("Accountant");
-        jobs.add("Manager");
-        jobTitleCB.getItems().addAll(jobs);
+        jobTitleCB.getItems().addAll(Employee.getJobList());
 
     }
 

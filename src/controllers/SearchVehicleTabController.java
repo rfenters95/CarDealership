@@ -328,9 +328,7 @@ public class SearchVehicleTabController implements Init {
             resultSet = preparedStatement.executeQuery();
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
 
     }
