@@ -54,7 +54,7 @@ public class VehicleDetailsController implements Initializable {
             Session.getInstance().selectedVehicle.setYear(yearTF.getText());
             Session.getInstance().selectedVehicle.setColor(colorTF.getText());
             Session.getInstance().selectedVehicle.setType(typeTF.getText());
-            Session.getInstance().selectedVehicle.setPrice(Formatter.USDtoString(priceTF.getText()));
+            Session.getInstance().selectedVehicle.setPrice(Formatter.parseNumber(priceTF.getText()));
             Vehicle.updateEntry(Session.getInstance().selectedVehicle);
         } catch (Exception e) {
             e.printStackTrace();

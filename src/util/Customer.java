@@ -31,7 +31,15 @@ public class Customer implements Comparable<Customer> {
     }
 
     public Customer(TextField firstName, TextField lastName, TextField phone, TextField email, TextField address, TextField city, DatePicker dateOfBirth) throws IllegalArgumentException {
-        this(firstName.getText(), lastName.getText(), phone.getText(), email.getText(), address.getText(), city.getText(), dateOfBirth.getValue().toString());
+        this(
+                Formatter.parseName(firstName.getText()),
+                Formatter.parseName(lastName.getText()),
+                Formatter.parseNumber(phone.getText()),
+                email.getText(),
+                address.getText(),
+                Formatter.parseName(city.getText()),
+                dateOfBirth.getValue().toString()
+        );
     }
 
     public Customer(String firstName, String lastName, String phone, String email, String address, String city, String dateOfBirth) throws IllegalArgumentException {

@@ -74,7 +74,7 @@ public class CreateInvoiceController implements Initializable {
 
             // Update employee totalSales
             double currentSales = Double.valueOf(employee.getTotalSales());
-            double currentSale = Double.valueOf(Formatter.USDtoString(totalPriceLabel.getText()));
+            double currentSale = Double.valueOf(Formatter.parseNumber(totalPriceLabel.getText()));
             employee.setTotalSales(String.valueOf(currentSales + currentSale));
             Employee.updateEntry(employee);
 

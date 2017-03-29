@@ -81,7 +81,7 @@ public class CustomerDetailsController implements Initializable {
         try {
             Session.getInstance().selectedCustomer.setFirstName(fNameTF.getText());
             Session.getInstance().selectedCustomer.setLastName(lNameTF.getText());
-            Session.getInstance().selectedCustomer.setPhone(Formatter.parsePhone(phoneTF.getText()));
+            Session.getInstance().selectedCustomer.setPhone(Formatter.parseNumber(phoneTF.getText()));
             Session.getInstance().selectedCustomer.setEmail(emailTF.getText());
             Session.getInstance().selectedCustomer.setAddress(addressTF.getText());
             Session.getInstance().selectedCustomer.setCity(cityTF.getText());

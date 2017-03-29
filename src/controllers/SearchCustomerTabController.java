@@ -65,8 +65,6 @@ public class SearchCustomerTabController implements Init {
                 customerResultsTP.setText(String.format("Results - %d", numberOfResults));
                 Collections.sort(listView.getItems());
 
-            } else {
-                System.out.println("DB empty!");
             }
 
         } catch (Exception e) {

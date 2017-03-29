@@ -48,18 +48,20 @@ public class Employee implements Comparable<Employee> {
     }
 
     public Employee(TextField firstName, TextField lastName, TextField phone, TextField email, TextField address, TextField city, DatePicker dateOfBirth, ComboBox<String> jobTitle, TextField salary) {
-        this.firstName = firstName.getText();
-        this.lastName = lastName.getText();
-        this.phone = phone.getText();
+        this.firstName = Formatter.parseName(firstName.getText());
+        this.lastName = Formatter.parseName(lastName.getText());
+        this.phone = Formatter.parseNumber(phone.getText());
         this.email = email.getText();
         this.address = address.getText();
-        this.city = city.getText();
+        this.city = Formatter.parseName(city.getText());
         this.dateOfBirth = dateOfBirth.getValue().toString();
-        this.jobTitle = jobTitle.getSelectionModel().getSelectedItem();
-        this.salary = salary.getText();
+        this.jobTitle = Formatter.parseName(jobTitle.getSelectionModel().getSelectedItem());
+        this.salary = Formatter.parseNumber(salary.getText());
         this.workStatus = "1";
         this.totalSales = "0";
     }
+
+
 
     public static void insertEntry(Employee employee) throws Exception {
         Connection connection = DataHandler.getConnection();

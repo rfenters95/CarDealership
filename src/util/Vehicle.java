@@ -37,7 +37,15 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     public Vehicle(TextField make, TextField model, TextField year, TextField color, ComboBox<String> type, TextField price) {
-        this(make.getText(), model.getText(), year.getText(), color.getText(), type.getSelectionModel().getSelectedItem(), price.getText(), "Yes");
+        this(
+                Formatter.parseName(make.getText()),
+                Formatter.parseName(model.getText()),
+                year.getText(),
+                Formatter.parseName(color.getText()),
+                type.getSelectionModel().getSelectedItem(),
+                Formatter.parseNumber(price.getText()),
+                "Yes"
+        );
     }
 
     public Vehicle(String make, String model, String year, String color, String type, String price, String used) {
