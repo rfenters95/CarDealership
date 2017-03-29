@@ -40,7 +40,7 @@ public class Vehicle implements Comparable<Vehicle> {
         this(
                 Formatter.parseName(make.getText()),
                 Formatter.parseName(model.getText()),
-                year.getText(),
+                Formatter.parseNumber(year.getText()),
                 Formatter.parseName(color.getText()),
                 type.getSelectionModel().getSelectedItem(),
                 Formatter.parseNumber(price.getText()),
