@@ -37,7 +37,7 @@ public class SearchEmployeeTabController implements Init {
 
     @FXML private Label selectedLabel;
 
-    void displayResultSet() {
+    public void displayResultSet() {
 
         tPane.setText(String.format(
                 "Search Employees - {EID = %s}",
@@ -124,15 +124,15 @@ public class SearchEmployeeTabController implements Init {
 
     @FXML public void select(ActionEvent event) {
         if (listView.getSelectionModel().getSelectedItem() != null) {
-            Session.selectedEmployee = listView.getSelectionModel().getSelectedItem();
+            Session.getInstance().selectedEmployee = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
-            selectedLabel.setText("Selected - " + Session.selectedEmployee.toString());
+            selectedLabel.setText("Selected - " + Session.getInstance().selectedEmployee.toString());
         }
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
 
-        if (Session.selectedEmployee != null) {
+        if (Session.getInstance().selectedEmployee != null) {
 
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
@@ -183,7 +183,7 @@ public class SearchEmployeeTabController implements Init {
 
     }
 
-    void updateResultSet() {
+    public void updateResultSet() {
         try {
 
             Connection connection = DataHandler.getConnection();

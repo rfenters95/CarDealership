@@ -50,7 +50,7 @@ public class SearchVehicleTabController implements Init {
         typeCB.getItems().clear();
     }
 
-    void displayResultSet() {
+    public void displayResultSet() {
 
         tPane.setText(String.format(
                 "Search Inventory - {Make = %s, Model = %s, Year = %s, " +
@@ -138,15 +138,15 @@ public class SearchVehicleTabController implements Init {
 
     @FXML public void select(ActionEvent event) {
         if (listView.getSelectionModel().getSelectedItem() != null) {
-            Session.selectedVehicle = listView.getSelectionModel().getSelectedItem();
+            Session.getInstance().selectedVehicle = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
-            selectedLabel.setText("Selected - " + Session.selectedVehicle.toString());
+            selectedLabel.setText("Selected - " + Session.getInstance().selectedVehicle.toString());
         }
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
 
-        if (Session.selectedVehicle != null) {
+        if (Session.getInstance().selectedVehicle != null) {
 
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
@@ -319,7 +319,7 @@ public class SearchVehicleTabController implements Init {
     /*
     * Used after changes have been made to db to show all results
     * */
-    void updateResultSet() {
+    public void updateResultSet() {
 
         try {
 

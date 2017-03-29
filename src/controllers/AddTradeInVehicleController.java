@@ -30,9 +30,8 @@ public class AddTradeInVehicleController implements Initializable {
 
             Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF);
             Vehicle.insertEntry(vehicle);
-            Session.alphaController.getSearchVehicleTabController().updateResultSet();
-            Session.alphaController.getSearchVehicleTabController().displayResultSet();
-            Session.alert("Vehicle added!");
+            Session.getInstance().reloadVehicles();
+            Session.getInstance().alert("Vehicle added!");
             stage.close();
 
         } catch (Exception e) {

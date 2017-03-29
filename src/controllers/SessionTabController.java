@@ -31,20 +31,20 @@ public class SessionTabController implements Init {
 
         boolean allSet = true;
 
-        if (Session.sessionUser != null) {
-            employeeLabel.setText(Session.sessionUser.toString());
+        if (Session.getInstance().sessionUser != null) {
+            employeeLabel.setText(Session.getInstance().sessionUser.toString());
         } else {
             allSet = false;
         }
 
-        if (Session.selectedCustomer != null) {
-            customerLabel.setText(Session.selectedCustomer.toString());
+        if (Session.getInstance().selectedCustomer != null) {
+            customerLabel.setText(Session.getInstance().selectedCustomer.toString());
         } else {
             allSet = false;
         }
 
-        if (Session.selectedVehicle != null) {
-            vehicleLabel.setText(Session.selectedVehicle.toString());
+        if (Session.getInstance().selectedVehicle != null) {
+            vehicleLabel.setText(Session.getInstance().selectedVehicle.toString());
         } else {
             allSet = false;
         }
@@ -82,7 +82,7 @@ public class SessionTabController implements Init {
     @FXML public void logout(ActionEvent event) {
         try {
             DataHandler.killConnection();
-            Session.clearSession();
+            Session.getInstance().clearSession();
             Parent register_page = FXMLLoader.load(getClass().getResource("../Login.fxml"));
             Scene register_scene = new Scene(register_page);
             Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -90,7 +90,7 @@ public class SessionTabController implements Init {
             register_stage.setScene(register_scene);
             register_stage.show();
         } catch (Exception e) {
-            Session.alert(e.getMessage());
+            Session.getInstance().alert(e.getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ public class SessionTabController implements Init {
             updateSessionInfo();
         });
 
-        if (!Session.sessionUser.getJobTitle().equals("Sales")) {
+        if (!Session.getInstance().sessionUser.getJobTitle().equals("Sales")) {
             createInvoiceButton.setVisible(false);
         }
 

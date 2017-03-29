@@ -49,19 +49,19 @@ public class LoginController implements Initializable {
 
                 if (hasResults) {
 
-                    Session.sessionUser = new Employee(resultSet);
+                    Session.getInstance().sessionUser = new Employee(resultSet);
                     loadResource(event, "views/Alpha.fxml");
 
                 } else {
-                    Session.alert("Invalid login combo!");
+                    Session.getInstance().alert("Invalid login combo!");
                 }
 
             } else {
-                Session.alert("Invalid login combo!");
+                Session.getInstance().alert("Invalid login combo!");
             }
 
         } catch (Exception e) {
-            Session.alert(e.getMessage());
+            Session.getInstance().alert(e.getMessage());
         }
 
     }

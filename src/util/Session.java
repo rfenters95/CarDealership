@@ -11,24 +11,44 @@ import java.io.IOException;
 
 public class Session {
 
-    public static Employee sessionUser;
-    public static Employee selectedEmployee;
-    public static Customer selectedCustomer;
-    public static Vehicle selectedVehicle;
-    public static Invoice selectedInvoice;
+    public Employee sessionUser;
+    public Employee selectedEmployee;
+    public Customer selectedCustomer;
+    public Vehicle selectedVehicle;
+    public Invoice selectedInvoice;
 
-    public static AlphaController alphaController;
+    public AlphaController alphaController;
 
-    private static String alertMessage;
+    private static Session instance = new Session();
+    public static Session getInstance() {
+        return instance;
+    }
 
-    public static String getAlertMessage() {
+    private String alertMessage;
+    public String getAlertMessage() {
         return alertMessage;
     }
 
-    public static void alert(String alertMessage) {
+    public void reloadCustomers() {
+        alphaController.getSearchCustomerTabController().updateResultSet();
+        alphaController.getSearchCustomerTabController().displayResultSet();
+    }
+
+    public void reloadEmployees() {
+        alphaController.getSearchEmployeeTabController().updateResultSet();
+        alphaController.getSearchEmployeeTabController().displayResultSet();
+    }
+
+    public void reloadVehicles() {
+        alphaController.getSearchVehicleTabController().updateResultSet();
+        alphaController.getSearchVehicleTabController().displayResultSet();
+    }
+
+
+    public void alert(String alertMessage) {
 
         try {
-            Session.alertMessage = alertMessage;
+            this.alertMessage = alertMessage;
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -46,15 +66,15 @@ public class Session {
 
     }
 
-    public static void clearSession() {
+    public void clearSession() {
 
-        Session.sessionUser = null;
-        Session.selectedEmployee = null;
-        Session.selectedCustomer = null;
-        Session.selectedVehicle = null;
-        Session.selectedInvoice = null;
-        Session.alphaController = null;
-        Session.alertMessage = null;
+        this.sessionUser = null;
+        this.selectedEmployee = null;
+        this.selectedCustomer = null;
+        this.selectedVehicle = null;
+        this.selectedInvoice = null;
+        this.alphaController = null;
+        this.alertMessage = null;
 
     }
 }

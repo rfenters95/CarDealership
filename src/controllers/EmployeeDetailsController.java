@@ -61,23 +61,21 @@ public class EmployeeDetailsController implements Initializable {
     @FXML public void save(ActionEvent event) throws IOException {
 
         try {
-            Session.selectedEmployee.setFirstName(fNameTF.getText());
-            Session.selectedEmployee.setLastName(lNameTF.getText());
-            Session.selectedEmployee.setPhone(Formatter.parsePhone(phoneTF.getText()));
-            Session.selectedEmployee.setEmail(emailTF.getText());
-            Session.selectedEmployee.setAddress(addressTF.getText());
-            Session.selectedEmployee.setCity(cityTF.getText());
-            Session.selectedEmployee.setDateOfBirth(dateOfBirthTF.getText());
-            Session.selectedEmployee.setDateOfBirth(jobTF.getText());
-            Session.selectedEmployee.setDateOfBirth(salaryTF.getText());
-            Employee.updateEntry(Session.selectedEmployee);
+            Session.getInstance().selectedEmployee.setFirstName(fNameTF.getText());
+            Session.getInstance().selectedEmployee.setLastName(lNameTF.getText());
+            Session.getInstance().selectedEmployee.setPhone(Formatter.parsePhone(phoneTF.getText()));
+            Session.getInstance().selectedEmployee.setEmail(emailTF.getText());
+            Session.getInstance().selectedEmployee.setAddress(addressTF.getText());
+            Session.getInstance().selectedEmployee.setCity(cityTF.getText());
+            Session.getInstance().selectedEmployee.setDateOfBirth(dateOfBirthTF.getText());
+            Session.getInstance().selectedEmployee.setDateOfBirth(jobTF.getText());
+            Session.getInstance().selectedEmployee.setDateOfBirth(salaryTF.getText());
+            Employee.updateEntry(Session.getInstance().selectedEmployee);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Session.alphaController.getSearchEmployeeTabController().updateResultSet();
-        Session.alphaController.getSearchEmployeeTabController().displayResultSet();
-
+        Session.getInstance().reloadEmployees();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
 
@@ -86,7 +84,7 @@ public class EmployeeDetailsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Employee employee = Session.selectedEmployee;
+        Employee employee = Session.getInstance().selectedEmployee;
 
         fNameTF.setText(employee.getFirstName());
         fNameTF.setDisable(true);

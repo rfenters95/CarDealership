@@ -29,11 +29,11 @@ public class AlphaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        if (!Session.sessionUser.isAdmin()) {
+        if (!Session.getInstance().sessionUser.isAdmin()) {
             employeeTab.setDisable(true);
         }
 
-        userSessionInfoTab.setText(Session.sessionUser.getFirstName() + " " + Session.sessionUser.getLastName());
+        userSessionInfoTab.setText(Session.getInstance().sessionUser.getFirstName() + " " + Session.getInstance().sessionUser.getLastName());
 
         addCustomerTabController.init(this);
         addEmployeeTabController.init(this);
@@ -43,7 +43,7 @@ public class AlphaController implements Initializable {
         searchEmployeeTabController.init(this);
         sessionTabController.init(this);
 
-        Session.alphaController = this;
+        Session.getInstance().alphaController = this;
 
     }
 

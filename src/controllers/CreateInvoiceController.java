@@ -70,6 +70,7 @@ public class CreateInvoiceController implements Initializable {
 
             // Delete vehicle from db
             Vehicle.removeVehicle();
+            Session.getInstance().reloadVehicles();
 
             // Update employee totalSales
             double currentSales = Double.valueOf(employee.getTotalSales());
@@ -77,11 +78,7 @@ public class CreateInvoiceController implements Initializable {
             employee.setTotalSales(String.valueOf(currentSales + currentSale));
             Employee.updateEntry(employee);
 
-            // Update listView in searchVehicleTab
-            Session.alphaController.getSearchVehicleTabController().updateResultSet();
-            Session.alphaController.getSearchVehicleTabController().displayResultSet();
-
-            Session.alert("Invoice Created!");
+            Session.getInstance().alert("Invoice Created!");
             stage.close();
 
         } catch (Exception e) {
@@ -98,7 +95,7 @@ public class CreateInvoiceController implements Initializable {
         dateLabel.setText(date);
 
         // Display salesman info
-        employee = Session.sessionUser;
+        employee = Session.getInstance().sessionUser;
         eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());
 
         paymentMethodCB.getItems().add("Cash");
@@ -151,8 +148,8 @@ public class CreateInvoiceController implements Initializable {
                     newStage.setResizable(false);
                     newStage.showAndWait();
 
-                    Session.alphaController.getSearchVehicleTabController().updateResultSet();
-                    Session.alphaController.getSearchVehicleTabController().displayResultSet();
+                    Session.getInstance().alphaController.getSearchVehicleTabController().updateResultSet();
+                    Session.getInstance().alphaController.getSearchVehicleTabController().displayResultSet();
 
                     tradeInValueTF.setDisable(false);
 
@@ -167,7 +164,7 @@ public class CreateInvoiceController implements Initializable {
         });
 
         // Display Customer info
-        customer = Session.selectedCustomer;
+        customer = Session.getInstance().selectedCustomer;
         cNameLabel.setText(customer.getFirstName() + " " + customer.getLastName());
         cPhoneLabel.setText(Formatter.phoneFormatter(customer.getPhone()));
         cAddressLabel.setText(customer.getAddress());
@@ -175,7 +172,7 @@ public class CreateInvoiceController implements Initializable {
         cCityLabel.setText(customer.getCity());
 
         // Display Vehicle info
-        vehicle = Session.selectedVehicle;
+        vehicle = Session.getInstance().selectedVehicle;
         vUsedLabel.setText(vehicle.getUsed());
         vMakeLabel.setText(vehicle.getMake());
         vModelLabel.setText(vehicle.getModel());

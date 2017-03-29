@@ -38,7 +38,7 @@ public class SearchCustomerTabController implements Init {
 
     @FXML private Label selectedLabel;
 
-    void displayResultSet() {
+    public void displayResultSet() {
 
         try {
 
@@ -133,25 +133,25 @@ public class SearchCustomerTabController implements Init {
             }
 
         } catch (Exception e) {
-            Session.alert("Error: No customer selected!");
+            Session.getInstance().alert("Error: No customer selected!");
         }
     }
 
     @FXML public void select(ActionEvent event) {
 
         if (listView.getSelectionModel().getSelectedItem() != null) {
-            Session.selectedCustomer = listView.getSelectionModel().getSelectedItem();
+            Session.getInstance().selectedCustomer = listView.getSelectionModel().getSelectedItem();
             viewDetailsButton.setDisable(false);
-            selectedLabel.setText("Selected - " + Session.selectedCustomer.toString());
+            selectedLabel.setText("Selected - " + Session.getInstance().selectedCustomer.toString());
         } else {
-            Session.alert("Error: No customer selected!");
+            Session.getInstance().alert("Error: No customer selected!");
         }
 
     }
 
     @FXML public void viewDetails(ActionEvent event) throws IOException {
 
-        if (Session.selectedCustomer != null) {
+        if (Session.getInstance().selectedCustomer != null) {
 
             Stage newStage = new Stage();
             newStage.initModality(Modality.APPLICATION_MODAL);
@@ -199,7 +199,7 @@ public class SearchCustomerTabController implements Init {
         displayResultSet();
     }
 
-    void updateResultSet() {
+    public void updateResultSet() {
 
         try {
 

@@ -22,6 +22,6 @@ public class AlertBoxController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        label.setText(Session.getAlertMessage());
+        label.setText(Session.getInstance().getAlertMessage());
     }
 }

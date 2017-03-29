@@ -49,19 +49,19 @@ public class VehicleDetailsController implements Initializable {
     @FXML public void save(ActionEvent event) {
 
         try {
-            Session.selectedVehicle.setMake(makeTF.getText());
-            Session.selectedVehicle.setModel(modelTF.getText());
-            Session.selectedVehicle.setYear(yearTF.getText());
-            Session.selectedVehicle.setColor(colorTF.getText());
-            Session.selectedVehicle.setType(typeTF.getText());
-            Session.selectedVehicle.setPrice(Formatter.USDtoString(priceTF.getText()));
-            Vehicle.updateEntry(Session.selectedVehicle);
+            Session.getInstance().selectedVehicle.setMake(makeTF.getText());
+            Session.getInstance().selectedVehicle.setModel(modelTF.getText());
+            Session.getInstance().selectedVehicle.setYear(yearTF.getText());
+            Session.getInstance().selectedVehicle.setColor(colorTF.getText());
+            Session.getInstance().selectedVehicle.setType(typeTF.getText());
+            Session.getInstance().selectedVehicle.setPrice(Formatter.USDtoString(priceTF.getText()));
+            Vehicle.updateEntry(Session.getInstance().selectedVehicle);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Session.alphaController.getSearchVehicleTabController().updateResultSet();
-        Session.alphaController.getSearchVehicleTabController().displayResultSet();
+        Session.getInstance().alphaController.getSearchVehicleTabController().updateResultSet();
+        Session.getInstance().alphaController.getSearchVehicleTabController().displayResultSet();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -71,7 +71,7 @@ public class VehicleDetailsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Vehicle vehicle = Session.selectedVehicle;
+        Vehicle vehicle = Session.getInstance().selectedVehicle;
 
         makeTF.setText(vehicle.getMake());
         makeTF.setDisable(inputEnabled);

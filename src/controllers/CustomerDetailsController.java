@@ -39,7 +39,7 @@ public class CustomerDetailsController implements Initializable {
 
     @FXML public void viewInvoice(ActionEvent event) throws IOException {
 
-        Session.selectedInvoice = invoiceCB.getSelectionModel().getSelectedItem();
+        Session.getInstance().selectedInvoice = invoiceCB.getSelectionModel().getSelectedItem();
 
         Stage newStage = new Stage();
         newStage.initModality(Modality.APPLICATION_MODAL);
@@ -79,20 +79,20 @@ public class CustomerDetailsController implements Initializable {
     @FXML public void save(ActionEvent event) throws IOException {
 
         try {
-            Session.selectedCustomer.setFirstName(fNameTF.getText());
-            Session.selectedCustomer.setLastName(lNameTF.getText());
-            Session.selectedCustomer.setPhone(Formatter.parsePhone(phoneTF.getText()));
-            Session.selectedCustomer.setEmail(emailTF.getText());
-            Session.selectedCustomer.setAddress(addressTF.getText());
-            Session.selectedCustomer.setCity(cityTF.getText());
-            Session.selectedCustomer.setDateOfBirth(dateOfBirthTF.getText());
-            Customer.updateEntry(Session.selectedCustomer);
+            Session.getInstance().selectedCustomer.setFirstName(fNameTF.getText());
+            Session.getInstance().selectedCustomer.setLastName(lNameTF.getText());
+            Session.getInstance().selectedCustomer.setPhone(Formatter.parsePhone(phoneTF.getText()));
+            Session.getInstance().selectedCustomer.setEmail(emailTF.getText());
+            Session.getInstance().selectedCustomer.setAddress(addressTF.getText());
+            Session.getInstance().selectedCustomer.setCity(cityTF.getText());
+            Session.getInstance().selectedCustomer.setDateOfBirth(dateOfBirthTF.getText());
+            Customer.updateEntry(Session.getInstance().selectedCustomer);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Session.alphaController.getSearchCustomerTabController().updateResultSet();
-        Session.alphaController.getSearchCustomerTabController().displayResultSet();
+        Session.getInstance().alphaController.getSearchCustomerTabController().updateResultSet();
+        Session.getInstance().alphaController.getSearchCustomerTabController().displayResultSet();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -102,7 +102,7 @@ public class CustomerDetailsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Customer customer = Session.selectedCustomer;
+        Customer customer = Session.getInstance().selectedCustomer;
 
         fNameTF.setText(customer.getFirstName());
         fNameTF.setDisable(true);
@@ -148,7 +148,7 @@ public class CustomerDetailsController implements Initializable {
             Connection connection = DataHandler.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `INVOICES` WHERE `CUSTOMER_ID`=?");
 
-            preparedStatement.setString(1, Session.selectedCustomer.getID());
+            preparedStatement.setString(1, Session.getInstance().selectedCustomer.getID());
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

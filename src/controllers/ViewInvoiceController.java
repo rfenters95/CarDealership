@@ -42,7 +42,7 @@ public class ViewInvoiceController implements Initializable {
 
         try {
 
-            Invoice invoice = Session.selectedInvoice;
+            Invoice invoice = Session.getInstance().selectedInvoice;
 
             Connection connection = DataHandler.getConnection();
 
@@ -74,7 +74,7 @@ public class ViewInvoiceController implements Initializable {
             Vehicle vehicle = new Vehicle(resultSet);
 
             // Get today's date
-            dateLabel.setText(Session.selectedInvoice.getDate());
+            dateLabel.setText(Session.getInstance().selectedInvoice.getDate());
 
             // Display Employee info
             eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());

@@ -26,12 +26,11 @@ public class AddCustomerTabController implements Init {
 
             Customer customer = new Customer(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP);
             Customer.insertEntry(customer);
-            alphaController.getSearchCustomerTabController().updateResultSet();
-            alphaController.getSearchCustomerTabController().displayResultSet();
-            Session.alert("Added Customer!");
+            Session.getInstance().reloadCustomers();
+            Session.getInstance().alert("Added Customer!");
 
         } catch (Exception e) {
-            Session.alert(e.getMessage());
+            Session.getInstance().alert(e.getMessage());
         }
 
     }
