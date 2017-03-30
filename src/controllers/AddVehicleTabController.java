@@ -27,7 +27,7 @@ public class AddVehicleTabController implements Init {
             Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF, usedCB);
             Vehicle.insertEntry(vehicle);
             Session.getInstance().reloadVehicles();
-            Session.getInstance().alert("Employee Added!");
+            Session.getInstance().alert("Vehicle Added!");
 
         } catch (Exception e) {
             Session.getInstance().alert(e.getMessage());
