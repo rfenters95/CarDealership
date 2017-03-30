@@ -61,8 +61,6 @@ public class Employee implements Comparable<Employee> {
         this.totalSales = "0";
     }
 
-
-
     public static void insertEntry(Employee employee) throws Exception {
         Connection connection = DataHandler.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(

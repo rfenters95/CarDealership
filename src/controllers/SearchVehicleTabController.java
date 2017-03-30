@@ -41,15 +41,6 @@ public class SearchVehicleTabController implements Init {
 
     @FXML private Label selectedLabel;
 
-    private void clearResults() {
-        listView.getItems().clear();
-        makeCB.getItems().clear();
-        modelCB.getItems().clear();
-        yearCB.getItems().clear();
-        colorCB.getItems().clear();
-        typeCB.getItems().clear();
-    }
-
     public void displayResultSet() {
 
         tPane.setText(String.format(
@@ -69,14 +60,13 @@ public class SearchVehicleTabController implements Init {
             boolean hasResults = resultSet.next();
             if (hasResults) {
 
-                // Clear old results
-                clearResults();
-
                 TreeSet<String> makeCBItems = new TreeSet<>();
                 TreeSet<String> modelCBItems = new TreeSet<>();
                 TreeSet<String> yearCBItems = new TreeSet<>();
                 TreeSet<String> colorCBItems = new TreeSet<>();
                 TreeSet<String> typeCBItems = new TreeSet<>();
+
+                setBoxes();
 
                 int numberOfResults = 0;
                 while (hasResults) {
@@ -104,10 +94,6 @@ public class SearchVehicleTabController implements Init {
                 yearCB.getItems().addAll(yearCBItems);
                 colorCB.getItems().addAll(colorCBItems);
                 typeCB.getItems().addAll(typeCBItems);
-
-            } else {
-
-                clearResults();
 
             }
 
@@ -142,7 +128,6 @@ public class SearchVehicleTabController implements Init {
             newStage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader fxmlLoader = new FXMLLoader();
             newStage.setTitle("View Vehicle");
-
             fxmlLoader.setLocation(getClass().getResource("../views/VehicleDetails.fxml"));
             Parent newResource = fxmlLoader.load();
             Scene newScene = new Scene(newResource);
@@ -157,22 +142,22 @@ public class SearchVehicleTabController implements Init {
     }
     @FXML public void search(ActionEvent event) {
 
-        // auto collapse search box for better viewing
+        // Auto collapse search box for better viewing
         tPane.setExpanded(false);
 
         try {
 
-            String sql = "SELECT * FROM `VEHICLES` WHERE";
-            final String make = (makeCB.getSelectionModel().getSelectedIndex() == 0) ? null : makeCB.getSelectionModel().getSelectedItem();
-            final String model = (modelCB.getSelectionModel().getSelectedIndex() == 0) ? null : modelCB.getSelectionModel().getSelectedItem();
-            final String year = (yearCB.getSelectionModel().getSelectedIndex() == 0) ? null : yearCB.getSelectionModel().getSelectedItem();
-            final String color = (colorCB.getSelectionModel().getSelectedIndex() == 0) ? null : colorCB.getSelectionModel().getSelectedItem();
-            final String type = (typeCB.getSelectionModel().getSelectedIndex() == 0) ? null : typeCB.getSelectionModel().getSelectedItem();
-            final String price = (priceCB.getSelectionModel().getSelectedIndex() == 0) ? null : priceCB.getSelectionModel().getSelectedItem();
-            final String used = (usedCB.getSelectionModel().getSelectedIndex() == 0) ? null : usedCB.getSelectionModel().getSelectedItem();
+            String sql = "SELECT * FROM VEHICLES WHERE";
+            String make = (makeCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : makeCB.getSelectionModel().getSelectedItem();
+            String model = (modelCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : modelCB.getSelectionModel().getSelectedItem();
+            String year = (yearCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : yearCB.getSelectionModel().getSelectedItem();
+            String color = (colorCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : colorCB.getSelectionModel().getSelectedItem();
+            String type = (typeCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : typeCB.getSelectionModel().getSelectedItem();
+            String price = (priceCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : priceCB.getSelectionModel().getSelectedItem();
+            String used = (usedCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : usedCB.getSelectionModel().getSelectedItem();
             String[] attributes = {make, model, year, color, type, price, used};
 
-            int j = 0; // flag indicates if all attributes are null
+            int j = 0; // Flag indicates if all attributes are null
             boolean hasMultiple = false;
             for (int i = 0; i < attributes.length; i++) {
                 if (attributes[i] != null) {
@@ -190,25 +175,25 @@ public class SearchVehicleTabController implements Init {
 
                     switch (i) {
                         case 0:
-                            sql += " `MAKE`=" + DataHandler.getWrappedValue(make);
+                            sql += " MAKE=" + DataHandler.getWrappedValue(make);
                             break;
                         case 1:
-                            sql += " `MODEL`=" + DataHandler.getWrappedValue(model);
+                            sql += " MODEL=" + DataHandler.getWrappedValue(model);
                             break;
                         case 2:
-                            sql += " `YEAR`=" + DataHandler.getWrappedValue(year);
+                            sql += " YEAR=" + DataHandler.getWrappedValue(year);
                             break;
                         case 3:
-                            sql += " `COLOR`=" + DataHandler.getWrappedValue(color);
+                            sql += " COLOR=" + DataHandler.getWrappedValue(color);
                             break;
                         case 4:
-                            sql += " `TYPE`=" + DataHandler.getWrappedValue(type);
+                            sql += " TYPE=" + DataHandler.getWrappedValue(type);
                             break;
                         case 5:
-                            sql += " `PRICE`" + price;
+                            sql += " PRICE" + price;
                             break;
                         case 6:
-                            sql += " `USED`=" + DataHandler.getWrappedValue(used);
+                            sql += " USED=" + DataHandler.getWrappedValue(used);
                             break;
                         default:
                             break;
@@ -216,7 +201,7 @@ public class SearchVehicleTabController implements Init {
                 }
             }
 
-            // if all attributes are null do not send sql fragment
+            // If all attributes are null do not send sql fragment
             if (j != 0) {
 
                 Connection connection = DataHandler.getConnection();
@@ -226,9 +211,7 @@ public class SearchVehicleTabController implements Init {
 
             } else {
 
-                Connection connection = DataHandler.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM VEHICLES");
-                resultSet = preparedStatement.executeQuery();
+                updateResultSet();
                 displayResultSet();
 
             }
@@ -245,11 +228,6 @@ public class SearchVehicleTabController implements Init {
         viewDetailsButton.setDisable(true);
 
         selectedLabel.setText("Selected - None");
-
-        usedCB.getItems().add("Any");
-        usedCB.getItems().add("No");
-        usedCB.getItems().add("Yes");
-        usedCB.getSelectionModel().select(0);
 
         listView.setCellFactory(new Callback<ListView<Vehicle>, ListCell<Vehicle>>() {
             @Override
@@ -269,39 +247,10 @@ public class SearchVehicleTabController implements Init {
             }
         });
 
-        makeCB.getItems().add("Any");
-        makeCB.getSelectionModel().select(0);
+        setBoxes();
 
-        modelCB.getItems().add("Any");
-        modelCB.getSelectionModel().select(0);
-
-        yearCB.getItems().add("Any");
-        yearCB.getSelectionModel().select(0);
-
-        colorCB.getItems().add("Any");
-        colorCB.getSelectionModel().select(0);
-
-        typeCB.getItems().add("Any");
-        typeCB.getSelectionModel().select(0);
-
-        priceCB.getItems().add("Any");
-        priceCB.getItems().add("<=20000");
-        priceCB.getItems().add("<=40000");
-        priceCB.getItems().add("<=60000");
-        priceCB.getItems().add("<=80000");
-        priceCB.getItems().add("<=100000");
-        priceCB.getSelectionModel().select(0);
-
-        try {
-
-            Connection connection = DataHandler.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM VEHICLES");
-            resultSet = statement.executeQuery();
-            displayResultSet();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        updateResultSet();
+        displayResultSet();
 
     }
 
@@ -320,6 +269,46 @@ public class SearchVehicleTabController implements Init {
             e.printStackTrace();
         }
 
+    }
+
+    private void setBoxes() {
+
+        listView.getItems().clear();
+
+        makeCB.getItems().clear();
+        makeCB.getItems().add("Any");
+        makeCB.getSelectionModel().select(0);
+
+        modelCB.getItems().clear();
+        modelCB.getItems().add("Any");
+        modelCB.getSelectionModel().select(0);
+
+        yearCB.getItems().clear();
+        yearCB.getItems().add("Any");
+        yearCB.getSelectionModel().select(0);
+
+        colorCB.getItems().clear();
+        colorCB.getItems().add("Any");
+        colorCB.getSelectionModel().select(0);
+
+        typeCB.getItems().clear();
+        typeCB.getItems().add("Any");
+        typeCB.getSelectionModel().select(0);
+
+        priceCB.getItems().clear();
+        priceCB.getItems().add("Any");
+        priceCB.getItems().add("<=20000");
+        priceCB.getItems().add("<=40000");
+        priceCB.getItems().add("<=60000");
+        priceCB.getItems().add("<=80000");
+        priceCB.getItems().add("<=100000");
+        priceCB.getSelectionModel().select(0);
+
+        usedCB.getItems().clear();
+        usedCB.getItems().add("Any");
+        usedCB.getItems().add("No");
+        usedCB.getItems().add("Yes");
+        usedCB.getSelectionModel().select(0);
     }
 
 }

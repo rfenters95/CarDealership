@@ -183,4 +183,5 @@ public class Vehicle implements Comparable<Vehicle> {
     public String toString() {
         return make + " " + model;
     }
+
 }
