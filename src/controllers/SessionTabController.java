@@ -83,7 +83,7 @@ public class SessionTabController implements Init {
         try {
             DataHandler.killConnection();
             Session.getInstance().clearSession();
-            Parent register_page = FXMLLoader.load(getClass().getResource("../Login.fxml"));
+            Parent register_page = FXMLLoader.load(getClass().getResource("../views/Login.fxml"));
             Scene register_scene = new Scene(register_page);
             Stage register_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             register_stage.hide();

@@ -1,3 +1,5 @@
+package controllers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +52,7 @@ public class LoginController implements Initializable {
                 if (hasResults) {
 
                     Session.getInstance().sessionUser = new Employee(resultSet);
-                    loadResource(event, "views/Alpha.fxml");
+                    loadResource(event, "../views/Alpha.fxml");
 
                 } else {
                     Session.getInstance().alert("Invalid login combo!");
