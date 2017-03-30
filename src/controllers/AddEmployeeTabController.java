@@ -33,6 +33,7 @@ public class AddEmployeeTabController implements Init {
 
         } catch (Exception e) {
             Session.getInstance().alert(e.getMessage());
+            e.printStackTrace();
         }
 
     }
