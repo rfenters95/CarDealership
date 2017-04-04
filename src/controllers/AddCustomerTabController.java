@@ -1,5 +1,7 @@
 package controllers;
 
+import components.NumberOnlyTextField;
+import components.TextOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -12,12 +14,12 @@ public class AddCustomerTabController implements Init {
 
     private AlphaController alphaController;
 
-    @FXML private TextField fNameTF;
-    @FXML private TextField lNameTF;
-    @FXML private TextField phoneTF;
+    @FXML private TextOnlyTextField fNameTF;
+    @FXML private TextOnlyTextField lNameTF;
+    @FXML private NumberOnlyTextField phoneTF;
     @FXML private TextField emailTF;
     @FXML private TextField addressTF;
-    @FXML private TextField cityTF;
+    @FXML private TextOnlyTextField cityTF;
     @FXML private DatePicker dateOfBirthDP;
 
     @FXML public void save(ActionEvent event) {

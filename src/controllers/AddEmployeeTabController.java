@@ -1,5 +1,7 @@
 package controllers;
 
+import components.NumberOnlyTextField;
+import components.TextOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -13,13 +15,13 @@ public class AddEmployeeTabController implements Init {
 
     private AlphaController alphaController;
 
-    @FXML private TextField fNameTF;
-    @FXML private TextField lNameTF;
-    @FXML private TextField phoneTF;
+    @FXML private TextOnlyTextField fNameTF;
+    @FXML private TextOnlyTextField lNameTF;
+    @FXML private NumberOnlyTextField phoneTF;
     @FXML private TextField emailTF;
     @FXML private TextField addressTF;
-    @FXML private TextField cityTF;
-    @FXML private TextField salaryTF;
+    @FXML private TextOnlyTextField cityTF;
+    @FXML private NumberOnlyTextField salaryTF;
     @FXML private DatePicker dateOfBirthDP;
     @FXML private ComboBox<String> jobTitleCB;
 

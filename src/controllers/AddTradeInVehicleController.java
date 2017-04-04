@@ -1,11 +1,12 @@
 package controllers;
 
+import components.NumberOnlyTextField;
+import components.TextOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import util.Session;
 import util.Vehicle;
@@ -15,12 +16,12 @@ import java.util.ResourceBundle;
 
 public class AddTradeInVehicleController implements Initializable {
 
-    @FXML private TextField makeTF;
-    @FXML private TextField modelTF;
-    @FXML private TextField yearTF;
-    @FXML private TextField colorTF;
+    @FXML private TextOnlyTextField makeTF;
+    @FXML private TextOnlyTextField modelTF;
+    @FXML private NumberOnlyTextField yearTF;
+    @FXML private TextOnlyTextField colorTF;
     @FXML private ComboBox<String> typeCB;
-    @FXML private TextField priceTF;
+    @FXML private NumberOnlyTextField priceTF;
 
     @FXML public void save(ActionEvent event) {
 

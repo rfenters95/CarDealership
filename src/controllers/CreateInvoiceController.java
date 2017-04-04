@@ -62,7 +62,7 @@ public class CreateInvoiceController implements Initializable {
                     date,
                     paymentMethod,
                     (!tradeInValueTF.getText().isEmpty()) ? tradeInValueTF.getText() : "0",
-                    warrantyValue
+                    Formatter.parseNumber(warrantyValue)
             );
 
             // Save Invoice to db

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import components.NumberOnlyTextField?>
+<?import components.TextOnlyTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -33,13 +35,13 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="First Name" HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" promptText="First Name" HBox.hgrow="ALWAYS" />
+                        <TextOnlyTextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" promptText="First Name" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Phone" HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="phoneTF" maxWidth="1.7976931348623157E308" promptText="Phone" HBox.hgrow="ALWAYS" />
+                        <NumberOnlyTextField fx:id="phoneTF" maxWidth="1.7976931348623157E308" promptText="Phone" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -51,7 +53,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Last Name" HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" promptText="Last Name" HBox.hgrow="ALWAYS" />
+                        <TextOnlyTextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" promptText="Last Name" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -63,7 +65,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="City" HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="cityTF" maxWidth="1.7976931348623157E308" promptText="City" HBox.hgrow="ALWAYS" />
+                        <TextOnlyTextField fx:id="cityTF" maxWidth="1.7976931348623157E308" promptText="City" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">

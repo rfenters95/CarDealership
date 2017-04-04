@@ -43,16 +43,20 @@ public class SearchVehicleTabController implements Init {
 
     public void displayResultSet() {
 
+        String make = makeCB.getSelectionModel().getSelectedItem();
+        String model = modelCB.getSelectionModel().getSelectedItem();
+        String year = yearCB.getSelectionModel().getSelectedItem();
+        String color = colorCB.getSelectionModel().getSelectedItem();
+        String type = typeCB.getSelectionModel().getSelectedItem();
+        String price = priceCB.getSelectionModel().getSelectedItem();
+        String used = usedCB.getSelectionModel().getSelectedItem();
+
+        setBoxes();
+
         tPane.setText(String.format(
                 "Search Inventory - {Make = %s, Model = %s, Year = %s, " +
                         "Color = %s, Type = %s, Price = %s, Used = %s}",
-                makeCB.getSelectionModel().getSelectedItem(),
-                modelCB.getSelectionModel().getSelectedItem(),
-                yearCB.getSelectionModel().getSelectedItem(),
-                colorCB.getSelectionModel().getSelectedItem(),
-                typeCB.getSelectionModel().getSelectedItem(),
-                priceCB.getSelectionModel().getSelectedItem(),
-                usedCB.getSelectionModel().getSelectedItem()
+                make, model, year, color, type, price, used
         ));
 
         try {
@@ -65,8 +69,6 @@ public class SearchVehicleTabController implements Init {
                 TreeSet<String> yearCBItems = new TreeSet<>();
                 TreeSet<String> colorCBItems = new TreeSet<>();
                 TreeSet<String> typeCBItems = new TreeSet<>();
-
-                setBoxes();
 
                 int numberOfResults = 0;
                 while (hasResults) {
@@ -87,7 +89,7 @@ public class SearchVehicleTabController implements Init {
 
                 }
 
-                vehicleResultsTP.setText(String.format("Results - %d", numberOfResults));
+                setResultTPTitle(String.format("Results - %d", numberOfResults));
                 Collections.sort(listView.getItems());
                 makeCB.getItems().addAll(makeCBItems);
                 modelCB.getItems().addAll(modelCBItems);
@@ -95,6 +97,9 @@ public class SearchVehicleTabController implements Init {
                 colorCB.getItems().addAll(colorCBItems);
                 typeCB.getItems().addAll(typeCBItems);
 
+            } else {
+                setResultTPTitle(String.format("Results - %d", 0));
+                Session.getInstance().alert("No matches!");
             }
 
         } catch (SQLException e) {
@@ -147,7 +152,7 @@ public class SearchVehicleTabController implements Init {
 
         try {
 
-            String sql = "SELECT * FROM VEHICLES WHERE";
+            String sql = "SELECT * FROM `VEHICLES` WHERE";
             String make = (makeCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : makeCB.getSelectionModel().getSelectedItem();
             String model = (modelCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : modelCB.getSelectionModel().getSelectedItem();
             String year = (yearCB.getSelectionModel().getSelectedItem().equals("Any")) ? null : yearCB.getSelectionModel().getSelectedItem();
@@ -175,25 +180,25 @@ public class SearchVehicleTabController implements Init {
 
                     switch (i) {
                         case 0:
-                            sql += " MAKE=" + DataHandler.getWrappedValue(make);
+                            sql += " `MAKE`=" + DataHandler.getWrappedValue(make);
                             break;
                         case 1:
-                            sql += " MODEL=" + DataHandler.getWrappedValue(model);
+                            sql += " `MODEL`=" + DataHandler.getWrappedValue(model);
                             break;
                         case 2:
-                            sql += " YEAR=" + DataHandler.getWrappedValue(year);
+                            sql += " `YEAR`=" + DataHandler.getWrappedValue(year);
                             break;
                         case 3:
-                            sql += " COLOR=" + DataHandler.getWrappedValue(color);
+                            sql += " `COLOR`=" + DataHandler.getWrappedValue(color);
                             break;
                         case 4:
-                            sql += " TYPE=" + DataHandler.getWrappedValue(type);
+                            sql += " `TYPE`=" + DataHandler.getWrappedValue(type);
                             break;
                         case 5:
-                            sql += " PRICE" + price;
+                            sql += " `PRICE`" + price;
                             break;
                         case 6:
-                            sql += " USED=" + DataHandler.getWrappedValue(used);
+                            sql += " `USED`=" + DataHandler.getWrappedValue(used);
                             break;
                         default:
                             break;
@@ -207,11 +212,6 @@ public class SearchVehicleTabController implements Init {
                 Connection connection = DataHandler.getConnection();
                 Statement statement = connection.createStatement();
                 resultSet = statement.executeQuery(sql);
-                displayResultSet();
-
-            } else {
-
-                updateResultSet();
                 displayResultSet();
 
             }
@@ -309,6 +309,10 @@ public class SearchVehicleTabController implements Init {
         usedCB.getItems().add("No");
         usedCB.getItems().add("Yes");
         usedCB.getSelectionModel().select(0);
+    }
+
+    private void setResultTPTitle(String title) {
+        vehicleResultsTP.setText(title);
     }
 
 }

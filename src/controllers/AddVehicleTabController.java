@@ -1,9 +1,10 @@
 package controllers;
 
+import components.NumberOnlyTextField;
+import components.TextOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import util.Init;
 import util.Session;
 import util.Vehicle;
@@ -12,12 +13,12 @@ public class AddVehicleTabController implements Init {
 
     private AlphaController alphaController;
 
-    @FXML private TextField makeTF;
-    @FXML private TextField modelTF;
-    @FXML private TextField yearTF;
-    @FXML private TextField colorTF;
+    @FXML private TextOnlyTextField makeTF;
+    @FXML private TextOnlyTextField modelTF;
+    @FXML private NumberOnlyTextField yearTF;
+    @FXML private TextOnlyTextField colorTF;
     @FXML private ComboBox<String> typeCB;
-    @FXML private TextField priceTF;
+    @FXML private NumberOnlyTextField priceTF;
     @FXML private ComboBox<String> usedCB;
 
     @FXML public void save(ActionEvent event) {
