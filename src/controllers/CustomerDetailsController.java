@@ -1,5 +1,7 @@
 package controllers;
 
+import components.NumberOnlyTextField;
+import components.TextOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class CustomerDetailsController implements Initializable {
@@ -25,13 +28,13 @@ public class CustomerDetailsController implements Initializable {
     private ResultSet resultSet;
     private AlphaController alphaController;
 
-    @FXML private TextField fNameTF;
-    @FXML private TextField lNameTF;
-    @FXML private TextField phoneTF;
+    @FXML private TextOnlyTextField fNameTF;
+    @FXML private TextOnlyTextField lNameTF;
+    @FXML private NumberOnlyTextField phoneTF;
     @FXML private TextField emailTF;
     @FXML private TextField addressTF;
-    @FXML private TextField cityTF;
-    @FXML private TextField dateOfBirthTF;
+    @FXML private TextOnlyTextField cityTF;
+    @FXML private DatePicker dateOfBirthDP;
     @FXML private ComboBox<Invoice> invoiceCB;
     @FXML private Button viewInvoiceButton;
 
@@ -72,7 +75,7 @@ public class CustomerDetailsController implements Initializable {
         emailTF.setDisable(inputDisabled);
         addressTF.setDisable(inputDisabled);
         cityTF.setDisable(inputDisabled);
-        dateOfBirthTF.setDisable(inputDisabled);
+        dateOfBirthDP.setDisable(inputDisabled);
 
     }
 
@@ -85,7 +88,7 @@ public class CustomerDetailsController implements Initializable {
             Session.getInstance().selectedCustomer.setEmail(emailTF.getText());
             Session.getInstance().selectedCustomer.setAddress(addressTF.getText());
             Session.getInstance().selectedCustomer.setCity(cityTF.getText());
-            Session.getInstance().selectedCustomer.setDateOfBirth(dateOfBirthTF.getText());
+            Session.getInstance().selectedCustomer.setDateOfBirth(dateOfBirthDP.getValue().toString());
             Customer.updateEntry(Session.getInstance().selectedCustomer);
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,8 +125,8 @@ public class CustomerDetailsController implements Initializable {
         cityTF.setText(customer.getCity());
         cityTF.setDisable(true);
 
-        dateOfBirthTF.setText(customer.getDateOfBirth());
-        dateOfBirthTF.setDisable(true);
+        dateOfBirthDP.setValue(LocalDate.parse(customer.getDateOfBirth()));
+        dateOfBirthDP.setDisable(true);
 
         invoiceCB.setCellFactory(new Callback<ListView<Invoice>, ListCell<Invoice>>() {
             @Override

@@ -1,10 +1,13 @@
 package controllers;
 
+import components.NumberOnlyTextField;
+import components.TextOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,19 +17,20 @@ import util.Session;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class EmployeeDetailsController implements Initializable {
 
-    @FXML private TextField fNameTF;
-    @FXML private TextField lNameTF;
-    @FXML private TextField phoneTF;
+    @FXML private TextOnlyTextField fNameTF;
+    @FXML private TextOnlyTextField lNameTF;
+    @FXML private NumberOnlyTextField phoneTF;
     @FXML private TextField emailTF;
     @FXML private TextField addressTF;
-    @FXML private TextField cityTF;
-    @FXML private TextField dateOfBirthTF;
-    @FXML private TextField jobTF;
-    @FXML private TextField salaryTF;
+    @FXML private TextOnlyTextField cityTF;
+    @FXML private DatePicker dateOfBirthDP;
+    @FXML private TextOnlyTextField jobTF;
+    @FXML private NumberOnlyTextField salaryTF;
     @FXML private TextField workStatusTF;
     @FXML private TextField totalSalesTF;
     @FXML private TextField commissionTF;
@@ -52,7 +56,7 @@ public class EmployeeDetailsController implements Initializable {
         emailTF.setDisable(inputDisabled);
         addressTF.setDisable(inputDisabled);
         cityTF.setDisable(inputDisabled);
-        dateOfBirthTF.setDisable(inputDisabled);
+        dateOfBirthDP.setDisable(inputDisabled);
         jobTF.setDisable(inputDisabled);
         salaryTF.setDisable(inputDisabled);
 
@@ -67,9 +71,9 @@ public class EmployeeDetailsController implements Initializable {
             Session.getInstance().selectedEmployee.setEmail(emailTF.getText());
             Session.getInstance().selectedEmployee.setAddress(addressTF.getText());
             Session.getInstance().selectedEmployee.setCity(cityTF.getText());
-            Session.getInstance().selectedEmployee.setDateOfBirth(dateOfBirthTF.getText());
-            Session.getInstance().selectedEmployee.setDateOfBirth(jobTF.getText());
-            Session.getInstance().selectedEmployee.setDateOfBirth(salaryTF.getText());
+            Session.getInstance().selectedEmployee.setDateOfBirth(dateOfBirthDP.getValue().toString());
+            Session.getInstance().selectedEmployee.setJobTitle(jobTF.getText());
+            Session.getInstance().selectedEmployee.setSalary(Formatter.parseNumber(salaryTF.getText()));
             Employee.updateEntry(Session.getInstance().selectedEmployee);
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,8 +108,8 @@ public class EmployeeDetailsController implements Initializable {
         cityTF.setText(employee.getCity());
         cityTF.setDisable(true);
 
-        dateOfBirthTF.setText(employee.getDateOfBirth());
-        dateOfBirthTF.setDisable(true);
+        dateOfBirthDP.setValue(LocalDate.parse(employee.getDateOfBirth()));
+        dateOfBirthDP.setDisable(true);
 
         jobTF.setText(employee.getJobTitle());
         jobTF.setDisable(true);

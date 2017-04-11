@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import components.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -18,37 +19,37 @@
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Make" />
-            <TextField fx:id="makeTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <TextOnlyTextField fx:id="makeTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Model" />
-            <TextField fx:id="modelTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <TextOnlyTextField fx:id="modelTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Year" />
-            <TextField fx:id="yearTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <NumberOnlyTextField fx:id="yearTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Color" />
-            <TextField fx:id="colorTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <TextOnlyTextField fx:id="colorTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Type" />
-            <TextField fx:id="typeTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <TextOnlyTextField fx:id="typeTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Price" />
-            <TextField fx:id="priceTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <NumberOnlyTextField fx:id="priceTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox spacing="5.0">

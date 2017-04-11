@@ -1,11 +1,12 @@
 package controllers;
 
+import components.NumberOnlyTextField;
+import components.TextOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import util.Formatter;
 import util.Session;
@@ -17,12 +18,12 @@ import java.util.ResourceBundle;
 
 public class VehicleDetailsController implements Initializable {
 
-    @FXML private TextField makeTF;
-    @FXML private TextField modelTF;
-    @FXML private TextField yearTF;
-    @FXML private TextField colorTF;
-    @FXML private TextField typeTF;
-    @FXML private TextField priceTF;
+    @FXML private TextOnlyTextField makeTF;
+    @FXML private TextOnlyTextField modelTF;
+    @FXML private NumberOnlyTextField yearTF;
+    @FXML private TextOnlyTextField colorTF;
+    @FXML private TextOnlyTextField typeTF;
+    @FXML private NumberOnlyTextField priceTF;
 
     private boolean inputEnabled = true;
 

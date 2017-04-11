@@ -51,38 +51,71 @@ public class CreateInvoiceController implements Initializable {
 
     @FXML public void saveInvoice(ActionEvent event) {
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        boolean condition1 = (paymentMethodCB.getValue() != null) && (warrantyCB.getValue() != null) && (tradeInCB.getValue() != null);
+        boolean condition2 = tradeInCB.getSelectionModel().getSelectedItem().equals("Yes") && !tradeInValueTF.getText().isEmpty();
 
-        try {
+        if (condition1) {
 
-            Invoice invoice = new Invoice(
-                    customer.getID(),
-                    employee.getID(),
-                    vehicle.getID(),
-                    date,
-                    paymentMethod,
-                    (!tradeInValueTF.getText().isEmpty()) ? tradeInValueTF.getText() : "0",
-                    Formatter.parseNumber(warrantyValue)
-            );
+            if (condition2) {
 
-            // Save Invoice to db
-            Invoice.saveInvoice(invoice);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Delete vehicle from db
-            Vehicle.removeVehicle();
-            Session.getInstance().reloadVehicles();
+                try {
 
-            // Update employee totalSales
-            double currentSales = Double.valueOf(employee.getTotalSales());
-            double currentSale = Double.valueOf(Formatter.parseNumber(totalPriceLabel.getText()));
-            employee.setTotalSales(String.valueOf(currentSales + currentSale));
-            Employee.updateEntry(employee);
+                    double vehiclePrice = Double.parseDouble(vehicle.getPrice());
+                    double warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getDoubleValue();
+                    double totalPrice = vehiclePrice + warrantyPrice;
 
-            Session.getInstance().alert("Invoice Created!");
-            stage.close();
+                    if (!tradeInValueTF.isDisabled()) {
+                        double tradeInPrice = Double.valueOf(tradeInValueTF.getText());
+                        totalPrice -= tradeInPrice;
+                    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+                    warrantyValue = String.valueOf(warrantyPrice);
+                    totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));
+
+                    if (totalPrice > 50000) {
+                        discountLabel.setText("One year of free car washes");
+                    } else {
+                        discountLabel.setText("None");
+                    }
+
+                    Invoice invoice = new Invoice(
+                            customer.getID(),
+                            employee.getID(),
+                            vehicle.getID(),
+                            date,
+                            paymentMethod,
+                            (!tradeInValueTF.getText().isEmpty()) ? tradeInValueTF.getText() : "0",
+                            Formatter.parseNumber(warrantyValue)
+                    );
+
+                    // Save Invoice to db
+                    Invoice.saveInvoice(invoice);
+
+                    // Delete vehicle from db
+                    Vehicle.removeVehicle();
+                    Session.getInstance().reloadVehicles();
+
+                    // Update employee totalSales
+                    double currentSales = Double.valueOf(employee.getTotalSales());
+                    double currentSale = Double.valueOf(Formatter.parseNumber(totalPriceLabel.getText()));
+                    employee.setTotalSales(String.valueOf(currentSales + currentSale));
+                    Employee.updateEntry(employee);
+
+                    Session.getInstance().alert("Invoice Created!");
+                    stage.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                Session.getInstance().alert("Error: Must specify trade in value!");
+            }
+
+        } else {
+            Session.getInstance().alert("Error: Empty fields!");
         }
 
     }
@@ -184,14 +217,13 @@ public class CreateInvoiceController implements Initializable {
 
             double vehiclePrice = Double.parseDouble(vehicle.getPrice());
             double warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getDoubleValue();
+            double totalPrice = vehiclePrice + warrantyPrice;
 
-            double totalPrice;
             if (!tradeInValueTF.isDisabled()) {
                 double tradeInPrice = Double.valueOf(tradeInValueTF.getText());
-                totalPrice = vehiclePrice + warrantyPrice - tradeInPrice;
-            } else {
-                totalPrice = vehiclePrice + warrantyPrice;
+                totalPrice -= tradeInPrice;
             }
+
             warrantyValue = String.valueOf(warrantyPrice);
             totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));
 

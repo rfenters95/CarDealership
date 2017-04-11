@@ -67,17 +67,17 @@ public class Employee implements Comparable<Employee> {
                 "INSERT INTO `EMPLOYEES` " +
                         "(`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `CITY`, `DATE_OF_BIRTH`, `JOB`, `SALARY`, `WORK_STATUS`, `TOTAL_SALES`) VALUES " +
                         "(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-        preparedStatement.setString(1, employee.getFirstName());
-        preparedStatement.setString(2, employee.getLastName());
-        preparedStatement.setString(3, employee.getPhone());
+        preparedStatement.setString(1, Formatter.parseName(employee.getFirstName()));
+        preparedStatement.setString(2, Formatter.parseName(employee.getLastName()));
+        preparedStatement.setString(3, Formatter.parseNumber(employee.getPhone()));
         preparedStatement.setString(4, employee.getEmail());
         preparedStatement.setString(5, employee.getAddress());
-        preparedStatement.setString(6, employee.getCity());
+        preparedStatement.setString(6, Formatter.parseName(employee.getCity()));
         preparedStatement.setString(7, employee.getDateOfBirth());
-        preparedStatement.setString(8, employee.getJobTitle());
-        preparedStatement.setString(9, employee.getSalary());
+        preparedStatement.setString(8, Formatter.parseName(employee.getJobTitle()));
+        preparedStatement.setString(9, Formatter.parseNumber(employee.getSalary()));
         preparedStatement.setString(10, employee.getWorkStatus());
-        preparedStatement.setString(11, employee.getTotalSales());
+        preparedStatement.setString(11, Formatter.parseNumber(employee.getTotalSales()));
         preparedStatement.executeUpdate();
 
         // Add USERS entry

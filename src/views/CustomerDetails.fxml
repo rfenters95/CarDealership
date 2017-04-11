@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import components.NumberOnlyTextField?>
+<?import components.TextOnlyTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -18,19 +20,19 @@
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="First Name" />
-            <TextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <TextOnlyTextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Last Name" />
-            <TextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <TextOnlyTextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Phone" />
-            <TextField fx:id="phoneTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <NumberOnlyTextField fx:id="phoneTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
@@ -48,13 +50,13 @@
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="City" />
-            <TextField fx:id="cityTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <TextOnlyTextField fx:id="cityTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label prefWidth="200.0" text="Date Of Birth" />
-            <TextField fx:id="dateOfBirthTF" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <DatePicker fx:id="dateOfBirthDP" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT">
