@@ -30,6 +30,7 @@ public class AddEmployeeTabController implements Init {
     @FXML private ComboBox<String> jobTitleCB;
 
     @FXML public void save(ActionEvent event) {
+
         try {
 
             Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB, salaryTF);
