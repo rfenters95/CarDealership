@@ -53,10 +53,11 @@ public class CreateInvoiceController implements Initializable {
 
         boolean condition1 = (paymentMethodCB.getValue() != null) && (warrantyCB.getValue() != null) && (tradeInCB.getValue() != null);
         boolean condition2 = tradeInCB.getSelectionModel().getSelectedItem().equals("Yes") && !tradeInValueTF.getText().isEmpty();
+        boolean condition3 = tradeInCB.getSelectionModel().getSelectedItem().equals("No");
 
         if (condition1) {
 
-            if (condition2) {
+            if (condition2 || condition3) {
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
