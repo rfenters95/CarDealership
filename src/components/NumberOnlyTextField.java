@@ -3,6 +3,11 @@ package components;
 import javafx.scene.control.TextField;
 
 public class NumberOnlyTextField extends TextField {
+
+    public NumberOnlyTextField() {
+        super();
+    }
+
     @Override
     public void replaceText(int start, int end, String text) {
         if (text.matches("[0-9]*")) {
@@ -16,4 +21,9 @@ public class NumberOnlyTextField extends TextField {
             super.replaceSelection(replacement);
         }
     }
+
+    public boolean isEmpty() {
+        return getText().isEmpty();
+    }
+
 }

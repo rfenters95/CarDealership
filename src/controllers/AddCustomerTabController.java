@@ -30,16 +30,41 @@ public class AddCustomerTabController implements Init {
 
         try {
 
-            Customer customer = new Customer(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP);
+            boolean allNonEmpty;
+            allNonEmpty = !fNameTF.isEmpty();
+            allNonEmpty = allNonEmpty && !lNameTF.isEmpty();
+            allNonEmpty = allNonEmpty && !phoneTF.isEmpty();
+            allNonEmpty = allNonEmpty && !emailTF.getText().isEmpty();
+            allNonEmpty = allNonEmpty && !addressTF.getText().isEmpty();
+            allNonEmpty = allNonEmpty && !cityTF.isEmpty();
+            allNonEmpty = allNonEmpty && dateOfBirthDP.getValue() != null;
 
-            Date birthDate = Formatter.parseDate(customer.getDateOfBirth());
-            long timePassed = new Date().getTime() - birthDate.getTime();
-            if (TimeUnit.MILLISECONDS.toDays(timePassed) >= 365 * 18) {
-                Customer.insertEntry(customer);
-                Session.getInstance().reloadCustomers();
-                Session.getInstance().alert("Added Customer!");
+            if (allNonEmpty) {
+                if (phoneTF.getText().length() >= 7 && phoneTF.getText().length() <= 10) {
+                    if (emailTF.getText().matches("[A-Za-z0-9]{2,}@[a-z]{3,}\\.[a-z]{3}")) {
+
+                        // Create customer from input fields
+                        Customer customer = new Customer(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP);
+
+                        // If age >= 18, add customer to db
+                        Date birthDate = Formatter.parseDate(customer.getDateOfBirth());
+                        long timePassed = new Date().getTime() - birthDate.getTime();
+                        if (TimeUnit.MILLISECONDS.toDays(timePassed) >= 365 * 18) {
+                            Customer.insertEntry(customer);
+                            Session.getInstance().reloadCustomers();
+                            Session.getInstance().alert("Added Customer!");
+                        } else {
+                            Session.getInstance().alert("Customer must be at least 18!");
+                        }
+
+                    } else {
+                        Session.getInstance().alert("Invalid Email!\nFormat: sometext@host.com");
+                    }
+                } else {
+                    Session.getInstance().alert("Invalid Phone!\nMust be between 7 - 10 digits!");
+                }
             } else {
-                Session.getInstance().alert("Customer must be at least 18!");
+                Session.getInstance().alert("Empty fields!");
             }
 
         } catch (Exception e) {
