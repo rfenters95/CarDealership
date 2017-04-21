@@ -34,36 +34,43 @@ public class LoginController implements Initializable {
 
         try {
 
-            Connection connection = DataHandler.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `USERS` WHERE USERNAME = ? AND PASSWORD = ?");
-            preparedStatement.setString(1, username.getText());
-            preparedStatement.setString(2, password.getText());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            boolean hasResults = resultSet.next();
+            if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
 
-            if (hasResults) {
-
-                String employeeID = resultSet.getString(1);
-                preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE ID = ?");
-                preparedStatement.setString(1, employeeID);
-                resultSet = preparedStatement.executeQuery();
-                hasResults = resultSet.next();
+                Connection connection = DataHandler.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `USERS` WHERE USERNAME = ? AND PASSWORD = ?");
+                preparedStatement.setString(1, username.getText());
+                preparedStatement.setString(2, password.getText());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                boolean hasResults = resultSet.next();
 
                 if (hasResults) {
 
-                    Session.getInstance().sessionUser = new Employee(resultSet);
-                    loadResource(event, "../views/Alpha.fxml");
+                    String employeeID = resultSet.getString(1);
+                    preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE ID = ?");
+                    preparedStatement.setString(1, employeeID);
+                    resultSet = preparedStatement.executeQuery();
+                    hasResults = resultSet.next();
+
+                    if (hasResults) {
+
+                        Session.getInstance().sessionUser = new Employee(resultSet);
+                        loadResource(event, "../views/Alpha.fxml");
+
+                    } else {
+                        Session.getInstance().alert("Invalid login combo!");
+                    }
 
                 } else {
                     Session.getInstance().alert("Invalid login combo!");
                 }
 
             } else {
-                Session.getInstance().alert("Invalid login combo!");
+                Session.getInstance().alert("Error: Empty fields!");
             }
 
         } catch (Exception e) {
-            Session.getInstance().alert(e.getMessage());
+            Session.getInstance().alert("Error: Contact admin!");
+            e.printStackTrace();
         }
 
     }

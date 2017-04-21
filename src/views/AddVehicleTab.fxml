@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import components.*?>
+<?import components.NumberOnlyTextField?>
+<?import components.TextOnlyTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -52,7 +53,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Model" HBox.hgrow="ALWAYS" />
-                        <TextOnlyTextField fx:id="modelTF" maxWidth="1.7976931348623157E308" promptText="Model" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="modelTF" maxWidth="1.7976931348623157E308" promptText="Model" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">

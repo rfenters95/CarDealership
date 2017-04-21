@@ -58,6 +58,7 @@ public class VehicleDetailsController implements Initializable {
             Session.getInstance().selectedVehicle.setPrice(Formatter.parseNumber(priceTF.getText()));
             Vehicle.updateEntry(Session.getInstance().selectedVehicle);
         } catch (Exception e) {
+            Session.getInstance().alert("Error: Contact Admin!");
             e.printStackTrace();
         }
 

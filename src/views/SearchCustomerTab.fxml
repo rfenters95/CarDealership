@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import components.TextOnlyTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -17,13 +18,13 @@
                               <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="First Name" />
-                                    <TextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" promptText="First Name" HBox.hgrow="ALWAYS" />
+                                    <TextOnlyTextField fx:id="fNameTF" maxWidth="1.7976931348623157E308" promptText="First Name" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Last Name" />
-                                    <TextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" promptText="Last Name" HBox.hgrow="ALWAYS" />
+                                    <TextOnlyTextField fx:id="lNameTF" maxWidth="1.7976931348623157E308" promptText="Last Name" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                            </children>

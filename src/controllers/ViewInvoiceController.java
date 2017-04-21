@@ -110,9 +110,8 @@ public class ViewInvoiceController implements Initializable {
             }
 
         } catch (Exception e) {
-
+            Session.getInstance().alert("Error: Contact Admin!");
             e.printStackTrace();
-
         }
 
     }

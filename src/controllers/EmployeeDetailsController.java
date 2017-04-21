@@ -76,6 +76,7 @@ public class EmployeeDetailsController implements Initializable {
             Session.getInstance().selectedEmployee.setSalary(Formatter.parseNumber(salaryTF.getText()));
             Employee.updateEntry(Session.getInstance().selectedEmployee);
         } catch (Exception e) {
+            Session.getInstance().alert("Error: Contact admin!");
             e.printStackTrace();
         }
 

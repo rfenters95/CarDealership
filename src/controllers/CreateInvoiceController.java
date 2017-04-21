@@ -192,6 +192,7 @@ public class CreateInvoiceController implements Initializable {
                 }
 
             } catch (IOException e) {
+                Session.getInstance().alert("Error: Contact Admin!");
                 e.printStackTrace();
             }
 

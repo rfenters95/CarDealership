@@ -80,14 +80,14 @@ public class Vehicle implements Comparable<Vehicle> {
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `VEHICLES` " +
                 "(`ID`, `MAKE`, `MODEL`, `YEAR`, `COLOR`, `TYPE`, `PRICE`, `USED`, `IN_STOCK`) VALUES " +
                 "(NULL, ?, ?, ?, ?, ?, ?, ?, ?);");
-        preparedStatement.setString(1, vehicle.getMake());
-        preparedStatement.setString(2, vehicle.getModel());
-        preparedStatement.setString(3, vehicle.getYear());
-        preparedStatement.setString(4, vehicle.getColor());
-        preparedStatement.setString(5, vehicle.getType());
-        preparedStatement.setString(6, vehicle.getPrice());
-        preparedStatement.setString(7, vehicle.getUsed());
-        preparedStatement.setString(8, vehicle.getInStock());
+        preparedStatement.setString(1, vehicle.getMake().trim());
+        preparedStatement.setString(2, vehicle.getModel().trim());
+        preparedStatement.setString(3, vehicle.getYear().trim());
+        preparedStatement.setString(4, vehicle.getColor().trim());
+        preparedStatement.setString(5, vehicle.getType().trim());
+        preparedStatement.setString(6, vehicle.getPrice().trim());
+        preparedStatement.setString(7, vehicle.getUsed().trim());
+        preparedStatement.setString(8, vehicle.getInStock().trim());
         preparedStatement.executeUpdate();
     }
 
@@ -103,15 +103,15 @@ public class Vehicle implements Comparable<Vehicle> {
                 "`USED` = ?, " +
                 "`IN_STOCK` = ? WHERE " +
                 "`ID` = ?");
-        preparedStatement.setString(1, vehicle.getMake());
-        preparedStatement.setString(2, vehicle.getModel());
-        preparedStatement.setString(3, vehicle.getYear());
-        preparedStatement.setString(4, vehicle.getColor());
-        preparedStatement.setString(5, vehicle.getType());
-        preparedStatement.setString(6, vehicle.getPrice());
-        preparedStatement.setString(7, vehicle.getUsed());
-        preparedStatement.setString(8, vehicle.getInStock());
-        preparedStatement.setString(9, vehicle.getID());
+        preparedStatement.setString(1, vehicle.getMake().trim());
+        preparedStatement.setString(2, vehicle.getModel().trim());
+        preparedStatement.setString(3, vehicle.getYear().trim());
+        preparedStatement.setString(4, vehicle.getColor().trim());
+        preparedStatement.setString(5, vehicle.getType().trim());
+        preparedStatement.setString(6, vehicle.getPrice().trim());
+        preparedStatement.setString(7, vehicle.getUsed().trim());
+        preparedStatement.setString(8, vehicle.getInStock().trim());
+        preparedStatement.setString(9, vehicle.getID().trim());
         preparedStatement.executeUpdate();
     }
 

@@ -91,6 +91,7 @@ public class CustomerDetailsController implements Initializable {
             Session.getInstance().selectedCustomer.setDateOfBirth(dateOfBirthDP.getValue().toString());
             Customer.updateEntry(Session.getInstance().selectedCustomer);
         } catch (Exception e) {
+            Session.getInstance().alert("Error: Contact admin!");
             e.printStackTrace();
         }
 
@@ -168,9 +169,8 @@ public class CustomerDetailsController implements Initializable {
             }
 
         } catch (Exception e) {
-
+            Session.getInstance().alert("Error: Contact admin!");
             e.printStackTrace();
-
         }
 
     }

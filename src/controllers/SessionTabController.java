@@ -90,7 +90,8 @@ public class SessionTabController implements Init {
             register_stage.setScene(register_scene);
             register_stage.show();
         } catch (Exception e) {
-            Session.getInstance().alert(e.getMessage());
+            Session.getInstance().alert("Error: Contact Admin!");
+            e.printStackTrace();
         }
     }
 

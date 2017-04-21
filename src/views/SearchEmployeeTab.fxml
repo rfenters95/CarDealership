@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import components.NumberOnlyTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,7 +16,7 @@
                         <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                            <children>
                               <Label maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" text="Employee ID" />
-                              <TextField fx:id="employeeID" maxWidth="1.7976931348623157E308" promptText="Employee ID" HBox.hgrow="ALWAYS" />
+                              <NumberOnlyTextField fx:id="employeeID" maxWidth="1.7976931348623157E308" promptText="Employee ID" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAll" text="Show All" VBox.vgrow="ALWAYS" />

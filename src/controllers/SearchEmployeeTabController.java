@@ -1,5 +1,6 @@
 package controllers;
 
+import components.NumberOnlyTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class SearchEmployeeTabController implements Init {
     @FXML private TitledPane tPane;
     @FXML private TitledPane employeeResultsTP;
 
-    @FXML private TextField employeeID;
+    @FXML private NumberOnlyTextField employeeID;
 
     @FXML private ListView<Employee> listView;
 
@@ -62,7 +63,7 @@ public class SearchEmployeeTabController implements Init {
                 Collections.sort(listView.getItems());
 
             } else {
-                System.out.println("DB empty!");
+                Session.getInstance().alert("No results!");
             }
 
         } catch (Exception e) {
@@ -73,6 +74,7 @@ public class SearchEmployeeTabController implements Init {
 
     @FXML public void showAll(ActionEvent event) {
 
+        employeeID.clear();
         updateResultSet();
         displayResultSet();
 
@@ -104,6 +106,7 @@ public class SearchEmployeeTabController implements Init {
             }
 
         } catch (Exception e) {
+            Session.getInstance().alert("Error: Contact Admin!");
             e.printStackTrace();
         }
     }
@@ -178,6 +181,7 @@ public class SearchEmployeeTabController implements Init {
             employeeID.clear();
 
         } catch (Exception e) {
+            Session.getInstance().alert("Error: Contact Admin!");
             e.printStackTrace();
         }
     }

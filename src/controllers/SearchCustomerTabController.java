@@ -65,9 +65,12 @@ public class SearchCustomerTabController implements Init {
                 customerResultsTP.setText(String.format("Results - %d", numberOfResults));
                 Collections.sort(listView.getItems());
 
+            } else {
+                Session.getInstance().alert("No results!");
             }
 
         } catch (Exception e) {
+            Session.getInstance().alert("Error: Contact Admin!");
             e.printStackTrace();
         }
 
@@ -75,6 +78,8 @@ public class SearchCustomerTabController implements Init {
 
     @FXML public void showAll(ActionEvent event) {
 
+        fNameTF.clear();
+        lNameTF.clear();
         updateResultSet();
         displayResultSet();
 

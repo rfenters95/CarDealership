@@ -68,7 +68,8 @@ public class AddCustomerTabController implements Init {
             }
 
         } catch (Exception e) {
-            Session.getInstance().alert(e.getMessage());
+            Session.getInstance().alert("Error: Contact Admin!");
+            e.printStackTrace();
         }
 
     }
