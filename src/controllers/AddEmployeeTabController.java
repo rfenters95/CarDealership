@@ -15,6 +15,13 @@ import util.Session;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/*
+*  AddEmployeeTabController
+*  Author: Reed Fenters
+*
+*  Enables user to input information on a new employee
+*  then saves it in a database
+* */
 public class AddEmployeeTabController implements Init {
 
     private AlphaController alphaController;
@@ -29,10 +36,12 @@ public class AddEmployeeTabController implements Init {
     @FXML private DatePicker dateOfBirthDP;
     @FXML private ComboBox<String> jobTitleCB;
 
+    // Save employee to the db
     @FXML public void save(ActionEvent event) {
 
         try {
 
+            // Empty field validation
             boolean allNonEmpty;
             allNonEmpty = !fNameTF.isEmpty();
             allNonEmpty = allNonEmpty && !lNameTF.isEmpty();
@@ -45,11 +54,17 @@ public class AddEmployeeTabController implements Init {
             allNonEmpty = allNonEmpty && dateOfBirthDP.getValue() != null;
 
             if (allNonEmpty) {
+
+                // Check phone input length should be in domain [7 - 10]
                 if (phoneTF.getText().length() >= 7 && phoneTF.getText().length() <= 10) {
+
+                    // Email structure validation
                     if (emailTF.getText().matches("[A-Za-z0-9]{2,}@[a-z]{3,}\\.[a-z]{3}")) {
 
+                        // Create employee from input fields
                         Employee employee = new Employee(fNameTF, lNameTF, phoneTF, emailTF, addressTF, cityTF, dateOfBirthDP, jobTitleCB, salaryTF);
 
+                        // If age >= 18, add customer to db
                         Date birthDate = Formatter.parseDate(employee.getDateOfBirth());
                         long timePassed = new Date().getTime() - birthDate.getTime();
                         if (TimeUnit.MILLISECONDS.toDays(timePassed) >= 365 * 18) {

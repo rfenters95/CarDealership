@@ -11,6 +11,13 @@ import util.Session;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+/*
+*  AlertBoxController
+*  Author: Reed Fenters
+*
+*  Alert popup for error messages and notifications
+* */
 public class AlertBoxController implements Initializable {
 
     @FXML private Label label;

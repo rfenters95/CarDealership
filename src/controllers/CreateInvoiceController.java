@@ -17,6 +17,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/*
+*  CreateInvoiceController
+*  Author: Reed Fenters
+*
+*  Enables user to view preview invoice information
+*  and select options on trade-in, warranty, and payment method
+*  before saving invoice in the database.
+* */
 public class CreateInvoiceController implements Initializable {
 
     @FXML private Label dateLabel;
@@ -49,24 +57,30 @@ public class CreateInvoiceController implements Initializable {
     private String paymentMethod;
     private String warrantyValue;
 
+    // generates invoices from input fields
     @FXML public void saveInvoice(ActionEvent event) {
 
+        // validation checks
         boolean condition1 = (paymentMethodCB.getValue() != null) && (warrantyCB.getValue() != null) && (tradeInCB.getValue() != null);
         boolean condition2 = tradeInCB.getSelectionModel().getSelectedItem().equals("Yes") && !tradeInValueTF.getText().isEmpty();
         boolean condition3 = tradeInCB.getSelectionModel().getSelectedItem().equals("No");
 
+        // prevent manual input fields from being empty
         if (condition1) {
 
+            // prevent entering a trade in without a trade in value
             if (condition2 || condition3) {
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 try {
 
+                    // get input values
                     double vehiclePrice = Double.parseDouble(vehicle.getPrice());
-                    double warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getDoubleValue();
+                    int warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getNumericalValue();
                     double totalPrice = vehiclePrice + warrantyPrice;
 
+                    // should trade in value be subtracted
                     if (!tradeInValueTF.isDisabled()) {
                         double tradeInPrice = Double.valueOf(tradeInValueTF.getText());
                         totalPrice -= tradeInPrice;
@@ -75,12 +89,14 @@ public class CreateInvoiceController implements Initializable {
                     warrantyValue = String.valueOf(warrantyPrice);
                     totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));
 
+                    // determine if discount is needed
                     if (totalPrice > 50000) {
                         discountLabel.setText("One year of free car washes");
                     } else {
                         discountLabel.setText("None");
                     }
 
+                    // create invoice object
                     Invoice invoice = new Invoice(
                             customer.getID(),
                             employee.getID(),
@@ -104,6 +120,7 @@ public class CreateInvoiceController implements Initializable {
                     employee.setTotalSales(String.valueOf(currentSales + currentSale));
                     Employee.updateEntry(employee);
 
+                    // alert user of successful invoice creation
                     Session.getInstance().alert("Invoice Created!");
                     stage.close();
 
@@ -132,18 +149,23 @@ public class CreateInvoiceController implements Initializable {
         employee = Session.getInstance().sessionUser;
         eNameLabel.setText(employee.getFirstName() + " " + employee.getLastName());
 
+        // Set payment method options
         paymentMethodCB.getItems().add("Cash");
         paymentMethodCB.getItems().add("Credit");
         paymentMethodCB.getItems().add("Finance");
 
+        // Helps prevent value entry in cases of no trade-in
         tradeInValueTF.setDisable(true);
 
+        // Update value onChange
         paymentMethodCB.setOnAction(e -> paymentMethod = paymentMethodCB.getSelectionModel().getSelectedItem());
 
+        // Init values
         warrantyCB.getItems().add(new USD(0).setStringValue("$0"));
         warrantyCB.getItems().add(new USD(3000));
         warrantyCB.getItems().add(new USD(5000));
 
+        // Customize comboBox
         warrantyCB.setCellFactory(new Callback<ListView<USD>, ListCell<USD>>() {
             @Override
             public ListCell<USD> call(ListView<USD> param) {
@@ -162,8 +184,11 @@ public class CreateInvoiceController implements Initializable {
             }
         });
 
+        // Init values
         tradeInCB.getItems().add("No");
         tradeInCB.getItems().add("Yes");
+
+        // If trade-in = yes, open addTradeIn window
         tradeInCB.setOnAction(event -> {
 
             try {
@@ -185,6 +210,7 @@ public class CreateInvoiceController implements Initializable {
                     Session.getInstance().alphaController.getSearchVehicleTabController().updateResultSet();
                     Session.getInstance().alphaController.getSearchVehicleTabController().displayResultSet();
 
+                    // Enable value field after trade-in has been entered
                     tradeInValueTF.setDisable(false);
 
                 } else {
@@ -215,12 +241,15 @@ public class CreateInvoiceController implements Initializable {
         vColorLabel.setText(vehicle.getColor());
         vPriceLabel.setText(Formatter.USDFormatter(Double.parseDouble(vehicle.getPrice())));
 
+        // Init warrantCB onAction
         warrantyCB.setOnAction(e -> {
 
+            // Get values
             double vehiclePrice = Double.parseDouble(vehicle.getPrice());
-            double warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getDoubleValue();
+            int warrantyPrice = warrantyCB.getSelectionModel().getSelectedItem().getNumericalValue();
             double totalPrice = vehiclePrice + warrantyPrice;
 
+            // Should trade-in be subtracted?
             if (!tradeInValueTF.isDisabled()) {
                 double tradeInPrice = Double.valueOf(tradeInValueTF.getText());
                 totalPrice -= tradeInPrice;
@@ -229,6 +258,7 @@ public class CreateInvoiceController implements Initializable {
             warrantyValue = String.valueOf(warrantyPrice);
             totalPriceLabel.setText(Formatter.USDFormatter(totalPrice));
 
+            // Calc discount
             if (totalPrice > 50000) {
                 discountLabel.setText("One year of free car washes");
             } else {

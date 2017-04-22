@@ -2,16 +2,16 @@ package util;
 
 public class USD {
 
-    private double doubleValue;
+    private int numericalValue;
     private String stringValue;
 
-    public USD(double doubleValue) {
-        this.doubleValue = doubleValue;
-        this.stringValue = Formatter.USDFormatter(doubleValue);
+    public USD(int numericalValue) {
+        this.numericalValue = numericalValue;
+        this.stringValue = Formatter.USDFormatter(numericalValue);
     }
 
-    public double getDoubleValue() {
-        return doubleValue;
+    public int getNumericalValue() {
+        return numericalValue;
     }
 
     public USD setStringValue(String stringValue) {

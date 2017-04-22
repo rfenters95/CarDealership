@@ -20,6 +20,13 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/*
+*  EmployeeDetailsController
+*  Author: Reed Fenters
+*
+*  View/Edit details of selected customer
+*  View Invoices of selected customer
+* */
 public class EmployeeDetailsController implements Initializable {
 
     @FXML private TextOnlyTextField fNameTF;
@@ -39,17 +46,21 @@ public class EmployeeDetailsController implements Initializable {
 
     private boolean inputDisabled = true;
 
+    // Edit customer details
     @FXML public void edit(ActionEvent event) throws IOException {
 
+        // Determines if fields are editable
         inputDisabled = !inputDisabled;
         Button button = (Button) event.getSource();
 
+        // Flip text on edit btn
         if (inputDisabled) {
             button.setText("Edit");
         } else {
             button.setText("View");
         }
 
+        // Determines if fields are editable
         lNameTF.setDisable(inputDisabled);
         fNameTF.setDisable(inputDisabled);
         phoneTF.setDisable(inputDisabled);
@@ -62,9 +73,12 @@ public class EmployeeDetailsController implements Initializable {
 
     }
 
+    // Save changes made to employee info
     @FXML public void save(ActionEvent event) throws IOException {
 
         try {
+
+            // Update selectedEmployee object
             Session.getInstance().selectedEmployee.setFirstName(fNameTF.getText());
             Session.getInstance().selectedEmployee.setLastName(lNameTF.getText());
             Session.getInstance().selectedEmployee.setPhone(Formatter.parseNumber(phoneTF.getText()));
@@ -74,13 +88,19 @@ public class EmployeeDetailsController implements Initializable {
             Session.getInstance().selectedEmployee.setDateOfBirth(dateOfBirthDP.getValue().toString());
             Session.getInstance().selectedEmployee.setJobTitle(jobTF.getText());
             Session.getInstance().selectedEmployee.setSalary(Formatter.parseNumber(salaryTF.getText()));
+
+            // Save changed object to db
             Employee.updateEntry(Session.getInstance().selectedEmployee);
+
         } catch (Exception e) {
             Session.getInstance().alert("Error: Contact admin!");
             e.printStackTrace();
         }
 
+        // Update search employees listView
         Session.getInstance().reloadEmployees();
+
+        // Close stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
 
@@ -89,6 +109,7 @@ public class EmployeeDetailsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // INIT fields to selectedEmployee info
         Employee employee = Session.getInstance().selectedEmployee;
 
         fNameTF.setText(employee.getFirstName());
@@ -120,7 +141,9 @@ public class EmployeeDetailsController implements Initializable {
 
         workStatusTF.setText(employee.getWorkStatus().equals("1") ? "Active" : "Inactive");
         workStatusTF.setDisable(true);
+        // END INIT
 
+        // Shows sales related info only for salesman
         if (employee.getJobTitle().equals("Sales")) {
 
             totalSalesTF.setText(Formatter.USDFormatter(employee.getTotalSales()));

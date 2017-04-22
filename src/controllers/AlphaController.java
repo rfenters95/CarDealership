@@ -8,6 +8,12 @@ import util.Session;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/*
+*  AlphaController
+*  Author: Reed Fenters
+*
+*  Central control object enables interController communication
+* */
 public class AlphaController implements Initializable {
 
     @FXML private AddCustomerTabController addCustomerTabController;
@@ -29,12 +35,15 @@ public class AlphaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
+        // Determines privilege of user, if admin allow editing of employees
         if (!Session.getInstance().sessionUser.isAdmin()) {
             employeeTab.setDisable(true);
         }
 
+        // Personalize session tab to user
         userSessionInfoTab.setText(Session.getInstance().sessionUser.getFirstName() + " " + Session.getInstance().sessionUser.getLastName());
 
+        // Add sub-controllers to AlphaController
         addCustomerTabController.init(this);
         addEmployeeTabController.init(this);
         addVehicleTabController.init(this);
@@ -43,10 +52,12 @@ public class AlphaController implements Initializable {
         searchEmployeeTabController.init(this);
         sessionTabController.init(this);
 
+        // Give access to AlphaController to Session
         Session.getInstance().alphaController = this;
 
     }
 
+    // Getter methods
     public Tab getUserSessionInfoTab() {
         return userSessionInfoTab;
     }

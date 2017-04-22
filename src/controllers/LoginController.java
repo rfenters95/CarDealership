@@ -22,6 +22,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+/*
+*  LoginController
+*  Author: Reed Fenters
+*
+*  Controls access to system via employee authorization
+* */
 public class LoginController implements Initializable {
 
     @FXML private TextField username;
@@ -29,13 +35,16 @@ public class LoginController implements Initializable {
     @FXML private Button login;
     @FXML private VBox root;
 
-    @FXML
-    public void login(ActionEvent event) {
+
+    // Use input fields info to attempt to login
+    @FXML public void login(ActionEvent event) {
 
         try {
 
+            // Empty field validation
             if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
 
+                // Search user table for employee with matching username & password
                 Connection connection = DataHandler.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `USERS` WHERE USERNAME = ? AND PASSWORD = ?");
                 preparedStatement.setString(1, username.getText());
@@ -43,16 +52,22 @@ public class LoginController implements Initializable {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 boolean hasResults = resultSet.next();
 
+                // Empty results check (USER table)
                 if (hasResults) {
 
+                    // Get employee's id from user table
                     String employeeID = resultSet.getString(1);
+
+                    // Use employee's id to find employee in (EMPLOYEE table)
                     preparedStatement = connection.prepareStatement("SELECT * FROM EMPLOYEES WHERE ID = ?");
                     preparedStatement.setString(1, employeeID);
                     resultSet = preparedStatement.executeQuery();
                     hasResults = resultSet.next();
 
+                    // Empty results check (EMPLOYEE table)
                     if (hasResults) {
 
+                        // Once employee is found open main stage
                         Session.getInstance().sessionUser = new Employee(resultSet);
                         loadResource(event, "../views/Alpha.fxml");
 
@@ -75,6 +90,7 @@ public class LoginController implements Initializable {
 
     }
 
+    // Load stage created from path to fxml file
     private void loadResource(ActionEvent event, String resourcePath) throws IOException {
         Parent register_page = FXMLLoader.load(getClass().getResource(resourcePath));
         Scene register_scene = new Scene(register_page);
@@ -87,6 +103,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // Allow enter key to trigger login button
         root.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case ENTER:
@@ -94,5 +112,6 @@ public class LoginController implements Initializable {
                     break;
             }
         });
+
     }
 }

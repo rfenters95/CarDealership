@@ -14,6 +14,13 @@ import util.Session;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/*
+*  AddCustomerTabController
+*  Author: Reed Fenters
+*
+*  Enables user to input information on a new customer
+*  then saves it in a database
+* */
 public class AddCustomerTabController implements Init {
 
     private AlphaController alphaController;
@@ -26,10 +33,12 @@ public class AddCustomerTabController implements Init {
     @FXML private TextOnlyTextField cityTF;
     @FXML private DatePicker dateOfBirthDP;
 
+    // Save customer to the db
     @FXML public void save(ActionEvent event) {
 
         try {
 
+            // Empty field validation
             boolean allNonEmpty;
             allNonEmpty = !fNameTF.isEmpty();
             allNonEmpty = allNonEmpty && !lNameTF.isEmpty();
@@ -40,7 +49,11 @@ public class AddCustomerTabController implements Init {
             allNonEmpty = allNonEmpty && dateOfBirthDP.getValue() != null;
 
             if (allNonEmpty) {
+
+                // Check phone input length should be in domain [7 - 10]
                 if (phoneTF.getText().length() >= 7 && phoneTF.getText().length() <= 10) {
+
+                    // Email structure validation
                     if (emailTF.getText().matches("[A-Za-z0-9]{2,}@[a-z]{3,}\\.[a-z]{3}")) {
 
                         // Create customer from input fields

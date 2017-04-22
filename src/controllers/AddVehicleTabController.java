@@ -10,6 +10,13 @@ import util.Init;
 import util.Session;
 import util.Vehicle;
 
+/*
+*  AddTradeInVehicleController
+*  Author: Reed Fenters
+*
+*  Enables user to input information on a new vehicle
+*  then saves it in a database
+* */
 public class AddVehicleTabController implements Init {
 
     private AlphaController alphaController;
@@ -22,10 +29,12 @@ public class AddVehicleTabController implements Init {
     @FXML private NumberOnlyTextField priceTF;
     @FXML private ComboBox<String> usedCB;
 
+    // Save vehicle to database
     @FXML public void save(ActionEvent event) {
 
         try {
 
+            // Empty field validation
             boolean isEmpty = !makeTF.getText().isEmpty();
             isEmpty = isEmpty && !modelTF.getText().isEmpty();
             isEmpty = isEmpty && !yearTF.getText().isEmpty();
@@ -36,6 +45,7 @@ public class AddVehicleTabController implements Init {
 
             if (isEmpty) {
 
+                // Create vehicle object & save
                 Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF, usedCB);
                 Vehicle.insertEntry(vehicle);
                 Session.getInstance().reloadVehicles();
@@ -57,9 +67,11 @@ public class AddVehicleTabController implements Init {
 
         this.alphaController = alphaController;
 
+        // Init used options
         usedCB.getItems().add("No");
         usedCB.getItems().add("Yes");
 
+        // Init type options
         typeCB.getItems().add("Family");
         typeCB.getItems().add("Sports");
         typeCB.getItems().add("Recreational");

@@ -23,6 +23,13 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/*
+*  CustomerDetailsController
+*  Author: Reed Fenters
+*
+*  View/Edit details of selected customer
+*  View Invoices of selected customer
+* */
 public class CustomerDetailsController implements Initializable {
 
     private ResultSet resultSet;
@@ -40,15 +47,17 @@ public class CustomerDetailsController implements Initializable {
 
     private boolean inputDisabled = true;
 
+    // View select invoice for selected customer
     @FXML public void viewInvoice(ActionEvent event) throws IOException {
 
+        // Store invoice in Session for access across controllers
         Session.getInstance().selectedInvoice = invoiceCB.getSelectionModel().getSelectedItem();
 
+        // Create popup stage & open
         Stage newStage = new Stage();
         newStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader fxmlLoader = new FXMLLoader();
         newStage.setTitle("View Invoice");
-
         fxmlLoader.setLocation(getClass().getResource("../views/ViewInvoice.fxml"));
         Parent newResource = fxmlLoader.load();
         Scene newScene = new Scene(newResource);
@@ -58,17 +67,21 @@ public class CustomerDetailsController implements Initializable {
 
     }
 
+    // Edit customer details
     @FXML public void edit(ActionEvent event) throws IOException {
 
+        // Determines if fields are editable
         inputDisabled = !inputDisabled;
         Button button = (Button) event.getSource();
 
+        // Flip text on edit btn
         if (inputDisabled) {
             button.setText("Edit");
         } else {
             button.setText("View");
         }
 
+        // Determines if fields are editable
         fNameTF.setDisable(inputDisabled);
         lNameTF.setDisable(inputDisabled);
         phoneTF.setDisable(inputDisabled);
@@ -79,9 +92,12 @@ public class CustomerDetailsController implements Initializable {
 
     }
 
+    // Save changes made to customer info
     @FXML public void save(ActionEvent event) throws IOException {
 
         try {
+
+            // Update selectedCustomer object
             Session.getInstance().selectedCustomer.setFirstName(fNameTF.getText());
             Session.getInstance().selectedCustomer.setLastName(lNameTF.getText());
             Session.getInstance().selectedCustomer.setPhone(Formatter.parseNumber(phoneTF.getText()));
@@ -89,15 +105,20 @@ public class CustomerDetailsController implements Initializable {
             Session.getInstance().selectedCustomer.setAddress(addressTF.getText());
             Session.getInstance().selectedCustomer.setCity(cityTF.getText());
             Session.getInstance().selectedCustomer.setDateOfBirth(dateOfBirthDP.getValue().toString());
+
+            // Save changed object to db
             Customer.updateEntry(Session.getInstance().selectedCustomer);
+
         } catch (Exception e) {
             Session.getInstance().alert("Error: Contact admin!");
             e.printStackTrace();
         }
 
+        // Update search customers listView
         Session.getInstance().alphaController.getSearchCustomerTabController().updateResultSet();
         Session.getInstance().alphaController.getSearchCustomerTabController().displayResultSet();
 
+        // Close stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
 
@@ -106,6 +127,7 @@ public class CustomerDetailsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // INIT fields to selectedCustomer info
         Customer customer = Session.getInstance().selectedCustomer;
 
         fNameTF.setText(customer.getFirstName());
@@ -128,7 +150,9 @@ public class CustomerDetailsController implements Initializable {
 
         dateOfBirthDP.setValue(LocalDate.parse(customer.getDateOfBirth()));
         dateOfBirthDP.setDisable(true);
+        // END INIT
 
+        // Customize invoice comboBox
         invoiceCB.setCellFactory(new Callback<ListView<Invoice>, ListCell<Invoice>>() {
             @Override
             public ListCell<Invoice> call(ListView<Invoice> param) {
@@ -147,6 +171,7 @@ public class CustomerDetailsController implements Initializable {
             }
         });
 
+        // Get all invoices for selected customer
         try {
 
             Connection connection = DataHandler.getConnection();

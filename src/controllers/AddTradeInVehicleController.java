@@ -15,6 +15,13 @@ import util.Vehicle;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/*
+*  AddTradeInVehicleController
+*  Author: Reed Fenters
+*
+*  Enables user to input information on a new trade-in vehicle
+*  then saves it in a database
+* */
 public class AddTradeInVehicleController implements Initializable {
 
     @FXML private TextOnlyTextField makeTF;
@@ -24,12 +31,14 @@ public class AddTradeInVehicleController implements Initializable {
     @FXML private ComboBox<String> typeCB;
     @FXML private NumberOnlyTextField priceTF;
 
+    // Save customer to the db
     @FXML public void save(ActionEvent event) {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         try {
 
+            // Empty field validation
             boolean isEmpty = !makeTF.getText().isEmpty();
             isEmpty = isEmpty && !modelTF.getText().isEmpty();
             isEmpty = isEmpty && !yearTF.getText().isEmpty();
@@ -39,6 +48,7 @@ public class AddTradeInVehicleController implements Initializable {
 
             if (isEmpty) {
 
+                // Create vehicle & save
                 Vehicle vehicle = new Vehicle(makeTF, modelTF, yearTF, colorTF, typeCB, priceTF);
                 Vehicle.insertEntry(vehicle);
                 Session.getInstance().reloadVehicles();
@@ -58,8 +68,11 @@ public class AddTradeInVehicleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // Init type options
         typeCB.getItems().add("Family");
         typeCB.getItems().add("Sports");
         typeCB.getItems().add("Recreational");
+
     }
 }
