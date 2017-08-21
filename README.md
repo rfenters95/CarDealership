@@ -3,7 +3,7 @@ CS 340: Software Design and Development Group Project
 
 ## How to run
 - Download and execute [JAR](https://github.com/rfenters95/CarDealership/raw/master/CarDealership.jar)
-- Follow instructions to [setup MAMP](https://github.com/rfenters95/CarDealership/blob/master/README.md#Import-to-MAMP)
+- Follow instructions to [setup MAMP](https://github.com/rfenters95/CarDealership/blob/master/README.md#setup-mamp)
 
 ## How to edit
 
