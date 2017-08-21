@@ -1,5 +1,5 @@
 # CarDealership
-CS340 Project
+CS 340: Software Design and Development Group Project
 
 ## Setup
 
