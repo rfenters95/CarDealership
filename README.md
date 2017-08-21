@@ -1,9 +1,13 @@
 # CarDealership
 CS 340: Software Design and Development Group Project
 
-## Setup
+## How to run
+- Download and execute [JAR](https://github.com/rfenters95/CarDealership/raw/master/CarDealership.jar)
+- Follow instructions to [setup MAMP](https://github.com/rfenters95/CarDealership/blob/master/README.md#Import-to-MAMP)
 
-### Code
+## How to edit
+
+#### Setup Intellij
 1. Fork project
 2. Open Intellij CE to welcome screen 
 3. Select `Check out from Version Control`
@@ -11,7 +15,7 @@ CS 340: Software Design and Development Group Project
 5. Select `CarDealership.git`
 6. Select `Clone`
 
-### Database
+#### Setup MAMP
 1. Download & install [MAMP](https://www.mamp.info/en/)
 2. Download MySQL Java Connector (Connector/J) Platform Independent .zip
 3. Extract .jar from MySQL Java Connector
